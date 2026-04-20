@@ -8,16 +8,17 @@ import { cn } from '@/lib/utils';
 import {
   BarChart3, Users, TrendingUp, Receipt, Database, ChevronLeft, ChevronRight, Menu, X,
   LayoutDashboard, LineChart, PieChart, DollarSign, FileText, Briefcase, UserCheck, Settings,
-  Bot, LogOut
+  Bot, LogOut, Clock, Building2, FolderKanban, Upload
 } from 'lucide-react';
 
 const navGroups = [
   {
-    label: 'KI-Assistenten',
-    icon: Bot,
-    color: 'text-pink-400',
+    label: 'Cockpit',
+    icon: LayoutDashboard,
+    color: 'text-sky-400',
     items: [
-      { label: 'Chat & Analyse', href: '/agent', icon: Bot },
+      { label: 'Executive Dashboard', href: '/dashboard', icon: LayoutDashboard },
+      { label: 'KI-Assistenten', href: '/agent', icon: Bot },
     ],
   },
   {
@@ -60,11 +61,30 @@ const navGroups = [
     ],
   },
   {
+    label: 'Stammdaten',
+    icon: Building2,
+    color: 'text-amber-400',
+    items: [
+      { label: 'Kunden', href: '/stammdaten/kunden', icon: Building2 },
+      { label: 'Mitarbeiter', href: '/stammdaten/mitarbeiter', icon: UserCheck },
+      { label: 'Projekte', href: '/stammdaten/projekte', icon: FolderKanban },
+    ],
+  },
+  {
+    label: 'Zeiterfassung',
+    icon: Clock,
+    color: 'text-teal-400',
+    items: [
+      { label: 'Wochenansicht', href: '/zeiterfassung', icon: Clock },
+    ],
+  },
+  {
     label: 'System',
     icon: Database,
     color: 'text-cyan-400',
     items: [
       { label: 'Daten\u00fcbersicht', href: '/base', icon: Database },
+      { label: 'BWA-Import', href: '/import', icon: Upload },
       { label: 'Konfiguration', href: '/base/config', icon: Settings },
     ],
   },
