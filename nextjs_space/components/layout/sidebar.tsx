@@ -3,15 +3,25 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useSession, signOut } from 'next-auth/react';
 import { cn } from '@/lib/utils';
 import {
   BarChart3, Users, TrendingUp, Receipt, Database, ChevronLeft, ChevronRight, Menu, X,
-  LayoutDashboard, LineChart, PieChart, DollarSign, FileText, Briefcase, UserCheck, Settings
+  LayoutDashboard, LineChart, PieChart, DollarSign, FileText, Briefcase, UserCheck, Settings,
+  Bot, LogOut
 } from 'lucide-react';
 
 const navGroups = [
   {
-    label: 'Finanzreport',
+    label: 'KI-Assistenten',
+    icon: Bot,
+    color: 'text-pink-400',
+    items: [
+      { label: 'Chat & Analyse', href: '/agent', icon: Bot },
+    ],
+  },
+  {
+    label: 'Finanzen',
     icon: BarChart3,
     color: 'text-blue-400',
     items: [
@@ -23,11 +33,11 @@ const navGroups = [
     ],
   },
   {
-    label: 'HR & Recruiting',
+    label: 'HR & Team',
     icon: Users,
     color: 'text-emerald-400',
     items: [
-      { label: 'Team', href: '/hr', icon: Users },
+      { label: 'Team-\u00dcbersicht', href: '/hr', icon: Users },
       { label: 'Mitarbeiter', href: '/hr/mitarbeiter', icon: UserCheck },
     ],
   },
@@ -41,7 +51,7 @@ const navGroups = [
     ],
   },
   {
-    label: 'Rechnungsstellung',
+    label: 'Rechnungen',
     icon: Receipt,
     color: 'text-purple-400',
     items: [
@@ -50,11 +60,11 @@ const navGroups = [
     ],
   },
   {
-    label: 'Base Report',
+    label: 'System',
     icon: Database,
     color: 'text-cyan-400',
     items: [
-      { label: 'Datenmodell', href: '/base', icon: Database },
+      { label: 'Daten\u00fcbersicht', href: '/base', icon: Database },
       { label: 'Konfiguration', href: '/base/config', icon: Settings },
     ],
   },
@@ -64,6 +74,7 @@ export function Sidebar() {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { data: session } = useSession() || {};
 
   return (
     <>
@@ -145,8 +156,23 @@ export function Sidebar() {
           ))}
         </nav>
 
-        {/* Footer */}
-        <div className="px-3 py-3 border-t border-slate-700/50">
+        {/* User & Logout */}
+        <div className="px-3 py-3 border-t border-slate-700/50 space-y-2">
+          {session?.user && !collapsed && (
+            <div className="px-2 text-xs text-slate-400 truncate">
+              {session.user.name || session.user.email}
+            </div>
+          )}
+          <button
+            onClick={() => signOut({ callbackUrl: '/login' })}
+            className={cn(
+              'flex items-center gap-2 w-full px-3 py-2 rounded-md text-sm text-slate-400 hover:text-red-400 hover:bg-slate-800 transition-colors',
+              collapsed && 'justify-center'
+            )}
+          >
+            <LogOut className="w-4 h-4" />
+            {!collapsed && <span>Abmelden</span>}
+          </button>
           {!collapsed && <p className="text-[10px] text-slate-500 text-center">&copy; 2026 PulseBI</p>}
         </div>
       </aside>

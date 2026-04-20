@@ -60,7 +60,7 @@ export async function GET(request: Request) {
     const lostEmployees = await prisma.employee.count({ where: { isActive: false, endDate: { gte: new Date(year, 0, 1), lt: new Date(year + 1, 0, 1) } } });
     const fluctuation = totalEmployees > 0 ? (lostEmployees / totalEmployees) * 100 : 0;
 
-    const avgHourlyRate = 93; // Based on Power BI data
+    const avgHourlyRate = 93;
     const sickCostEstimate = totalSickDays * 8 * avgHourlyRate;
 
     const employeeList = (employees ?? []).map((e: any) => ({

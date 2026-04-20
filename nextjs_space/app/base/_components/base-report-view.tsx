@@ -7,7 +7,7 @@ import { Loader2, Database, Users, Layers, Table2, FileText, BarChart3 } from 'l
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
 const COLORS = ['#60B5FF', '#FF9149', '#FF9898', '#FF90BB', '#80D8C3', '#A19AD3'];
-const SOURCE_COLORS: Record<string, string> = { Clockodo: '#60B5FF', DATEV: '#FF9149', Dataverse: '#80D8C3', SharePoint: '#A19AD3', Intern: '#FF90BB' };
+const SOURCE_COLORS: Record<string, string> = { Zeiterfassung: '#60B5FF', Buchhaltung: '#FF9149', Stammdaten: '#80D8C3', Projektverwaltung: '#A19AD3', Rechnungsmodul: '#FF90BB', Planung: '#FFD700', System: '#98FB98' };
 
 export function BaseReportView() {
   const [data, setData] = useState<any>(null);
@@ -112,11 +112,11 @@ export function BaseReportView() {
       <div className="bg-card rounded-xl p-4 border border-border/50 shadow-sm">
         <h3 className="text-sm font-semibold mb-3">Datenarchitektur</h3>
         <div className="grid grid-cols-1 sm:grid-cols-5 gap-3">
-          {[{ name: 'Clockodo', desc: 'Zeiterfassung', icon: '\u23f0', color: 'bg-blue-50 border-blue-200' },
-            { name: 'DATEV', desc: 'Buchhaltung', icon: '\ud83d\udcca', color: 'bg-orange-50 border-orange-200' },
-            { name: 'Dataverse', desc: 'Stammdaten', icon: '\ud83d\uddc4\ufe0f', color: 'bg-emerald-50 border-emerald-200' },
-            { name: 'SharePoint', desc: 'Projektmgmt', icon: '\ud83d\udcc1', color: 'bg-purple-50 border-purple-200' },
-            { name: 'Intern', desc: 'Dimensionen', icon: '\ud83d\udd17', color: 'bg-pink-50 border-pink-200' },
+          {[{ name: 'Zeiterfassung', desc: 'Stunden & Abwesenheiten', icon: '\u23f0', color: 'bg-blue-50 border-blue-200' },
+            { name: 'Buchhaltung', desc: 'BWA & Finanzen', icon: '\ud83d\udcca', color: 'bg-orange-50 border-orange-200' },
+            { name: 'Stammdaten', desc: 'Kunden & Mitarbeiter', icon: '\ud83d\uddc4\ufe0f', color: 'bg-emerald-50 border-emerald-200' },
+            { name: 'Projektverwaltung', desc: 'Projekte & Vertr\u00e4ge', icon: '\ud83d\udcc1', color: 'bg-purple-50 border-purple-200' },
+            { name: 'Rechnungsmodul', desc: 'Billing & Faktura', icon: '\ud83d\udd17', color: 'bg-pink-50 border-pink-200' },
           ].map((s: any) => (
             <div key={s?.name} className={`rounded-lg p-3 border ${s?.color} text-center`}>
               <span className="text-2xl">{s?.icon}</span>

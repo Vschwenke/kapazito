@@ -24,21 +24,21 @@ export async function GET() {
     const totalEntries = customers + employees + projects + timeEntries + absences + accounts + invoices + cashflow + planning + openItems + holidays + assignments + userReports + personnelCosts;
 
     const tables = [
-      { name: 'Customer', count: customers, source: 'Dataverse', type: 'Dimension' },
-      { name: 'Employee', count: employees, source: 'Dataverse', type: 'Dimension' },
-      { name: 'Project', count: projects, source: 'SharePoint', type: 'Dimension' },
-      { name: 'TimeEntry', count: timeEntries, source: 'Clockodo', type: 'Fakt' },
-      { name: 'Absence', count: absences, source: 'Clockodo', type: 'Fakt' },
-      { name: 'FinancialAccount', count: accounts, source: 'DATEV', type: 'Fakt' },
-      { name: 'PersonnelCost', count: personnelCosts, source: 'DATEV', type: 'Fakt' },
-      { name: 'Invoice', count: invoices, source: 'Intern', type: 'Fakt' },
-      { name: 'InvoiceItem', count: 0, source: 'Intern', type: 'Fakt' },
-      { name: 'CashflowEntry', count: cashflow, source: 'DATEV', type: 'Fakt' },
-      { name: 'FinancialPlanning', count: planning, source: 'Dataverse', type: 'Fakt' },
-      { name: 'OpenItem', count: openItems, source: 'DATEV', type: 'Fakt' },
-      { name: 'Holiday', count: holidays, source: 'Clockodo', type: 'Dimension' },
-      { name: 'EmployeeAssignment', count: assignments, source: 'Intern', type: 'Beziehung' },
-      { name: 'UserReport', count: userReports, source: 'Clockodo', type: 'Fakt' },
+      { name: 'Kunden', count: customers, source: 'Stammdaten', type: 'Dimension' },
+      { name: 'Mitarbeiter', count: employees, source: 'Stammdaten', type: 'Dimension' },
+      { name: 'Projekte', count: projects, source: 'Projektverwaltung', type: 'Dimension' },
+      { name: 'Zeiteinträge', count: timeEntries, source: 'Zeiterfassung', type: 'Fakt' },
+      { name: 'Abwesenheiten', count: absences, source: 'Zeiterfassung', type: 'Fakt' },
+      { name: 'Finanzbuchungen', count: accounts, source: 'Buchhaltung', type: 'Fakt' },
+      { name: 'Personalkosten', count: personnelCosts, source: 'Buchhaltung', type: 'Fakt' },
+      { name: 'Rechnungen', count: invoices, source: 'Rechnungsmodul', type: 'Fakt' },
+      { name: 'Rechnungspositionen', count: 0, source: 'Rechnungsmodul', type: 'Fakt' },
+      { name: 'Cashflow', count: cashflow, source: 'Buchhaltung', type: 'Fakt' },
+      { name: 'Finanzplanung', count: planning, source: 'Planung', type: 'Fakt' },
+      { name: 'Offene Posten', count: openItems, source: 'Buchhaltung', type: 'Fakt' },
+      { name: 'Feiertage', count: holidays, source: 'System', type: 'Dimension' },
+      { name: 'Zuordnungen', count: assignments, source: 'Projektverwaltung', type: 'Beziehung' },
+      { name: 'Monatsberichte', count: userReports, source: 'Zeiterfassung', type: 'Fakt' },
     ];
 
     const devByExperience = await prisma.employee.groupBy({

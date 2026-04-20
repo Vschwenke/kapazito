@@ -9,6 +9,29 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+model User {
+  id            String   @id @default(cuid())
+  name          String?
+  email         String   @unique
+  password      String
+  role          String   @default("user") // user, admin
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  chatMessages  ChatMessage[]
+}
+
+model ChatMessage {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  role      String   // user, assistant
+  content   String
+  agent     String?  // finanz, hr, sales, general
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt])
+}
+
 model Customer {
   id            String   @id @default(cuid())
   name          String
