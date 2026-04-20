@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils';
 
 const TYPES = ['Urlaub', 'Krank', 'Feiertag', 'Sonstiges'];
 const TYPE_COLORS: Record<string, string> = {
-  Urlaub: 'bg-blue-500/10 text-blue-500 border-blue-500/20',
+  Urlaub: 'bg-blue-500/10 text-teal-500 border-blue-500/20',
   Krank: 'bg-red-500/10 text-red-500 border-red-500/20',
   Feiertag: 'bg-amber-500/10 text-amber-500 border-amber-500/20',
   Sonstiges: 'bg-gray-500/10 text-gray-500 border-gray-500/20',
@@ -98,7 +98,7 @@ export function AbwesenheitenClient() {
     <div className="space-y-6">
       {/* KPIs */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <KpiCard title="Urlaubstage" value={summary.Urlaub?.days ?? 0} icon={Sun} iconColor="bg-blue-50 text-blue-600" />
+        <KpiCard title="Urlaubstage" value={summary.Urlaub?.days ?? 0} icon={Sun} iconColor="bg-teal-50 text-teal-600" />
         <KpiCard title="Krankheitstage" value={summary.Krank?.days ?? 0} icon={Thermometer} iconColor="bg-red-50 text-red-600" />
         <KpiCard title="Feiertage" value={summary.Feiertag?.days ?? 0} icon={Calendar} iconColor="bg-amber-50 text-amber-600" />
         <KpiCard title="Gesamt" value={data?.totalDays ?? 0} icon={Clock} iconColor="bg-purple-50 text-purple-600" />

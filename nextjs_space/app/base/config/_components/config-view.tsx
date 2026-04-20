@@ -18,7 +18,7 @@ export function ConfigView() {
       {/* System Info */}
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
         <div className="bg-card rounded-xl p-4 border border-border/50 shadow-sm flex items-start gap-3">
-          <Server className="w-8 h-8 text-blue-500 shrink-0" />
+          <Server className="w-8 h-8 text-teal-500 shrink-0" />
           <div>
             <p className="text-sm font-semibold">Server</p>
             <p className="text-xs text-muted-foreground">Next.js 14 + PostgreSQL</p>
@@ -78,7 +78,7 @@ export function ConfigView() {
         <h3 className="text-sm font-semibold mb-3 flex items-center gap-2"><Upload className="w-4 h-4" /> Datenintegration</h3>
         <div className="space-y-2 text-xs text-muted-foreground">
           <p>\u2022 <strong>BWA-Daten:</strong> Monatlich als CSV aus Ihrer Buchhaltung exportieren und hochladen</p>
-          <p>\u2022 <strong>Zeiterfassung:</strong> Mitarbeiter erfassen Stunden direkt in ServiceIQ \u2013 keine externe Software n\u00f6tig</p>
+          <p>\u2022 <strong>Zeiterfassung:</strong> Mitarbeiter erfassen Stunden direkt in Kapazito \u2013 keine externe Software n\u00f6tig</p>
           <p>\u2022 <strong>Stundens\u00e4tze:</strong> Pro Projekt/Vertrag im System pflegen \u2013 Umsatz wird automatisch berechnet</p>
           <p>\u2022 <strong>Stammdaten:</strong> Kunden und Mitarbeiter direkt in der Anwendung verwalten</p>
           <p>\u2022 <strong>Rechnungen:</strong> Automatisch aus Zeiterfassung und Stundens\u00e4tzen generieren</p>

@@ -9,7 +9,7 @@ import {
   LineChart, Line, PieChart, Pie, Cell, ComposedChart, Area
 } from 'recharts';
 
-const COLORS = ['#60B5FF', '#FF9149', '#FF9898', '#FF90BB', '#80D8C3', '#A19AD3'];
+const COLORS = ['#1a9a8a', '#7c5cfc', '#f59e42', '#e8577a', '#38bdf8', '#34d399'];
 
 export function SalesDashboard() {
   const [data, setData] = useState<any>(null);
@@ -60,7 +60,7 @@ export function SalesDashboard() {
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        <KpiCard title="Abrechenbare Std." value={Math.round(data?.totalBillableHours ?? 0).toLocaleString('de-DE')} icon={Clock} iconColor="bg-blue-50 text-blue-600" />
+        <KpiCard title="Abrechenbare Std." value={Math.round(data?.totalBillableHours ?? 0).toLocaleString('de-DE')} icon={Clock} iconColor="bg-teal-50 text-teal-600" />
         <KpiCard title="Umsatz Kunden" value={data?.totalRevenue ?? 0} format="currency" icon={DollarSign} iconColor="bg-emerald-50 text-emerald-600" />
         <KpiCard title="\u00d8 Stundensatz" value={`${(data?.avgHourlyRate ?? 0).toFixed(0)}\u20ac`} icon={TrendingUp} iconColor="bg-purple-50 text-purple-600" />
         <KpiCard title="Offene Posten" value={data?.totalOpenItems ?? 0} format="currency" icon={Wallet} iconColor="bg-orange-50 text-orange-600" />
@@ -80,8 +80,8 @@ export function SalesDashboard() {
                   <YAxis yAxisId="right" orientation="right" tickLine={false} tick={{ fontSize: 10 }} />
                   <Tooltip contentStyle={{ fontSize: 11 }} />
                   <Legend verticalAlign="top" wrapperStyle={{ fontSize: 11 }} />
-                  <Bar yAxisId="left" dataKey="Umsatz" fill="#60B5FF" radius={[4,4,0,0]} />
-                  <Line yAxisId="right" dataKey="Stunden" stroke="#FF9149" strokeWidth={2} dot={{ r: 3 }} />
+                  <Bar yAxisId="left" dataKey="Umsatz" fill="#1a9a8a" radius={[4,4,0,0]} />
+                  <Line yAxisId="right" dataKey="Stunden" stroke="#f59e42" strokeWidth={2} dot={{ r: 3 }} />
                 </ComposedChart>
               </ResponsiveContainer>
             ) : <p className="text-center text-muted-foreground text-sm pt-20">Keine Daten</p>}

@@ -8,7 +8,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pi
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
-const COLORS = ['#60B5FF', '#FF9149', '#FF9898', '#FF90BB', '#80D8C3', '#A19AD3'];
+const COLORS = ['#1a9a8a', '#7c5cfc', '#f59e42', '#e8577a', '#38bdf8', '#34d399'];
 
 export function DeckungsbeitragView() {
   const [data, setData] = useState<any>(null);
@@ -62,7 +62,7 @@ export function DeckungsbeitragView() {
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
-        <KpiCard title="Gesamtumsatz" value={totalRevenue} format="currency" icon={DollarSign} iconColor="bg-blue-50 text-blue-600" />
+        <KpiCard title="Gesamtumsatz" value={totalRevenue} format="currency" icon={DollarSign} iconColor="bg-teal-50 text-teal-600" />
         <KpiCard title="Personalkosten" value={totalCosts} format="currency" icon={DollarSign} iconColor="bg-red-50 text-red-600" />
         <KpiCard title="Deckungsbeitrag" value={totalDB} format="currency" icon={TrendingUp} iconColor="bg-emerald-50 text-emerald-600" />
         <KpiCard title="DB-Quote" value={`${dbPercent.toFixed(1)}%`} icon={PieChartIcon} iconColor="bg-purple-50 text-purple-600" />
@@ -86,9 +86,9 @@ export function DeckungsbeitragView() {
                 <YAxis type="category" dataKey="name" tickLine={false} tick={{ fontSize: 10 }} width={55} />
                 <Tooltip contentStyle={{ fontSize: 11 }} formatter={(v: any) => formatCurrency(v ?? 0)} />
                 <Legend verticalAlign="top" wrapperStyle={{ fontSize: 11 }} />
-                <Bar dataKey="Umsatz" fill="#60B5FF" radius={[0, 4, 4, 0]} />
-                <Bar dataKey="Kosten" name="Personalkosten" fill="#FF9898" radius={[0, 4, 4, 0]} />
-                <Bar dataKey="Deckungsbeitrag" fill="#80D8C3" radius={[0, 4, 4, 0]} />
+                <Bar dataKey="Umsatz" fill="#1a9a8a" radius={[0, 4, 4, 0]} />
+                <Bar dataKey="Kosten" name="Personalkosten" fill="#e8577a" radius={[0, 4, 4, 0]} />
+                <Bar dataKey="Deckungsbeitrag" fill="#34d399" radius={[0, 4, 4, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>

@@ -13,8 +13,8 @@ const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mon
 
 export const metadata = {
   metadataBase: new URL(process.env.NEXTAUTH_URL || 'http://localhost:3000'),
-  title: 'ServiceIQ – Business Intelligence für IT-Dienstleister',
-  description: 'Eigenständige BI-Plattform mit KI-Assistenten. Finanzen, HR, Sales & Rechnungsstellung – alles in einer Anwendung.',
+  title: 'Kapazito – Dein Kapazitäts-Cockpit',
+  description: 'Intelligentes Cockpit für Auslastung, Finanzen und Team-Performance. Dashboards, KI-Assistenten & Controlling in einer Anwendung.',
   icons: { icon: '/favicon.svg', shortcut: '/favicon.svg' },
   openGraph: { images: ['/og-image.png'] },
 }

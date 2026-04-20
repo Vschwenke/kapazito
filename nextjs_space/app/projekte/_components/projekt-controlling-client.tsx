@@ -54,7 +54,7 @@ export function ProjektControllingClient() {
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        <KpiCard title="Projekte" value={summary.projectCount ?? 0} icon={FolderKanban} iconColor="bg-blue-50 text-blue-600" />
+        <KpiCard title="Projekte" value={summary.projectCount ?? 0} icon={FolderKanban} iconColor="bg-teal-50 text-teal-600" />
         <KpiCard title="Gesamtumsatz" value={summary.totalRevenue ?? 0} format="currency" icon={DollarSign} iconColor="bg-emerald-50 text-emerald-600" />
         <KpiCard title="Personalkosten" value={summary.totalCosts ?? 0} format="currency" icon={DollarSign} iconColor="bg-red-50 text-red-600" />
         <KpiCard title="Profit" value={summary.totalProfit ?? 0} format="currency" icon={TrendingUp} iconColor="bg-emerald-50 text-emerald-600" />
@@ -83,8 +83,8 @@ export function ProjektControllingClient() {
               {/* Header Row */}
               <div className="flex flex-col lg:flex-row lg:items-center gap-3">
                 <div className="flex items-center gap-3 flex-1 min-w-0">
-                  <div className="w-10 h-10 rounded-lg bg-blue-600/10 flex items-center justify-center shrink-0">
-                    <FolderKanban className="w-5 h-5 text-blue-500" />
+                  <div className="w-10 h-10 rounded-lg bg-teal-600/10 flex items-center justify-center shrink-0">
+                    <FolderKanban className="w-5 h-5 text-teal-500" />
                   </div>
                   <div className="min-w-0">
                     <h3 className="font-semibold text-sm truncate">{p.name}</h3>
@@ -159,8 +159,8 @@ export function ProjektControllingClient() {
                             <YAxis tick={{ fontSize: 10 }} tickLine={false} />
                             <Tooltip contentStyle={{ fontSize: 11 }} />
                             <Legend wrapperStyle={{ fontSize: 10 }} />
-                            <Bar dataKey="hours" name="Gesamt" fill="#60B5FF" radius={[4,4,0,0]} />
-                            <Bar dataKey="billable" name="Abrechenbar" fill="#80D8C3" radius={[4,4,0,0]} />
+                            <Bar dataKey="hours" name="Gesamt" fill="#1a9a8a" radius={[4,4,0,0]} />
+                            <Bar dataKey="billable" name="Abrechenbar" fill="#34d399" radius={[4,4,0,0]} />
                           </BarChart>
                         </ResponsiveContainer>
                       ) : <p className="text-xs text-muted-foreground text-center pt-16">Keine Daten</p>}
@@ -174,7 +174,7 @@ export function ProjektControllingClient() {
                       {(p.team ?? []).map((t: any, i: number) => (
                         <div key={i} className="flex items-center justify-between p-2 rounded bg-muted/30">
                           <div className="flex items-center gap-2">
-                            <div className="w-6 h-6 rounded-full bg-blue-600/10 flex items-center justify-center text-[10px] font-bold text-blue-500">
+                            <div className="w-6 h-6 rounded-full bg-teal-600/10 flex items-center justify-center text-[10px] font-bold text-teal-500">
                               {t.name.split(' ').map((n: string) => n[0]).join('')}
                             </div>
                             <span className="text-xs font-medium">{t.name}</span>

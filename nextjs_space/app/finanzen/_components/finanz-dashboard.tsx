@@ -11,7 +11,7 @@ import {
   PieChart, Pie, Cell, Legend, ComposedChart, Area
 } from 'recharts';
 
-const COLORS = ['#60B5FF', '#FF9149', '#FF9898', '#FF90BB', '#80D8C3', '#A19AD3'];
+const COLORS = ['#1a9a8a', '#7c5cfc', '#f59e42', '#e8577a', '#38bdf8', '#34d399'];
 
 export function FinanzDashboard() {
   const [data, setData] = useState<any>(null);
@@ -92,7 +92,7 @@ export function FinanzDashboard() {
 
       {/* KPI Cards Row */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        <KpiCard title="Umsatzerl\u00f6se" value={data?.revenue ?? 0} format="currency" delta={revenueDelta} deltaLabel="\u0394/VJ" icon={DollarSign} iconColor="bg-blue-50 text-blue-600" />
+        <KpiCard title="Umsatzerl\u00f6se" value={data?.revenue ?? 0} format="currency" delta={revenueDelta} deltaLabel="\u0394/VJ" icon={DollarSign} iconColor="bg-teal-50 text-teal-600" />
         <KpiCard title="Rohertrag" value={data?.rohertrag ?? 0} format="currency" delta={rohertragDelta} deltaLabel="\u0394/VJ" icon={TrendingUp} iconColor="bg-emerald-50 text-emerald-600" />
         <KpiCard title="Gesamtkosten" value={data?.gesamtkosten ?? 0} format="currency" delta={kostenDelta} deltaLabel="\u0394/VJ" icon={TrendingDown} iconColor="bg-red-50 text-red-600" />
         <KpiCard title="Betriebsergebnis" value={data?.betriebsergebnis ?? 0} format="currency" delta={ergebnisDelta} deltaLabel="\u0394/VJ" icon={BarChart3} iconColor="bg-purple-50 text-purple-600" />
@@ -103,13 +103,13 @@ export function FinanzDashboard() {
       {/* Gauges Row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <div className="bg-card rounded-xl p-4 border border-border/50 shadow-sm flex flex-col items-center">
-          <GaugeChart value={deckungsbeitrag} label="Deckungsbeitrag" color="#60B5FF" />
+          <GaugeChart value={deckungsbeitrag} label="Deckungsbeitrag" color="#1a9a8a" />
         </div>
         <div className="bg-card rounded-xl p-4 border border-border/50 shadow-sm flex flex-col items-center">
-          <GaugeChart value={data?.utilization ?? 0} label="Auslastung" color="#10b981" />
+          <GaugeChart value={data?.utilization ?? 0} label="Auslastung" color="#1a9a8a" />
         </div>
         <div className="bg-card rounded-xl p-4 border border-border/50 shadow-sm flex flex-col items-center">
-          <GaugeChart value={umsatzrendite} label="Umsatzrendite" color="#FF9149" />
+          <GaugeChart value={umsatzrendite} label="Umsatzrendite" color="#f59e42" />
         </div>
         <div className="bg-card rounded-xl p-4 border border-border/50 shadow-sm flex items-center justify-center">
           <div className="text-center">
@@ -132,8 +132,8 @@ export function FinanzDashboard() {
                   <XAxis dataKey="month" tickLine={false} tick={{ fontSize: 10 }} />
                   <YAxis tickLine={false} tick={{ fontSize: 10 }} tickFormatter={(v: any) => `${((v ?? 0) / 1000).toFixed(0)}K`} />
                   <Tooltip contentStyle={{ fontSize: 11 }} formatter={(v: any) => formatCurrency(v ?? 0)} />
-                  <Bar dataKey="Umsatz" fill="#60B5FF" radius={[4, 4, 0, 0]} />
-                  <Bar dataKey="Kosten" fill="#FF9898" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="Umsatz" fill="#1a9a8a" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="Kosten" fill="#e8577a" radius={[4, 4, 0, 0]} />
                   <Line dataKey="Ergebnis" stroke="#10b981" strokeWidth={2} dot={{ r: 4 }} />
                 </ComposedChart>
               </ResponsiveContainer>
@@ -151,9 +151,9 @@ export function FinanzDashboard() {
                   <XAxis dataKey="month" tickLine={false} tick={{ fontSize: 10 }} />
                   <YAxis tickLine={false} tick={{ fontSize: 10 }} tickFormatter={(v: any) => `${((v ?? 0) / 1000).toFixed(0)}K`} />
                   <Tooltip contentStyle={{ fontSize: 11 }} formatter={(v: any) => formatCurrency(v ?? 0)} />
-                  <Bar dataKey="Zufluss" fill="#80D8C3" radius={[4, 4, 0, 0]} />
-                  <Bar dataKey="Abfluss" fill="#FF9898" radius={[4, 4, 0, 0]} />
-                  <Line dataKey="Kumulativ" stroke="#3b82f6" strokeWidth={2} dot={{ r: 4 }} />
+                  <Bar dataKey="Zufluss" fill="#34d399" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="Abfluss" fill="#e8577a" radius={[4, 4, 0, 0]} />
+                  <Line dataKey="Kumulativ" stroke="#7c5cfc" strokeWidth={2} dot={{ r: 4 }} />
                 </ComposedChart>
               </ResponsiveContainer>
             ) : <p className="text-center text-muted-foreground text-sm pt-20">Keine Daten f\u00fcr diesen Zeitraum</p>}
@@ -173,7 +173,7 @@ export function FinanzDashboard() {
                   <XAxis type="number" tickLine={false} tick={{ fontSize: 10 }} tickFormatter={(v: any) => `${((v ?? 0) / 1000).toFixed(0)}K`} />
                   <YAxis type="category" dataKey="name" tickLine={false} tick={{ fontSize: 10 }} width={55} />
                   <Tooltip contentStyle={{ fontSize: 11 }} formatter={(v: any) => formatCurrency(v ?? 0)} />
-                  <Bar dataKey="amount" fill="#FF9149" radius={[0, 4, 4, 0]} />
+                  <Bar dataKey="amount" fill="#f59e42" radius={[0, 4, 4, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             ) : <p className="text-center text-muted-foreground text-sm pt-20">Keine offenen Posten</p>}

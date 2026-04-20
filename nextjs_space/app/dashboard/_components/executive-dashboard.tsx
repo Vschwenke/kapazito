@@ -15,7 +15,7 @@ import {
   LineChart, Line, PieChart, Pie, Cell, ComposedChart
 } from 'recharts';
 
-const COLORS = ['#60B5FF', '#FF9149', '#FF9898', '#FF90BB', '#80D8C3', '#A19AD3'];
+const COLORS = ['#1a9a8a', '#7c5cfc', '#f59e42', '#e8577a', '#38bdf8', '#34d399'];
 
 export function ExecutiveDashboard() {
   const [data, setData] = useState<any>(null);
@@ -76,7 +76,7 @@ export function ExecutiveDashboard() {
 
       {/* Top KPIs - Traffic Light System */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        <KpiCard title="Umsatz" value={data.revenue ?? 0} format="currency" delta={revDelta} deltaLabel="Δ/VJ" icon={DollarSign} iconColor="bg-blue-50 text-blue-600" />
+        <KpiCard title="Umsatz" value={data.revenue ?? 0} format="currency" delta={revDelta} deltaLabel="Δ/VJ" icon={DollarSign} iconColor="bg-teal-50 text-teal-600" />
         <KpiCard title="Betriebsergebnis" value={data.betriebsergebnis ?? 0} format="currency" delta={beDelta} deltaLabel="Δ/VJ" icon={TrendingUp} iconColor="bg-emerald-50 text-emerald-600" />
         <KpiCard title="Rev/Mitarbeiter" value={`${Math.round(data.revenuePerEmployeeMonthly ?? 0).toLocaleString('de-DE')}€`} icon={Banknote} iconColor="bg-purple-50 text-purple-600" />
         <KpiCard title="Offene Posten" value={data.totalOpen ?? 0} format="currency" icon={Wallet} iconColor="bg-orange-50 text-orange-600" />
@@ -90,10 +90,10 @@ export function ExecutiveDashboard() {
           <GaugeChart value={data.avgUtilization ?? 0} label="Auslastung" color={data.avgUtilization >= 80 ? '#10b981' : data.avgUtilization >= 70 ? '#f59e0b' : '#ef4444'} size={100} />
         </div>
         <div className="bg-card rounded-xl p-3 border border-border/50 shadow-sm flex flex-col items-center">
-          <GaugeChart value={data.billableRatio ?? 0} label="Billable Ratio" color="#60B5FF" size={100} />
+          <GaugeChart value={data.billableRatio ?? 0} label="Billable Ratio" color="#1a9a8a" size={100} />
         </div>
         <div className="bg-card rounded-xl p-3 border border-border/50 shadow-sm flex flex-col items-center">
-          <GaugeChart value={data.overallDBPercent ?? 0} label="Deckungsbeitrag" color="#80D8C3" size={100} />
+          <GaugeChart value={data.overallDBPercent ?? 0} label="Deckungsbeitrag" color="#34d399" size={100} />
         </div>
         <div className="bg-card rounded-xl p-3 border border-border/50 shadow-sm flex flex-col items-center">
           <GaugeChart value={data.personnelCostRatio ?? 0} maxValue={100} label="Personalkosten" color={data.personnelCostRatio <= 60 ? '#10b981' : data.personnelCostRatio <= 65 ? '#f59e0b' : '#ef4444'} size={100} />
@@ -128,7 +128,7 @@ export function ExecutiveDashboard() {
                 <XAxis dataKey="month" tickLine={false} tick={{ fontSize: 10 }} />
                 <YAxis tickLine={false} tick={{ fontSize: 10 }} tickFormatter={(v: any) => `${((v ?? 0) / 1000).toFixed(0)}K`} />
                 <Tooltip contentStyle={{ fontSize: 11 }} formatter={(v: any) => formatCurrency(v ?? 0)} />
-                <Bar dataKey="Umsatz" fill="#60B5FF" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="Umsatz" fill="#1a9a8a" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -146,9 +146,9 @@ export function ExecutiveDashboard() {
                 <XAxis dataKey="month" tickLine={false} tick={{ fontSize: 10 }} />
                 <YAxis tickLine={false} tick={{ fontSize: 10 }} tickFormatter={(v: any) => `${((v ?? 0) / 1000).toFixed(0)}K`} />
                 <Tooltip contentStyle={{ fontSize: 11 }} formatter={(v: any) => formatCurrency(v ?? 0)} />
-                <Bar dataKey="Zufluss" fill="#80D8C3" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="Abfluss" fill="#FF9898" radius={[4, 4, 0, 0]} />
-                <Line dataKey="Kumulativ" stroke="#3b82f6" strokeWidth={2} dot={{ r: 3 }} />
+                <Bar dataKey="Zufluss" fill="#34d399" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="Abfluss" fill="#e8577a" radius={[4, 4, 0, 0]} />
+                <Line dataKey="Kumulativ" stroke="#7c5cfc" strokeWidth={2} dot={{ r: 3 }} />
               </ComposedChart>
             </ResponsiveContainer>
           </div>
@@ -169,7 +169,7 @@ export function ExecutiveDashboard() {
                 <XAxis type="number" tickLine={false} tick={{ fontSize: 10 }} tickFormatter={(v: any) => `${((v ?? 0) / 1000).toFixed(0)}K`} />
                 <YAxis type="category" dataKey="name" tickLine={false} tick={{ fontSize: 10 }} width={45} />
                 <Tooltip contentStyle={{ fontSize: 11 }} formatter={(v: any) => formatCurrency(v ?? 0)} />
-                <Bar dataKey="Umsatz" fill="#60B5FF" radius={[0, 4, 4, 0]} stackId="a" />
+                <Bar dataKey="Umsatz" fill="#1a9a8a" radius={[0, 4, 4, 0]} stackId="a" />
                 <Bar dataKey="DB" fill="#10b981" radius={[0, 4, 4, 0]} />
               </BarChart>
             </ResponsiveContainer>

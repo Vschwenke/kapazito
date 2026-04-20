@@ -51,7 +51,7 @@ export function MitarbeiterView() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-            <KpiCard title="Vertragsart" value={selected?.contractType ?? '-'} icon={Briefcase} iconColor="bg-blue-50 text-blue-600" />
+            <KpiCard title="Vertragsart" value={selected?.contractType ?? '-'} icon={Briefcase} iconColor="bg-teal-50 text-teal-600" />
             <KpiCard title="Homeoffice" value={formatPercent(selected?.homeOfficePercent)} icon={Home} iconColor="bg-cyan-50 text-cyan-600" />
             <KpiCard title="Monatseinkommen" value={selected?.monthlyIncome ?? 0} format="currency" icon={DollarSign} iconColor="bg-emerald-50 text-emerald-600" />
             <KpiCard title="Erfahrung" value={selected?.experienceLevel ?? '-'} icon={User} iconColor="bg-purple-50 text-purple-600" />
@@ -59,9 +59,9 @@ export function MitarbeiterView() {
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div className="bg-card rounded-xl p-4 border border-border/50 shadow-sm flex flex-col items-center">
-              <GaugeChart value={selected?.utilization ?? 0} label="Auslastung" color="#10b981" size={100} />
+              <GaugeChart value={selected?.utilization ?? 0} label="Auslastung" color="#1a9a8a" size={100} />
             </div>
-            <KpiCard title="Abrechenbare Std." value={Math.round(selected?.billableHours ?? 0).toLocaleString('de-DE')} icon={Clock} iconColor="bg-blue-50 text-blue-600" />
+            <KpiCard title="Abrechenbare Std." value={Math.round(selected?.billableHours ?? 0).toLocaleString('de-DE')} icon={Clock} iconColor="bg-teal-50 text-teal-600" />
             <KpiCard title="Krankheitstage" value={Math.round(selected?.sickDays ?? 0)} icon={Heart} iconColor="bg-red-50 text-red-600" />
             <KpiCard title="Urlaubstage" value={Math.round(selected?.vacationDays ?? 0)} icon={Palmtree} iconColor="bg-amber-50 text-amber-600" />
           </div>

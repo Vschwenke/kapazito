@@ -42,7 +42,7 @@ export function ErtraegeView() {
     <div className="space-y-4">
       <FilterBar selectedYear={year} selectedQuarter={quarter} selectedMonth={month} onYearChange={setYear} onQuarterChange={setQuarter} onMonthChange={setMonth} />
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-        <KpiCard title="Umsatzerl\u00f6se" value={revenueAcc?.total ?? 0} format="currency" delta={revenueAcc?.delta} deltaLabel="\u0394/VJ" icon={DollarSign} iconColor="bg-blue-50 text-blue-600" />
+        <KpiCard title="Umsatzerl\u00f6se" value={revenueAcc?.total ?? 0} format="currency" delta={revenueAcc?.delta} deltaLabel="\u0394/VJ" icon={DollarSign} iconColor="bg-teal-50 text-teal-600" />
         <KpiCard title="Refinancing" value={refinancingAcc?.total ?? 0} format="currency" icon={TrendingUp} iconColor="bg-purple-50 text-purple-600" />
         <KpiCard title="Rohertrag" value={rohertragAcc?.total ?? 0} format="currency" delta={rohertragAcc?.delta} deltaLabel="\u0394/VJ" icon={TrendingUp} iconColor="bg-emerald-50 text-emerald-600" />
       </div>
@@ -57,8 +57,8 @@ export function ErtraegeView() {
                   <YAxis tickLine={false} tick={{ fontSize: 10 }} tickFormatter={(v: any) => `${((v??0)/1000).toFixed(0)}K`} />
                   <Tooltip contentStyle={{ fontSize: 11 }} formatter={(v: any) => formatCurrency(v ?? 0)} />
                   <Legend verticalAlign="top" wrapperStyle={{ fontSize: 11 }} />
-                  <Bar dataKey="Umsatz" fill="#60B5FF" radius={[4,4,0,0]} />
-                  <Bar dataKey="Refinancing" fill="#A19AD3" radius={[4,4,0,0]} />
+                  <Bar dataKey="Umsatz" fill="#1a9a8a" radius={[4,4,0,0]} />
+                  <Bar dataKey="Refinancing" fill="#7c5cfc" radius={[4,4,0,0]} />
                 </BarChart>
               </ResponsiveContainer>
             ) : <p className="text-center text-muted-foreground text-sm pt-20">Keine Daten</p>}

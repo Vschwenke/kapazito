@@ -6,8 +6,8 @@ import { formatNumber } from '@/lib/format';
 import { Loader2, Database, Users, Layers, Table2, FileText, BarChart3 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
-const COLORS = ['#60B5FF', '#FF9149', '#FF9898', '#FF90BB', '#80D8C3', '#A19AD3'];
-const SOURCE_COLORS: Record<string, string> = { Zeiterfassung: '#60B5FF', Buchhaltung: '#FF9149', Stammdaten: '#80D8C3', Projektverwaltung: '#A19AD3', Rechnungsmodul: '#FF90BB', Planung: '#FFD700', System: '#98FB98' };
+const COLORS = ['#1a9a8a', '#7c5cfc', '#f59e42', '#e8577a', '#38bdf8', '#34d399'];
+const SOURCE_COLORS: Record<string, string> = { Zeiterfassung: '#1a9a8a', Buchhaltung: '#7c5cfc', Stammdaten: '#34d399', Projektverwaltung: '#38bdf8', Rechnungsmodul: '#e8577a', Planung: '#f59e42', System: '#818cf8' };
 
 export function BaseReportView() {
   const [data, setData] = useState<any>(null);
@@ -38,7 +38,7 @@ export function BaseReportView() {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <KpiCard title="Eintr\u00e4ge DB" value={formatNumber(data?.totalEntries ?? 0)} icon={Database} iconColor="bg-blue-50 text-blue-600" />
+        <KpiCard title="Eintr\u00e4ge DB" value={formatNumber(data?.totalEntries ?? 0)} icon={Database} iconColor="bg-teal-50 text-teal-600" />
         <KpiCard title="Tabellen" value={tables?.length ?? 0} icon={Table2} iconColor="bg-emerald-50 text-emerald-600" />
         <KpiCard title="Datenquellen" value={Object.keys(bySource ?? {}).length} icon={Layers} iconColor="bg-purple-50 text-purple-600" />
         <KpiCard title="Entwickler" value={(data?.devByExperience ?? []).reduce((s: number, d: any) => s + (d?.count ?? 0), 0)} icon={Users} iconColor="bg-orange-50 text-orange-600" />
@@ -68,7 +68,7 @@ export function BaseReportView() {
                 <XAxis dataKey="level" tickLine={false} tick={{ fontSize: 10 }} />
                 <YAxis tickLine={false} tick={{ fontSize: 10 }} />
                 <Tooltip contentStyle={{ fontSize: 11 }} />
-                <Bar dataKey="count" fill="#60B5FF" radius={[4,4,0,0]} />
+                <Bar dataKey="count" fill="#1a9a8a" radius={[4,4,0,0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -91,7 +91,7 @@ export function BaseReportView() {
                 <td className="py-1.5 px-2 font-mono font-medium">{t?.name}</td>
                 <td className="py-1.5 px-2">
                   <span className={`inline-block px-1.5 py-0.5 rounded text-[10px] font-semibold ${
-                    t?.type === 'Fakt' ? 'bg-blue-100 text-blue-700' :
+                    t?.type === 'Fakt' ? 'bg-teal-100 text-teal-700' :
                     t?.type === 'Dimension' ? 'bg-emerald-100 text-emerald-700' : 'bg-purple-100 text-purple-700'
                   }`}>{t?.type}</span>
                 </td>
@@ -130,7 +130,7 @@ export function BaseReportView() {
         </div>
         <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-3 text-center border border-slate-200 dark:border-slate-700">
           <Database className="w-6 h-6 mx-auto text-primary" />
-          <p className="text-sm font-bold mt-1">ServiceIQ – Zentrales Datenmodell</p>
+          <p className="text-sm font-bold mt-1">Kapazito – Zentrales Datenmodell</p>
           <p className="text-[10px] text-muted-foreground">PostgreSQL \u2022 {(data?.totalEntries ?? 0).toLocaleString('de-DE')} Eintr\u00e4ge \u2022 {tables?.length ?? 0} Tabellen</p>
         </div>
         <div className="text-center my-3">

@@ -8,7 +8,7 @@ type Message = { role: 'user' | 'assistant'; content: string };
 type AgentType = 'general' | 'finanz' | 'hr' | 'sales';
 
 const AGENTS: { id: AgentType; label: string; desc: string; icon: any; color: string }[] = [
-  { id: 'general', label: 'ServiceIQ Assistent', desc: 'Allgemeine Gesch\u00e4ftsberatung', icon: Bot, color: 'bg-blue-100 text-blue-700 border-blue-200' },
+  { id: 'general', label: 'Kapazito Assistent', desc: 'Allgemeine Gesch\u00e4ftsberatung', icon: Bot, color: 'bg-teal-100 text-teal-700 border-teal-200' },
   { id: 'finanz', label: 'Finanz-Analyst', desc: 'BWA, Cashflow, Deckungsbeitrag', icon: BarChart3, color: 'bg-emerald-100 text-emerald-700 border-emerald-200' },
   { id: 'hr', label: 'HR-Berater', desc: 'Auslastung, Team, Gehalt', icon: Users, color: 'bg-purple-100 text-purple-700 border-purple-200' },
   { id: 'sales', label: 'Sales-Stratege', desc: 'Kunden, Stundens\u00e4tze, Pipeline', icon: TrendingUp, color: 'bg-orange-100 text-orange-700 border-orange-200' },
@@ -177,7 +177,7 @@ export function AgentChat() {
             <div className={cn(
               'max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed',
               msg.role === 'user'
-                ? 'bg-blue-600 text-white rounded-br-md'
+                ? 'bg-teal-600 text-white rounded-br-md'
                 : 'bg-card border border-border shadow-sm rounded-bl-md'
             )}>
               <div className="whitespace-pre-wrap">{msg.content || (loading && i === messages.length - 1 ? '' : '')}</div>
@@ -210,7 +210,7 @@ export function AgentChat() {
         <button
           onClick={sendMessage}
           disabled={loading || !input.trim()}
-          className="h-12 w-12 rounded-xl bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center transition-colors disabled:opacity-50 shrink-0"
+          className="h-12 w-12 rounded-xl bg-teal-600 hover:bg-teal-700 text-white flex items-center justify-center transition-colors disabled:opacity-50 shrink-0"
         >
           {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
         </button>

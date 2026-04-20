@@ -267,7 +267,7 @@ export function ZeiterfassungClient() {
             )}>
               <CardHeader className="p-3 pb-2">
                 <div className="flex items-center justify-between">
-                  <span className={cn('text-xs font-semibold', isToday ? 'text-blue-500' : 'text-muted-foreground')}>
+                  <span className={cn('text-xs font-semibold', isToday ? 'text-teal-500' : 'text-muted-foreground')}>
                     {formatDateDE(d)}
                   </span>
                   <span className="text-xs font-bold">{dayTotal > 0 ? `${dayTotal}h` : ''}</span>
@@ -285,7 +285,7 @@ export function ZeiterfassungClient() {
                       <p className="text-[10px] text-muted-foreground truncate">{e.project?.name || e.customer?.name || e.description || 'Kein Projekt'}</p>
                     </div>
                     <div className="hidden group-hover:flex items-center gap-0.5">
-                      <button onClick={() => handleEdit(e)} className="p-0.5 hover:text-blue-500"><Pencil className="w-3 h-3" /></button>
+                      <button onClick={() => handleEdit(e)} className="p-0.5 hover:text-teal-500"><Pencil className="w-3 h-3" /></button>
                       <button onClick={() => handleDelete(e.id)} className="p-0.5 hover:text-red-500"><Trash2 className="w-3 h-3" /></button>
                     </div>
                   </div>

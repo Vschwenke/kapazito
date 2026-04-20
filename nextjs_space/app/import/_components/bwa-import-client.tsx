@@ -63,7 +63,7 @@ export function BwaImportClient() {
       <Card className="border-blue-500/20 bg-blue-500/5">
         <CardContent className="p-4">
           <div className="flex gap-3">
-            <Info className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
+            <Info className="w-5 h-5 text-teal-500 shrink-0 mt-0.5" />
             <div className="text-sm space-y-1">
               <p className="font-semibold">CSV-Format f\u00fcr BWA-Import</p>
               <p className="text-muted-foreground">Pflichtfelder: <code className="bg-muted px-1 rounded">Kontonummer</code>, <code className="bg-muted px-1 rounded">Kontoname</code>, <code className="bg-muted px-1 rounded">Jahr</code>, <code className="bg-muted px-1 rounded">Monat</code>, <code className="bg-muted px-1 rounded">Betrag</code></p>
@@ -97,7 +97,7 @@ export function BwaImportClient() {
             <Upload className="w-8 h-8 mx-auto mb-3 text-muted-foreground" />
             {file ? (
               <div className="flex items-center justify-center gap-2">
-                <FileText className="w-4 h-4 text-blue-500" />
+                <FileText className="w-4 h-4 text-teal-500" />
                 <span className="font-medium text-sm">{file.name}</span>
                 <span className="text-xs text-muted-foreground">({(file.size / 1024).toFixed(1)} KB)</span>
               </div>

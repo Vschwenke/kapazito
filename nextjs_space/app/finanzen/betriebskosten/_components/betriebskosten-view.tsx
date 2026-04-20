@@ -9,7 +9,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, PieC
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
-const COLORS = ['#60B5FF', '#FF9149', '#FF9898', '#A19AD3', '#80D8C3', '#FF90BB'];
+const COLORS = ['#1a9a8a', '#7c5cfc', '#f59e42', '#e8577a', '#38bdf8', '#34d399'];
 
 // Map BWA account numbers to categories
 const COST_CATEGORIES: Record<string, string> = {
@@ -118,7 +118,7 @@ export function BetriebskostenView() {
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <KpiCard title="Gesamtkosten" value={total} format="currency" delta={kostenAcc?.delta} deltaLabel="\u0394/VJ" icon={DollarSign} iconColor="bg-red-50 text-red-600" />
-        <KpiCard title="Personalkosten" value={costBreakdown.find(c => c.name === 'Personalkosten')?.value ?? 0} format="currency" icon={Users} iconColor="bg-blue-50 text-blue-600" />
+        <KpiCard title="Personalkosten" value={costBreakdown.find(c => c.name === 'Personalkosten')?.value ?? 0} format="currency" icon={Users} iconColor="bg-teal-50 text-teal-600" />
         <KpiCard title="Sachkosten" value={costBreakdown.find(c => c.name === 'Sachkosten')?.value ?? 0} format="currency" icon={Building} iconColor="bg-orange-50 text-orange-600" />
         <KpiCard title="Sonstige" value={(costBreakdown.find(c => c.name === 'Abschreibungen')?.value ?? 0) + (costBreakdown.find(c => c.name === 'Sonstige')?.value ?? 0)} format="currency" icon={DollarSign} iconColor="bg-purple-50 text-purple-600" />
       </div>
@@ -147,10 +147,10 @@ export function BetriebskostenView() {
                   <YAxis tickLine={false} tick={{ fontSize: 10 }} tickFormatter={(v: any) => `${((v??0)/1000).toFixed(0)}K`} />
                   <Tooltip contentStyle={{ fontSize: 11 }} formatter={(v: any) => formatCurrency(v ?? 0)} />
                   <Legend verticalAlign="top" wrapperStyle={{ fontSize: 11 }} />
-                  <Bar dataKey="Personalkosten" stackId="a" fill="#60B5FF" />
-                  <Bar dataKey="Sachkosten" stackId="a" fill="#FF9149" />
-                  <Bar dataKey="Abschreibungen" stackId="a" fill="#FF9898" />
-                  <Bar dataKey="Sonstige" stackId="a" fill="#A19AD3" radius={[4,4,0,0]} />
+                  <Bar dataKey="Personalkosten" stackId="a" fill="#1a9a8a" />
+                  <Bar dataKey="Sachkosten" stackId="a" fill="#f59e42" />
+                  <Bar dataKey="Abschreibungen" stackId="a" fill="#e8577a" />
+                  <Bar dataKey="Sonstige" stackId="a" fill="#7c5cfc" radius={[4,4,0,0]} />
                 </BarChart>
               </ResponsiveContainer>
             ) : <p className="text-center text-muted-foreground text-sm pt-20">Keine Daten</p>}

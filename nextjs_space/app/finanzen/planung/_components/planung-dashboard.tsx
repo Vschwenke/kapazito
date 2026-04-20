@@ -55,7 +55,7 @@ export function PlanungDashboard() {
                 <YAxis tickLine={false} tick={{ fontSize: 10 }} tickFormatter={(v: any) => isCurrencyCat ? `${((v ?? 0)/1000).toFixed(0)}K` : `${v ?? 0}%`} />
                 <Tooltip contentStyle={{ fontSize: 11 }} formatter={(v: any) => fmt(v)} />
                 <Legend verticalAlign="top" wrapperStyle={{ fontSize: 11 }} />
-                <Bar dataKey="Geplant" fill="#60B5FF" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="Geplant" fill="#1a9a8a" radius={[4, 4, 0, 0]} />
                 <Bar dataKey="IST" fill="#10b981" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
@@ -71,9 +71,9 @@ export function PlanungDashboard() {
                 <YAxis tickLine={false} tick={{ fontSize: 10 }} tickFormatter={(v: any) => isCurrencyCat ? `${((v ?? 0)/1000).toFixed(0)}K` : `${v ?? 0}%`} />
                 <Tooltip contentStyle={{ fontSize: 11 }} formatter={(v: any) => fmt(v)} />
                 <Legend verticalAlign="top" wrapperStyle={{ fontSize: 11 }} />
-                <Line dataKey="Geplant" stroke="#60B5FF" strokeWidth={2} dot={{ r: 3 }} />
+                <Line dataKey="Geplant" stroke="#1a9a8a" strokeWidth={2} dot={{ r: 3 }} />
                 <Line dataKey="IST" stroke="#10b981" strokeWidth={2} dot={{ r: 3 }} />
-                <Line dataKey="Forecast" stroke="#FF9149" strokeWidth={2} strokeDasharray="5 5" dot={{ r: 3 }} />
+                <Line dataKey="Forecast" stroke="#f59e42" strokeWidth={2} strokeDasharray="5 5" dot={{ r: 3 }} />
               </LineChart>
             </ResponsiveContainer>
           </div>

@@ -5,7 +5,7 @@ import { KpiCard } from '@/components/ui/kpi-card';
 import { formatCurrency } from '@/lib/format';
 import { Loader2, Receipt, Users, Clock, Calendar } from 'lucide-react';
 
-const STATUS_COLORS: Record<string, string> = { paid: '#10b981', partial: '#f59e0b', open: '#3b82f6', overdue: '#ef4444' };
+const STATUS_COLORS: Record<string, string> = { paid: '#34d399', partial: '#f59e42', open: '#38bdf8', overdue: '#e8577a' };
 const STATUS_LABELS: Record<string, string> = { paid: 'Bezahlt', partial: 'Teilweise', open: 'Offen', overdue: '\u00dcberf\u00e4llig' };
 
 export function RechnungenDetailsView() {
@@ -56,7 +56,7 @@ export function RechnungenDetailsView() {
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <KpiCard title="Mitarbeiter" value={filteredBilling?.length ?? 0} icon={Users} iconColor="bg-blue-50 text-blue-600" />
+        <KpiCard title="Mitarbeiter" value={filteredBilling?.length ?? 0} icon={Users} iconColor="bg-teal-50 text-teal-600" />
         <KpiCard title="Gesamt Stunden" value={Math.round(filteredBilling.reduce((s: number, e: any) => s + (e?.totalHours ?? 0), 0)).toLocaleString('de-DE')} icon={Clock} iconColor="bg-emerald-50 text-emerald-600" />
         <KpiCard title="Abrechenbare Std." value={Math.round(filteredBilling.reduce((s: number, e: any) => s + (e?.billableHours ?? 0), 0)).toLocaleString('de-DE')} icon={Receipt} iconColor="bg-purple-50 text-purple-600" />
         <KpiCard title="Rechnungen" value={data?.invoices?.length ?? 0} icon={Calendar} iconColor="bg-orange-50 text-orange-600" />

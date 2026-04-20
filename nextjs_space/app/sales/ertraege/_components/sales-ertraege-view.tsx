@@ -5,7 +5,7 @@ import { formatCurrency } from '@/lib/format';
 import { Loader2 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
-const COLORS = ['#60B5FF', '#FF9149', '#FF9898', '#FF90BB', '#80D8C3', '#A19AD3'];
+const COLORS = ['#1a9a8a', '#7c5cfc', '#f59e42', '#e8577a', '#38bdf8', '#34d399'];
 
 export function SalesErtraegeView() {
   const [data, setData] = useState<any>(null);
@@ -39,7 +39,7 @@ export function SalesErtraegeView() {
                 <YAxis tickLine={false} tick={{ fontSize: 10 }} tickFormatter={(v: any) => `${((v??0)/1000).toFixed(0)}K`} />
                 <Tooltip contentStyle={{ fontSize: 11 }} formatter={(v: any) => formatCurrency(v ?? 0)} />
                 <Legend verticalAlign="top" wrapperStyle={{ fontSize: 11 }} />
-                <Bar dataKey="Umsatz" fill="#60B5FF" radius={[4,4,0,0]} />
+                <Bar dataKey="Umsatz" fill="#1a9a8a" radius={[4,4,0,0]} />
               </BarChart>
             </ResponsiveContainer>
           ) : <p className="text-center text-muted-foreground text-sm pt-20">Keine Daten</p>}

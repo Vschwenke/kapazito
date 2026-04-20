@@ -6,8 +6,8 @@ import { formatCurrency } from '@/lib/format';
 import { Loader2, Receipt, DollarSign, AlertCircle, CheckCircle2, Clock } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, PieChart, Pie, Cell } from 'recharts';
 
-const COLORS = ['#60B5FF', '#FF9149', '#FF9898', '#80D8C3', '#A19AD3'];
-const STATUS_COLORS: Record<string, string> = { paid: '#10b981', partial: '#f59e0b', open: '#3b82f6', overdue: '#ef4444' };
+const COLORS = ['#1a9a8a', '#7c5cfc', '#f59e42', '#34d399', '#e8577a'];
+const STATUS_COLORS: Record<string, string> = { paid: '#34d399', partial: '#f59e42', open: '#38bdf8', overdue: '#e8577a' };
 const STATUS_LABELS: Record<string, string> = { paid: 'Bezahlt', partial: 'Teilweise', open: 'Offen', overdue: '\u00dcberf\u00e4llig' };
 
 export function RechnungenDashboard() {
@@ -55,7 +55,7 @@ export function RechnungenDashboard() {
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <KpiCard title="Rechnungsbetrag" value={data?.totalInvoiced ?? 0} format="currency" icon={Receipt} iconColor="bg-blue-50 text-blue-600" />
+        <KpiCard title="Rechnungsbetrag" value={data?.totalInvoiced ?? 0} format="currency" icon={Receipt} iconColor="bg-teal-50 text-teal-600" />
         <KpiCard title="Bezahlt" value={data?.totalPaid ?? 0} format="currency" icon={CheckCircle2} iconColor="bg-emerald-50 text-emerald-600" />
         <KpiCard title="Offen" value={data?.totalOpen ?? 0} format="currency" icon={Clock} iconColor="bg-orange-50 text-orange-600" />
         <KpiCard title="Rechnungen" value={(data?.invoices?.length ?? 0)} icon={Receipt} iconColor="bg-purple-50 text-purple-600" />
@@ -72,8 +72,8 @@ export function RechnungenDashboard() {
                   <YAxis tickLine={false} tick={{ fontSize: 10 }} tickFormatter={(v: any) => `${((v??0)/1000).toFixed(0)}K`} />
                   <Tooltip contentStyle={{ fontSize: 11 }} formatter={(v: any) => formatCurrency(v ?? 0)} />
                   <Legend verticalAlign="top" wrapperStyle={{ fontSize: 11 }} />
-                  <Bar dataKey="Rechnungsbetrag" fill="#60B5FF" radius={[4,4,0,0]} />
-                  <Bar dataKey="Bezahlt" fill="#80D8C3" radius={[4,4,0,0]} />
+                  <Bar dataKey="Rechnungsbetrag" fill="#1a9a8a" radius={[4,4,0,0]} />
+                  <Bar dataKey="Bezahlt" fill="#34d399" radius={[4,4,0,0]} />
                 </BarChart>
               </ResponsiveContainer>
             ) : <p className="text-center text-muted-foreground text-sm pt-20">Keine Daten</p>}

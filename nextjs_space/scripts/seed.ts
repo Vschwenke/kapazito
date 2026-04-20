@@ -19,36 +19,36 @@ const customers = [
 ];
 
 const employees = [
-  { id: 'emp01', firstName: 'Lukas', lastName: 'Bergmann', email: 'l.bergmann@serviceiq.de', contractType: 'Hybrid', experienceLevel: 'Senior', monthlyIncome: 6800, homeOfficePercent: 55 },
-  { id: 'emp02', firstName: 'Mirko', lastName: 'Petrov', email: 'm.petrov@serviceiq.de', contractType: 'Remote', experienceLevel: 'Senior', monthlyIncome: 7200, homeOfficePercent: 90 },
-  { id: 'emp03', firstName: 'Tobias', lastName: 'Lenz', email: 't.lenz@serviceiq.de', contractType: 'Hybrid', experienceLevel: 'Lead', monthlyIncome: 8500, homeOfficePercent: 60 },
-  { id: 'emp04', firstName: 'Jan', lastName: 'Nowak', email: 'j.nowak@serviceiq.de', contractType: 'Remote', experienceLevel: 'Mid', monthlyIncome: 5500, homeOfficePercent: 85 },
-  { id: 'emp05', firstName: 'Felix', lastName: 'Kramer', email: 'f.kramer@serviceiq.de', contractType: 'Office', experienceLevel: 'Mid', monthlyIncome: 5200, homeOfficePercent: 30 },
-  { id: 'emp06', firstName: 'Nils', lastName: 'Reuter', email: 'n.reuter@serviceiq.de', contractType: 'Remote', experienceLevel: 'Senior', monthlyIncome: 6900, homeOfficePercent: 80 },
-  { id: 'emp07', firstName: 'Marco', lastName: 'Seidel', email: 'm.seidel@serviceiq.de', contractType: 'Hybrid', experienceLevel: 'Mid', monthlyIncome: 5400, homeOfficePercent: 50 },
-  { id: 'emp08', firstName: 'Paul', lastName: 'Voigt', email: 'p.voigt@serviceiq.de', contractType: 'Remote', experienceLevel: 'Senior', monthlyIncome: 7100, homeOfficePercent: 75 },
-  { id: 'emp09', firstName: 'Leon', lastName: 'Hauser', email: 'l.hauser@serviceiq.de', contractType: 'Hybrid', experienceLevel: 'Mid', monthlyIncome: 5600, homeOfficePercent: 45 },
-  { id: 'emp10', firstName: 'Tim', lastName: 'Dietrich', email: 't.dietrich@serviceiq.de', contractType: 'Office', experienceLevel: 'Junior', monthlyIncome: 4200, homeOfficePercent: 20 },
-  { id: 'emp11', firstName: 'Viktor', lastName: 'Stein', email: 'v.stein@serviceiq.de', contractType: 'Remote', experienceLevel: 'Senior', monthlyIncome: 7000, homeOfficePercent: 70 },
-  { id: 'emp12', firstName: 'Stefan', lastName: 'Hartung', email: 's.hartung@serviceiq.de', contractType: 'Hybrid', experienceLevel: 'Lead', monthlyIncome: 8200, homeOfficePercent: 65 },
-  { id: 'emp13', firstName: 'Robert', lastName: 'Fiedler', email: 'r.fiedler@serviceiq.de', contractType: 'Remote', experienceLevel: 'Senior', monthlyIncome: 7500, homeOfficePercent: 88 },
-  { id: 'emp14', firstName: 'Kai', lastName: 'Lindner', email: 'k.lindner@serviceiq.de', contractType: 'Hybrid', experienceLevel: 'Mid', monthlyIncome: 5300, homeOfficePercent: 55 },
-  { id: 'emp15', firstName: 'Jens', lastName: 'Roth', email: 'j.roth@serviceiq.de', contractType: 'Office', experienceLevel: 'Senior', monthlyIncome: 6600, homeOfficePercent: 25 },
-  { id: 'emp16', firstName: 'Florian', lastName: 'Bauer', email: 'f.bauer@serviceiq.de', contractType: 'Remote', experienceLevel: 'Mid', monthlyIncome: 5800, homeOfficePercent: 82 },
-  { id: 'emp17', firstName: 'Rafael', lastName: 'Costa', email: 'r.costa@serviceiq.de', contractType: 'Remote', experienceLevel: 'Senior', monthlyIncome: 7400, homeOfficePercent: 92 },
-  { id: 'emp18', firstName: 'Matthias', lastName: 'Kessler', email: 'm.kessler@serviceiq.de', contractType: 'Hybrid', experienceLevel: 'Lead', monthlyIncome: 8800, homeOfficePercent: 50 },
-  { id: 'emp19', firstName: 'Lena', lastName: 'Schreiber', email: 'l.schreiber@serviceiq.de', contractType: 'Remote', experienceLevel: 'Senior', monthlyIncome: 7300, homeOfficePercent: 78 },
-  { id: 'emp20', firstName: 'Dominik', lastName: 'Riedel', email: 'd.riedel@serviceiq.de', contractType: 'Office', experienceLevel: 'Mid', monthlyIncome: 5100, homeOfficePercent: 30 },
-  { id: 'emp21', firstName: 'Elena', lastName: 'Kraft', email: 'e.kraft@serviceiq.de', contractType: 'Hybrid', experienceLevel: 'Junior', monthlyIncome: 4500, homeOfficePercent: 40 },
-  { id: 'emp22', firstName: 'Henrik', lastName: 'Wald', email: 'h.wald@serviceiq.de', contractType: 'Remote', experienceLevel: 'Senior', monthlyIncome: 6700, homeOfficePercent: 85 },
-  { id: 'emp23', firstName: 'Carla', lastName: 'Moser', email: 'c.moser@serviceiq.de', contractType: 'Hybrid', experienceLevel: 'Mid', monthlyIncome: 5900, homeOfficePercent: 55 },
-  { id: 'emp24', firstName: 'David', lastName: 'Pohl', email: 'd.pohl@serviceiq.de', contractType: 'Office', experienceLevel: 'Junior', monthlyIncome: 4100, homeOfficePercent: 15 },
-  { id: 'emp25', firstName: 'Alina', lastName: 'Naumann', email: 'a.naumann@serviceiq.de', contractType: 'Remote', experienceLevel: 'Mid', monthlyIncome: 5700, homeOfficePercent: 72 },
-  { id: 'emp26', firstName: 'Timo', lastName: 'Gerlach', email: 't.gerlach@serviceiq.de', contractType: 'Hybrid', experienceLevel: 'Senior', monthlyIncome: 7100, homeOfficePercent: 60 },
-  { id: 'emp27', firstName: 'Simon', lastName: 'Wirth', email: 's.wirth@serviceiq.de', contractType: 'Remote', experienceLevel: 'Mid', monthlyIncome: 5500, homeOfficePercent: 80 },
-  { id: 'emp28', firstName: 'Anna', lastName: 'Richter', email: 'a.richter@serviceiq.de', contractType: 'Hybrid', experienceLevel: 'Senior', monthlyIncome: 7000, homeOfficePercent: 65 },
-  { id: 'emp29', firstName: 'Max', lastName: 'Weber', email: 'm.weber@serviceiq.de', contractType: 'Office', experienceLevel: 'Mid', monthlyIncome: 5400, homeOfficePercent: 25 },
-  { id: 'emp30', firstName: 'Sophie', lastName: 'Klein', email: 's.klein@serviceiq.de', contractType: 'Remote', experienceLevel: 'Junior', monthlyIncome: 4300, homeOfficePercent: 75 },
+  { id: 'emp01', firstName: 'Lukas', lastName: 'Bergmann', email: 'l.bergmann@kapazito.de', contractType: 'Hybrid', experienceLevel: 'Senior', monthlyIncome: 6800, homeOfficePercent: 55 },
+  { id: 'emp02', firstName: 'Mirko', lastName: 'Petrov', email: 'm.petrov@kapazito.de', contractType: 'Remote', experienceLevel: 'Senior', monthlyIncome: 7200, homeOfficePercent: 90 },
+  { id: 'emp03', firstName: 'Tobias', lastName: 'Lenz', email: 't.lenz@kapazito.de', contractType: 'Hybrid', experienceLevel: 'Lead', monthlyIncome: 8500, homeOfficePercent: 60 },
+  { id: 'emp04', firstName: 'Jan', lastName: 'Nowak', email: 'j.nowak@kapazito.de', contractType: 'Remote', experienceLevel: 'Mid', monthlyIncome: 5500, homeOfficePercent: 85 },
+  { id: 'emp05', firstName: 'Felix', lastName: 'Kramer', email: 'f.kramer@kapazito.de', contractType: 'Office', experienceLevel: 'Mid', monthlyIncome: 5200, homeOfficePercent: 30 },
+  { id: 'emp06', firstName: 'Nils', lastName: 'Reuter', email: 'n.reuter@kapazito.de', contractType: 'Remote', experienceLevel: 'Senior', monthlyIncome: 6900, homeOfficePercent: 80 },
+  { id: 'emp07', firstName: 'Marco', lastName: 'Seidel', email: 'm.seidel@kapazito.de', contractType: 'Hybrid', experienceLevel: 'Mid', monthlyIncome: 5400, homeOfficePercent: 50 },
+  { id: 'emp08', firstName: 'Paul', lastName: 'Voigt', email: 'p.voigt@kapazito.de', contractType: 'Remote', experienceLevel: 'Senior', monthlyIncome: 7100, homeOfficePercent: 75 },
+  { id: 'emp09', firstName: 'Leon', lastName: 'Hauser', email: 'l.hauser@kapazito.de', contractType: 'Hybrid', experienceLevel: 'Mid', monthlyIncome: 5600, homeOfficePercent: 45 },
+  { id: 'emp10', firstName: 'Tim', lastName: 'Dietrich', email: 't.dietrich@kapazito.de', contractType: 'Office', experienceLevel: 'Junior', monthlyIncome: 4200, homeOfficePercent: 20 },
+  { id: 'emp11', firstName: 'Viktor', lastName: 'Stein', email: 'v.stein@kapazito.de', contractType: 'Remote', experienceLevel: 'Senior', monthlyIncome: 7000, homeOfficePercent: 70 },
+  { id: 'emp12', firstName: 'Stefan', lastName: 'Hartung', email: 's.hartung@kapazito.de', contractType: 'Hybrid', experienceLevel: 'Lead', monthlyIncome: 8200, homeOfficePercent: 65 },
+  { id: 'emp13', firstName: 'Robert', lastName: 'Fiedler', email: 'r.fiedler@kapazito.de', contractType: 'Remote', experienceLevel: 'Senior', monthlyIncome: 7500, homeOfficePercent: 88 },
+  { id: 'emp14', firstName: 'Kai', lastName: 'Lindner', email: 'k.lindner@kapazito.de', contractType: 'Hybrid', experienceLevel: 'Mid', monthlyIncome: 5300, homeOfficePercent: 55 },
+  { id: 'emp15', firstName: 'Jens', lastName: 'Roth', email: 'j.roth@kapazito.de', contractType: 'Office', experienceLevel: 'Senior', monthlyIncome: 6600, homeOfficePercent: 25 },
+  { id: 'emp16', firstName: 'Florian', lastName: 'Bauer', email: 'f.bauer@kapazito.de', contractType: 'Remote', experienceLevel: 'Mid', monthlyIncome: 5800, homeOfficePercent: 82 },
+  { id: 'emp17', firstName: 'Rafael', lastName: 'Costa', email: 'r.costa@kapazito.de', contractType: 'Remote', experienceLevel: 'Senior', monthlyIncome: 7400, homeOfficePercent: 92 },
+  { id: 'emp18', firstName: 'Matthias', lastName: 'Kessler', email: 'm.kessler@kapazito.de', contractType: 'Hybrid', experienceLevel: 'Lead', monthlyIncome: 8800, homeOfficePercent: 50 },
+  { id: 'emp19', firstName: 'Lena', lastName: 'Schreiber', email: 'l.schreiber@kapazito.de', contractType: 'Remote', experienceLevel: 'Senior', monthlyIncome: 7300, homeOfficePercent: 78 },
+  { id: 'emp20', firstName: 'Dominik', lastName: 'Riedel', email: 'd.riedel@kapazito.de', contractType: 'Office', experienceLevel: 'Mid', monthlyIncome: 5100, homeOfficePercent: 30 },
+  { id: 'emp21', firstName: 'Elena', lastName: 'Kraft', email: 'e.kraft@kapazito.de', contractType: 'Hybrid', experienceLevel: 'Junior', monthlyIncome: 4500, homeOfficePercent: 40 },
+  { id: 'emp22', firstName: 'Henrik', lastName: 'Wald', email: 'h.wald@kapazito.de', contractType: 'Remote', experienceLevel: 'Senior', monthlyIncome: 6700, homeOfficePercent: 85 },
+  { id: 'emp23', firstName: 'Carla', lastName: 'Moser', email: 'c.moser@kapazito.de', contractType: 'Hybrid', experienceLevel: 'Mid', monthlyIncome: 5900, homeOfficePercent: 55 },
+  { id: 'emp24', firstName: 'David', lastName: 'Pohl', email: 'd.pohl@kapazito.de', contractType: 'Office', experienceLevel: 'Junior', monthlyIncome: 4100, homeOfficePercent: 15 },
+  { id: 'emp25', firstName: 'Alina', lastName: 'Naumann', email: 'a.naumann@kapazito.de', contractType: 'Remote', experienceLevel: 'Mid', monthlyIncome: 5700, homeOfficePercent: 72 },
+  { id: 'emp26', firstName: 'Timo', lastName: 'Gerlach', email: 't.gerlach@kapazito.de', contractType: 'Hybrid', experienceLevel: 'Senior', monthlyIncome: 7100, homeOfficePercent: 60 },
+  { id: 'emp27', firstName: 'Simon', lastName: 'Wirth', email: 's.wirth@kapazito.de', contractType: 'Remote', experienceLevel: 'Mid', monthlyIncome: 5500, homeOfficePercent: 80 },
+  { id: 'emp28', firstName: 'Anna', lastName: 'Richter', email: 'a.richter@kapazito.de', contractType: 'Hybrid', experienceLevel: 'Senior', monthlyIncome: 7000, homeOfficePercent: 65 },
+  { id: 'emp29', firstName: 'Max', lastName: 'Weber', email: 'm.weber@kapazito.de', contractType: 'Office', experienceLevel: 'Mid', monthlyIncome: 5400, homeOfficePercent: 25 },
+  { id: 'emp30', firstName: 'Sophie', lastName: 'Klein', email: 's.klein@kapazito.de', contractType: 'Remote', experienceLevel: 'Junior', monthlyIncome: 4300, homeOfficePercent: 75 },
 ];
 
 const projects = [
@@ -111,12 +111,12 @@ for (const p of projects) {
 }
 
 async function main() {
-  console.log('\n=== ServiceIQ Demo-Daten Seed ===\n');
+  console.log('\n=== Kapazito Demo-Daten Seed ===\n');
 
   // ---- USERS ----
   console.log('Seeding users...');
   const testPw = await bcrypt.hash('johndoe123', 12);
-  const adminPw = await bcrypt.hash('ServiceIQ2026!', 12);
+  const adminPw = await bcrypt.hash('Kapazito2026!', 12);
   const demoPw = await bcrypt.hash('Demo2026!', 12);
   await prisma.user.upsert({
     where: { email: 'john@doe.com' },
@@ -124,14 +124,14 @@ async function main() {
     create: { email: 'john@doe.com', password: testPw, name: 'Test Admin', role: 'admin' },
   });
   await prisma.user.upsert({
-    where: { email: 'admin@serviceiq.de' },
+    where: { email: 'admin@kapazito.de' },
     update: { password: adminPw },
-    create: { email: 'admin@serviceiq.de', password: adminPw, name: 'Admin', role: 'admin' },
+    create: { email: 'admin@kapazito.de', password: adminPw, name: 'Admin', role: 'admin' },
   });
   await prisma.user.upsert({
-    where: { email: 'demo@serviceiq.de' },
+    where: { email: 'demo@kapazito.de' },
     update: { password: demoPw },
-    create: { email: 'demo@serviceiq.de', password: demoPw, name: 'Demo User', role: 'user' },
+    create: { email: 'demo@kapazito.de', password: demoPw, name: 'Demo User', role: 'user' },
   });
 
   // ---- CUSTOMERS ----
@@ -553,8 +553,8 @@ async function main() {
   console.log(`Projects: ${projects.length}`);
   console.log(`Assignments: ${assignments.length}`);
   console.log('Time period: 2024–2026 (Jan–Jun)');
-  console.log('Login: admin@serviceiq.de / ServiceIQ2026!');
-  console.log('Demo:  demo@serviceiq.de / Demo2026!');
+  console.log('Login: admin@kapazito.de / Kapazito2026!');
+  console.log('Demo:  demo@kapazito.de / Demo2026!');
 }
 
 main()

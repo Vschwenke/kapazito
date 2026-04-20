@@ -136,8 +136,8 @@ export default function KundenPage() {
                     <tr key={c.id} className="border-b last:border-0 hover:bg-muted/20 transition-colors">
                       <td className="p-3">
                         <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 rounded-lg bg-blue-600/10 flex items-center justify-center">
-                            <Building2 className="w-4 h-4 text-blue-500" />
+                          <div className="w-8 h-8 rounded-lg bg-teal-600/10 flex items-center justify-center">
+                            <Building2 className="w-4 h-4 text-teal-500" />
                           </div>
                           <span className="font-medium text-sm">{c.name}</span>
                         </div>

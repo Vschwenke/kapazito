@@ -7,7 +7,7 @@ import { formatCurrency, formatNumber, getMonthShort } from '@/lib/format';
 import { Loader2, Users, Clock, AlertTriangle, Palmtree, Heart, DollarSign, Home } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, PieChart, Pie, Cell } from 'recharts';
 
-const COLORS = ['#60B5FF', '#FF9149', '#FF9898', '#FF90BB', '#80D8C3', '#A19AD3'];
+const COLORS = ['#1a9a8a', '#7c5cfc', '#f59e42', '#e8577a', '#38bdf8', '#34d399'];
 
 export function HrTeamDashboard() {
   const [data, setData] = useState<any>(null);
@@ -36,7 +36,7 @@ export function HrTeamDashboard() {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        <KpiCard title="Entwickler" value={data?.totalEmployees ?? 0} icon={Users} iconColor="bg-blue-50 text-blue-600" />
+        <KpiCard title="Entwickler" value={data?.totalEmployees ?? 0} icon={Users} iconColor="bg-teal-50 text-teal-600" />
         <KpiCard title="Abrechenbare Std." value={formatNumber(data?.totalBillableHours ?? 0)} icon={Clock} iconColor="bg-emerald-50 text-emerald-600" />
         <KpiCard title="Fluktuation" value={`${(data?.fluctuation ?? 0).toFixed(1)}%`} icon={AlertTriangle} iconColor="bg-red-50 text-red-600" />
         <KpiCard title="Verl. Umsatz (Krank)" value={data?.sickCostEstimate ?? 0} format="currency" icon={Heart} iconColor="bg-pink-50 text-pink-600" />
@@ -46,10 +46,10 @@ export function HrTeamDashboard() {
 
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         <div className="bg-card rounded-xl p-4 border border-border/50 shadow-sm flex flex-col items-center">
-          <GaugeChart value={data?.avgUtilization ?? 0} label="Auslastung" color="#10b981" />
+          <GaugeChart value={data?.avgUtilization ?? 0} label="Auslastung" color="#1a9a8a" />
         </div>
         <div className="bg-card rounded-xl p-4 border border-border/50 shadow-sm flex flex-col items-center">
-          <GaugeChart value={data?.totalBillableHours > 0 ? ((data?.totalBillableHours / Math.max((data?.totalBillableHours + (data?.totalSickDays ?? 0) * 8), 1)) * 100) : 0} label="Abrechenbare Std. %" color="#60B5FF" />
+          <GaugeChart value={data?.totalBillableHours > 0 ? ((data?.totalBillableHours / Math.max((data?.totalBillableHours + (data?.totalSickDays ?? 0) * 8), 1)) * 100) : 0} label="Abrechenbare Std. %" color="#1a9a8a" />
         </div>
         <div className="bg-card rounded-xl p-4 border border-border/50 shadow-sm text-center">
           <p className="text-xs text-muted-foreground uppercase font-semibold">\u00d8 Monatseinkommen</p>
@@ -69,9 +69,9 @@ export function HrTeamDashboard() {
                   <YAxis tickLine={false} tick={{ fontSize: 10 }} />
                   <Tooltip contentStyle={{ fontSize: 11 }} />
                   <Legend verticalAlign="top" wrapperStyle={{ fontSize: 11 }} />
-                  <Bar dataKey="Abrechenbar" fill="#60B5FF" radius={[4,4,0,0]} />
-                  <Bar dataKey="Krank" fill="#FF9898" radius={[4,4,0,0]} />
-                  <Bar dataKey="Urlaub" fill="#FF90BB" radius={[4,4,0,0]} />
+                  <Bar dataKey="Abrechenbar" fill="#1a9a8a" radius={[4,4,0,0]} />
+                  <Bar dataKey="Krank" fill="#e8577a" radius={[4,4,0,0]} />
+                  <Bar dataKey="Urlaub" fill="#7c5cfc" radius={[4,4,0,0]} />
                 </BarChart>
               </ResponsiveContainer>
             ) : <p className="text-center text-muted-foreground text-sm pt-20">Keine Daten</p>}
