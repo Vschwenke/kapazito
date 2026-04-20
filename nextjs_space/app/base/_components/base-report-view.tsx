@@ -130,7 +130,7 @@ export function BaseReportView() {
         </div>
         <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-3 text-center border border-slate-200 dark:border-slate-700">
           <Database className="w-6 h-6 mx-auto text-primary" />
-          <p className="text-sm font-bold mt-1">PulseBI – Zentrales Datenmodell</p>
+          <p className="text-sm font-bold mt-1">ServiceIQ – Zentrales Datenmodell</p>
           <p className="text-[10px] text-muted-foreground">PostgreSQL \u2022 {(data?.totalEntries ?? 0).toLocaleString('de-DE')} Eintr\u00e4ge \u2022 {tables?.length ?? 0} Tabellen</p>
         </div>
         <div className="text-center my-3">

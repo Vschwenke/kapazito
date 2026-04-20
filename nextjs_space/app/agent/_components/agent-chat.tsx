@@ -8,7 +8,7 @@ type Message = { role: 'user' | 'assistant'; content: string };
 type AgentType = 'general' | 'finanz' | 'hr' | 'sales';
 
 const AGENTS: { id: AgentType; label: string; desc: string; icon: any; color: string }[] = [
-  { id: 'general', label: 'PulseBI Assistent', desc: 'Allgemeine Gesch\u00e4ftsberatung', icon: Bot, color: 'bg-blue-100 text-blue-700 border-blue-200' },
+  { id: 'general', label: 'ServiceIQ Assistent', desc: 'Allgemeine Gesch\u00e4ftsberatung', icon: Bot, color: 'bg-blue-100 text-blue-700 border-blue-200' },
   { id: 'finanz', label: 'Finanz-Analyst', desc: 'BWA, Cashflow, Deckungsbeitrag', icon: BarChart3, color: 'bg-emerald-100 text-emerald-700 border-emerald-200' },
   { id: 'hr', label: 'HR-Berater', desc: 'Auslastung, Team, Gehalt', icon: Users, color: 'bg-purple-100 text-purple-700 border-purple-200' },
   { id: 'sales', label: 'Sales-Stratege', desc: 'Kunden, Stundens\u00e4tze, Pipeline', icon: TrendingUp, color: 'bg-orange-100 text-orange-700 border-orange-200' },
@@ -26,14 +26,19 @@ export function AgentChat() {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
   }, [messages]);
 
-  const sendMessage = async () => {
-    if (!input.trim() || loading) return;
-    const userMsg: Message = { role: 'user', content: input.trim() };
-    const newMessages = [...messages, userMsg];
-    setMessages(newMessages);
-    setInput('');
-    setLoading(true);
+  const sendSuggestion = (text: string) => {
+    setInput(text);
+    setTimeout(() => {
+      const userMsg: Message = { role: 'user', content: text };
+      const newMessages = [...messages, userMsg];
+      setMessages(newMessages);
+      setInput('');
+      setLoading(true);
+      doSend(newMessages);
+    }, 0);
+  };
 
+  const doSend = async (newMessages: Message[]) => {
     try {
       const response = await fetch('/api/agent', {
         method: 'POST',
@@ -43,14 +48,11 @@ export function AgentChat() {
           agent,
         }),
       });
-
       if (!response.ok) throw new Error('Anfrage fehlgeschlagen');
-
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
       let assistantContent = '';
       setMessages(prev => [...prev, { role: 'assistant', content: '' }]);
-
       let partialRead = '';
       while (true) {
         const { done, value } = await reader!.read();
@@ -81,6 +83,16 @@ export function AgentChat() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const sendMessage = async () => {
+    if (!input.trim() || loading) return;
+    const userMsg: Message = { role: 'user', content: input.trim() };
+    const newMessages = [...messages, userMsg];
+    setMessages(newMessages);
+    setInput('');
+    setLoading(true);
+    doSend(newMessages);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -130,7 +142,7 @@ export function AgentChat() {
                 'Welche Kosten k\u00f6nnen wir optimieren?',
                 'Erstelle eine Deckungsbeitrags-Bewertung',
               ].map(q => (
-                <button key={q} onClick={() => { setInput(q); }} className="text-left p-3 rounded-lg bg-muted/50 hover:bg-muted text-sm text-muted-foreground transition-colors">{q}</button>
+                <button key={q} onClick={() => sendSuggestion(q)} className="text-left p-3 rounded-lg bg-muted/50 hover:bg-muted text-sm text-muted-foreground transition-colors">{q}</button>
               ))}
               {agent === 'hr' && [
                 'Wie ist die aktuelle Auslastung des Teams?',
@@ -138,7 +150,7 @@ export function AgentChat() {
                 'Welche Mitarbeiter sind unterbesch\u00e4ftigt?',
                 'Gib Empfehlungen zur Gehaltsstruktur',
               ].map(q => (
-                <button key={q} onClick={() => { setInput(q); }} className="text-left p-3 rounded-lg bg-muted/50 hover:bg-muted text-sm text-muted-foreground transition-colors">{q}</button>
+                <button key={q} onClick={() => sendSuggestion(q)} className="text-left p-3 rounded-lg bg-muted/50 hover:bg-muted text-sm text-muted-foreground transition-colors">{q}</button>
               ))}
               {agent === 'sales' && [
                 'Welche Kunden bringen am meisten Umsatz?',
@@ -146,7 +158,7 @@ export function AgentChat() {
                 'Analysiere das Wachstumspotenzial',
                 'Welche Cross-Selling-M\u00f6glichkeiten gibt es?',
               ].map(q => (
-                <button key={q} onClick={() => { setInput(q); }} className="text-left p-3 rounded-lg bg-muted/50 hover:bg-muted text-sm text-muted-foreground transition-colors">{q}</button>
+                <button key={q} onClick={() => sendSuggestion(q)} className="text-left p-3 rounded-lg bg-muted/50 hover:bg-muted text-sm text-muted-foreground transition-colors">{q}</button>
               ))}
               {agent === 'general' && [
                 'Gib mir einen \u00dcberblick \u00fcber die Gesch\u00e4ftslage',
@@ -154,7 +166,7 @@ export function AgentChat() {
                 'Wie verbessere ich die Profitabilit\u00e4t?',
                 'Welche Benchmarks sollte ich anstreben?',
               ].map(q => (
-                <button key={q} onClick={() => { setInput(q); }} className="text-left p-3 rounded-lg bg-muted/50 hover:bg-muted text-sm text-muted-foreground transition-colors">{q}</button>
+                <button key={q} onClick={() => sendSuggestion(q)} className="text-left p-3 rounded-lg bg-muted/50 hover:bg-muted text-sm text-muted-foreground transition-colors">{q}</button>
               ))}
             </div>
           </div>

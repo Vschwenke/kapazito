@@ -107,11 +107,11 @@ export function Sidebar() {
         <div className="flex items-center justify-between px-4 h-14 border-b border-slate-700/50">
           {!collapsed && (
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white text-sm">PB</div>
-              <span className="font-display font-bold text-sm tracking-tight">PulseBI</span>
+              <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white text-sm">SQ</div>
+              <span className="font-display font-bold text-sm tracking-tight">ServiceIQ</span>
             </div>
           )}
-          {collapsed && <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white text-sm mx-auto">PB</div>}
+          {collapsed && <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white text-sm mx-auto">SQ</div>}
           <button onClick={() => setMobileOpen(false)} className="lg:hidden p-1 hover:bg-slate-700 rounded">
             <X className="w-4 h-4" />
           </button>
@@ -173,7 +173,7 @@ export function Sidebar() {
             <LogOut className="w-4 h-4" />
             {!collapsed && <span>Abmelden</span>}
           </button>
-          {!collapsed && <p className="text-[10px] text-slate-500 text-center">&copy; 2026 PulseBI</p>}
+          {!collapsed && <p className="text-[10px] text-slate-500 text-center">&copy; 2026 ServiceIQ</p>}
         </div>
       </aside>
     </>

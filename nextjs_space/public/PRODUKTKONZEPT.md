@@ -1,376 +1,481 @@
-# Produktkonzept – Business Intelligence für IT-Dienstleister
+# ServiceIQ – Intelligence Quotient für dein IT-Service-Business
+
+## Produktkonzept & Business Case
+
+*Stand: April 2026 | Version 3.0*
 
 ---
 
 ## 1. Executive Summary
 
-Eine eigenständige, KI-gestützte Business-Intelligence-Plattform, die speziell für IT-Dienstleister entwickelt wurde. Die Software vereint Finanzen, HR, Sales, Rechnungsstellung und KI-Beratung in einer einzigen Anwendung – zugeschnitten auf das Geschäftsmodell von Unternehmen, die Berater- und Entwicklerzeit verkaufen.
+**ServiceIQ** ist eine KI-gestützte Business-Intelligence-Plattform, die speziell für IT-Dienstleister entwickelt wurde. Die Software vereint Finanzen, HR, Sales, Zeiterfassung, Rechnungsstellung und KI-Beratung in einer einzigen Anwendung – zugeschnitten auf das Geschäftsmodell von Unternehmen, die Berater- und Entwicklerzeit verkaufen.
 
-Anstatt 5–8 verschiedene Tools zu nutzen und Daten manuell zusammenzuführen, erhalten IT-Dienstleister erstmals eine Gesamtsicht auf ihr Geschäft: von der Auslastungsquote über den Deckungsbeitrag pro Kunde bis zur KI-gestützten Handlungsempfehlung.
+> **„ServiceIQ macht dein IT-Service-Business messbar, steuerbar und intelligent.“**
 
 ---
 
 ## 2. Das Problem
 
-### Situation im Markt
-IT-Dienstleister (Systemhäuser, IT-Beratungen, Managed Service Provider, Softwareentwicklungshäuser) mit 10–150 Mitarbeitern stehen vor einer gemeinsamen Herausforderung:
+### Die tägliche Realität eines IT-Dienstleisters
 
-**Ihre wichtigsten Geschäftskennzahlen sind über viele Systeme verteilt:**
+IT-Unternehmen mit 10–150 Mitarbeitern operieren typischerweise mit 5–8 verschiedenen Tools, die nicht miteinander sprechen:
 
-| Bereich | Typisches Tool | Problem |
-|---------|---------------|----------|
-| Zeiterfassung | Clockodo, Harvest, Toggl | Nur Stunden, keine Verknüpfung zu Finanzen |
-| Buchhaltung | DATEV, lexoffice, SevDesk | Nur Zahlen, kein Bezug zu Projekten/Kunden |
-| CRM / Sales | Pipedrive, HubSpot | Keine Verbindung zu Auslastung/Verfügbarkeit |
+| Bereich | Typische Tools | Kernproblem |
+|---------|---------------|-------------|
+| Zeiterfassung | Clockodo, Harvest, Toggl, Mite | Nur Stunden – kein Bezug zu Kosten oder Profitabilität |
+| Buchhaltung | DATEV, lexoffice, sevDesk | Nur Zahlen – kein Bezug zu Projekten oder Kunden |
+| CRM / Sales | Pipedrive, HubSpot | Keine Verbindung zu Auslastung oder Verfügbarkeit |
 | HR | Personio, Excel | Kein Zusammenhang mit Profitabilität |
-| BI / Reporting | Power BI, Excel | Manuelles Zusammenführen, hoher Aufwand |
+| Reporting | Power BI, Excel | Manuelles Zusammenführen, enormer Aufwand |
 | Rechnungsstellung | lexoffice, Billomat | Isoliert von Zeiterfassung und Projekten |
+| Banking | Banken-Portale | Kein Zusammenhang mit Forecast oder Cashflow-Planung |
 
-### Konkrete Schmerzpunkte
+### Die 5 größten Schmerzpunkte
 
-1. **Blindflug bei der Profitabilität** – Der Geschäftsführer weiß nicht, welcher Kunde wirklich profitabel ist, weil Stundensätze, Auslastung und Kosten in verschiedenen Systemen liegen.
+1. **Blindflug bei der Profitabilität** – Welcher Kunde ist wirklich profitabel? Niemand weiß es, weil Stundensätze, Auslastung und Kosten in verschiedenen Systemen liegen.
 
-2. **Auslastung als Blackbox** – Die Auslastungsquote der Berater ist DIE wichtigste Kennzahl, aber sie wird bestenfalls monatlich in Excel berechnet – reaktiv statt proaktiv.
+2. **Auslastung als Blackbox** – Die Auslastungsquote ist DIE wichtigste Kennzahl, wird aber bestenfalls monatlich in Excel berechnet.
 
 3. **Keine Frühwarnung** – Steigende Krankheitsquoten, sinkende Stundensätze oder wachsende offene Posten werden erst erkannt, wenn es zu spät ist.
 
-4. **Zeitaufwand für Reporting** – Geschäftsführer und Controller verbringen 2–5 Tage pro Monat damit, Daten aus verschiedenen Quellen zusammenzuführen.
+4. **2–5 Tage/Monat für Reporting** – Der GF verbringt die Hälfte seiner Zeit damit, Daten zusammenzuführen statt Entscheidungen zu treffen.
 
-5. **Keine KI-Unterstützung** – Existierende Tools bieten keine intelligente Analyse oder Handlungsempfehlungen.
+5. **Kein Echtzeit-Cashflow** – Ohne Bankanbindung sind Liquiditätsdaten immer veraltet. Forecast basiert auf Schätzungen statt echten Kontobewegungen.
 
 ---
 
-## 3. Die Lösung
+## 3. Die Lösung: ServiceIQ
 
 ### Produktvision
 
-> **Eine einzige Plattform, die alle geschäftskritischen Daten eines IT-Dienstleisters verbindet und mit KI-gestützter Analyse in Echtzeit-Handlungsempfehlungen verwandelt.**
+> **Eine einzige Plattform, die alle geschäftskritischen Daten eines IT-Dienstleisters verbindet – inklusive Bankkonten – und mit KI-gestützter Analyse in Echtzeit-Handlungsempfehlungen verwandelt.**
 
-### Was die Software leistet
+### Das Drei-Säulen-Modell: Woher kommen die Daten?
 
-Die Plattform ist ein **vertikales SaaS-Produkt** – keine generische BI-Lösung, sondern ein maßgeschneidertes Werkzeug für eine spezifische Branche mit einem spezifischen Geschäftsmodell: **dem Verkauf von Fachkräfte-Zeit.**
+ServiceIQ bietet drei Wege, um an Daten zu kommen. Der Kunde wählt, was zu ihm passt:
+
+```
+┌────────────────────────────────────────────────────────────────────┐
+│              DATEN-STRATEGIE: 3 SÄULEN                        │
+│                                                              │
+│   SÄULE 1              SÄULE 2             SÄULE 3            │
+│   Eigene Module        Integrationen       Datenimport        │
+│   (Built-in)           (API-Sync)          (CSV/Excel)        │
+│                                                              │
+│   • Zeiterfassung      • Clockodo           • BWA (CSV)         │
+│   • Abwesenheiten      • Harvest            • Stunden-Import    │
+│   • Stammdaten         • Toggl Track        • MA-Import         │
+│   • Projekte           • Mite / Kimai       • Kunden-Import     │
+│   • Rechnungen         • lexoffice          • Rechnungen        │
+│                        • sevDesk            • Offene Posten     │
+│   NEU: Bankzugang      • DATEV                                 │
+│   • Open Banking API   • Personio                              │
+│   • PSD2-konform       • HRworks                               │
+│   • Echtzeit-Saldo     • Bankanbindung                         │
+│     & Transaktionen       (finAPI/Tink)                       │
+└────────────────────────────────────────────────────────────────────┘
+```
+
+**Entscheidend:** Der Kunde muss NICHT alles auf einmal machen:
+- **Tag 1:** Stammdaten eingeben + BWA-CSV hochladen → sofort BI-Dashboards
+- **Woche 2:** Zeiterfassungsmodul aktivieren ODER Clockodo anbinden
+- **Monat 2:** Bankkonto verbinden für Echtzeit-Cashflow
+- **Später:** lexoffice, Personio oder weitere Systeme anbinden
 
 ---
 
 ## 4. Funktionsumfang (Module)
 
-### 📊 Modul 1: Finanzreport
-**Zweck:** Komplette finanzielle Transparenz für die Geschäftsführung
+### 📊 Modul: Finanzen & Controlling
 
 | Feature | Beschreibung |
 |---------|-------------|
-| BWA-Dashboard | Betriebswirtschaftliche Auswertung mit Umsatzerlösen, Rohertrag, Gesamtkosten und Betriebsergebnis |
-| Cashflow-Analyse | Monatliche Zu- und Abflüsse mit kumulierter Liquiditätsentwicklung |
-| Planung & Forecast | IST-SOLL-Vergleiche mit automatischem Forecast und Abweichungsanalyse |
-| Deckungsbeitrag | Deckungsbeitragsanalyse pro Kunde und Projekt – die Kernfrage: "Welcher Kunde lohnt sich wirklich?" |
-| Erträge | Detaillierte Ertragsaufschlüsselung mit Zeitreihenanalyse und Bruttomarge |
-| Betriebskosten | Kostenstruktur nach Kategorien (Personal, Sach, Abschreibung) mit monatlicher Entwicklung |
+| BWA-Dashboard | Betriebswirtschaftliche Auswertung: Umsatz, Rohertrag, Kosten, Betriebsergebnis |
+| Cashflow-Analyse | Echtzeit-Cashflow aus Bankanbindung (Zu-/Abflüsse, kumulierte Liquidität) |
+| **Bankkonten-Integration** | **PSD2-konforme Anbindung via Open Banking (finAPI/Tink). Echtzeit-Kontostand, Transaktionen, automatische Kategorisierung** |
+| **Liquiditätsreichweite** | **"Bei aktuellem Burn-Rate reicht die Liquidität noch X Monate"** |
+| Planung & Forecast | IST-SOLL-Vergleiche mit automatischem Forecast |
+| **Laufender-Monat-Forecast** | **Hochrechnung des aktuellen Monats basierend auf: bereits gebuchte Stunden + offene Arbeitstage + Auslastungstrend + geplante Abwesenheiten + Bankbewegungen** |
+| Deckungsbeitrag | **Echtkosten-DB pro Kunde:** (Stundensatz × Stunden) – (anteilige Personalkosten) |
+| **Revenue per Employee** | Umsatz pro Mitarbeiter pro Monat (Branchenbenchmark: 10–15K€) |
+| **Personalkosten-Quote** | Personalkosten / Umsatz (Ziel: 55–65%) |
+| Offene Posten | Forderungen nach Kunden mit **Aging-Analyse (30/60/90/120+ Tage)** |
+| **DSO** | Days Sales Outstanding – durchschnittliche Zahlungsdauer |
+| Betriebskosten | Kostenstruktur nach Kategorien mit monatlicher Entwicklung |
+| **Break-Even-Auslastung** | Ab welcher Auslastung wird Gewinn erwirtschaftet? |
 
-**Warum das wichtig ist:** Ein IT-Dienstleister mit 50 Beratern und Ø 120€/h Stundensatz hat ~10M€ Umsatzpotenzial. Schon 5% bessere Kostenkontrolle bedeuten 500K€ mehr Gewinn.
-
-### 👥 Modul 2: HR & Team
-**Zweck:** Mitarbeiter-Performance und Kapazitätsplanung
-
-| Feature | Beschreibung |
-|---------|-------------|
-| Team-Übersicht | KPIs: Auslastungsquote, Fluktuation, Krankenquote, Urlaubstage, Durchschnittsgehalt |
-| Auslastungs-Gauge | Visuelle Echtzeit-Anzeige der Gesamtauslastung und abrechenbaren Stunden |
-| Mitarbeiter-Detail | Individuelle Mitarbeiterprofile mit Vertrag, Gehalt, Auslastung, Homeoffice-Quote |
-| Abwesenheits-Tracking | Krankheits- und Urlaubsstatistiken mit Trendanalyse |
-| Erfahrungs-Mix | Verteilung Junior/Mid/Senior/Lead für optimale Teamzusammensetzung |
-| Umsatzausfall-Berechnung | Automatische Berechnung des entgangenen Umsatzes durch Krankheitstage |
-
-**Warum das wichtig ist:** Bei einem Berater mit 150€/h Stundensatz kostet jeder Krankheitstag 1.200€ entgangenen Umsatz. Bei 50 Beratern und Ø 12 Krankheitstagen/Jahr sind das 720.000€.
-
-### 💼 Modul 3: Sales & CRM
-**Zweck:** Kundenanalyse und Umsatzsteuerung
+### ⏱️ Modul: Zeiterfassung (Add-On)
 
 | Feature | Beschreibung |
 |---------|-------------|
-| Kunden-Dashboard | Umsatz, Stunden und Stundensätze pro Kunde |
-| Stundensatz-Analyse | Durchschnittlicher Stundensatz pro Kunde – Verhandlungsbasis |
-| Umsatzverteilung | Abhängigkeit von einzelnen Kunden erkennen (Klumpenrisiko) |
-| Projekt-Übersicht | Alle aktiven Projekte mit Budget, PO und Status |
-| Monatstrends | Revenue- und Stundenentwicklung über die Monate |
+| Stunden buchen | Datum, Projekt, Tätigkeit, Stunden, abrechenbar ja/nein |
+| Wochenansicht | Kalender-ähnlich, schnelles Buchen per Klick |
+| Timer | Start/Stop für laufende Tätigkeiten |
+| Abwesenheiten | Urlaub, Krank, Feiertag beantragen und genehmigen |
+| Freigabe-Workflow | Vorgesetzter gibt Zeiten frei, E-Mail-Benachrichtigung |
+| Budget-Warnung | Automatischer Alarm wenn X% des Projektbudgets verbraucht |
+| Mobile-Ansicht | Responsive für unterwegs |
 
-**Warum das wichtig ist:** Viele IT-Dienstleister realisieren erst nach Analyse, dass 60% ihres Umsatzes von 2 Kunden kommen – ein enormes Risiko.
+**ODER:** Integration mit Clockodo, Harvest, Toggl, Mite, Kimai, ZEP
 
-### 🧾 Modul 4: Rechnungsstellung
-**Zweck:** Billing-Transparenz und Zahlungskontrolle
-
-| Feature | Beschreibung |
-|---------|-------------|
-| Rechnungsübersicht | Alle Rechnungen mit Status (offen, teilbezahlt, bezahlt, überfällig) |
-| Kunden-Billing | Rechnungsvolumen pro Kunde mit Zahlungsverhalten |
-| Stundenerfassung-Detail | Verknüpfung von gebuchten Stunden mit Rechnungsposition |
-| Mitarbeiter-Billing | Welcher Mitarbeiter generiert wie viel abrechenbaren Umsatz |
-| Zahlungsstatus | Farbcodierte Statusanzeige für schnelle Übersicht |
-
-**Warum das wichtig ist:** Offene Posten über 90 Tage kosten nicht nur Liquidität, sondern signalisieren oft tiefere Kundenprobleme.
-
-### 🤖 Modul 5: KI-Assistenten
-**Zweck:** Intelligente Analyse und Handlungsempfehlungen per Chat
-
-| Agent | Spezialisierung |
-|-------|----------------|
-| **Business-Assistent** | Allgemeine Geschäftsberatung, Querverbindungen zwischen Modulen |
-| **Finanz-Analyst** | BWA-Interpretation, Cashflow-Optimierung, Kostenstruktur-Empfehlungen |
-| **HR-Berater** | Auslastungsoptimierung, Fluktuationsrisiko, Gehalts-Benchmarking |
-| **Sales-Stratege** | Stundensatz-Strategie, Cross-Selling, Kundenentwicklung |
-
-**Technologie:** GPT-4.1 mit Echtzeit-Zugriff auf die Unternehmensdaten
-
-**Warum das wichtig ist:** Statt Zahlen nur zu sehen, bekommen Geschäftsführer Antworten auf Fragen wie: "Sollen wir den Stundensatz bei Kunde X erhöhen?" oder "Wie können wir unsere Auslastung um 5% steigern?"
-
-### ⚙️ Modul 6: System & Konfiguration
-**Zweck:** Datenmodell-Übersicht und Systemstatus
+### 👥 Modul: HR & Team
 
 | Feature | Beschreibung |
 |---------|-------------|
-| Datenübersicht | Alle Tabellen, Datensätze und Quellen auf einen Blick |
-| Modul-Status | Status aller integrierten Module und Schnittstellen |
-| Sicherheits-Info | SSL, Verschlüsselung, Rollenbasierte Zugriffe |
+| Team-Übersicht | Auslastung, Fluktuation, Krankenquote, Urlaubstage |
+| **Bench-Management** | **Welche Berater sind wann verfügbar? Welche Projekte enden bald?** |
+| **Billable Ratio** | **Anteil abrechnungsfähiger Stunden pro Mitarbeiter** |
+| **Revenue per Consultant** | **Welcher Berater generiert welchen Umsatz?** |
+| Mitarbeiter-Details | Gehalt, Vertrag, Skills, Auslastung, Homeoffice-% |
+| Abwesenheits-Tracking | Trendanalyse Krankheit/Urlaub mit Umsatzausfall-Berechnung |
+| **Überstunden-Tracking** | Burnout-Frühindikator |
+| Erfahrungs-Mix | Junior/Mid/Senior/Lead-Verteilung für optimale Teamzusammensetzung |
+
+### 💼 Modul: Sales & CRM
+
+| Feature | Beschreibung |
+|---------|-------------|
+| Kunden-Dashboard | Umsatz, Stunden, Stundensätze pro Kunde |
+| **Stundensatz-Entwicklung** | **Trend über Zeit: Steigen oder sinken unsere Stundensätze?** |
+| **Kundenkonzentration (HHI)** | **Objektive Messung des Klumpenrisikos** |
+| **Customer Lifetime Value** | **Gesamtwert eines Kunden über die Geschäftsbeziehung** |
+| Projekt-Übersicht | Budget, PO, Status, Ressourcen pro Projekt |
+| Monatstrends | Revenue- und Stunden-Entwicklung |
+
+### 🧾 Modul: Rechnungsstellung (Add-On)
+
+| Feature | Beschreibung |
+|---------|-------------|
+| Rechnungsübersicht | Status: offen, teilbezahlt, bezahlt, überfällig |
+| **Rechnungserstellung aus Zeiten** | **Automatisch Rechnung generieren aus gebuchten Stunden** |
+| **Mahnwesen** | **Intelligente Zahlungserinnerungen basierend auf Kundenbeziehung** |
+| Mitarbeiter-Billing | Welcher MA generiert wie viel Umsatz |
+| **Export zu lexoffice/sevDesk** | **Rechnungen direkt ins Buchhaltungssystem syncen** |
+
+### 🤖 Modul: KI-Assistenten
+
+| Agent | Spezialisierung | KI-Mehrwert |
+|-------|----------------|-------------|
+| **Business-Assistent** | Allgemeine Beratung | Querverbindungen zwischen allen Modulen |
+| **Finanz-Analyst** | BWA, Cashflow, Kosten | BWA-Interpretation, Liquiditätswarnung, Forecast |
+| **HR-Berater** | Auslastung, Team | Fluktuationsrisiko-Erkennung, Bench-Vorhersage |
+| **Sales-Stratege** | Kunden, Preise | Stundensatz-Empfehlung, Cross-Selling |
+
+**KI-Stufen:**
+
+| Stufe | Features | Timeline |
+|-------|---------|----------|
+| **Stufe 1: Datenbasiert** | Vollständige Datenweitergabe, BWA-Interpreter, Smart Alerts, automatische Insights auf jedem Dashboard | Sofort |
+| **Stufe 2: Prädiktiv** | Umsatz-Forecast, Fluktuationsrisiko, Cash-Burn-Warnung, Bench-Vorhersage, Stundensatz-Empfehlung | 3–6 Monate |
+| **Stufe 3: Autonom** | KI-Wochenbericht per E-Mail, automatische Rechnungen, intelligentes Mahnwesen, Meeting-Vorbereitung | 6–12 Monate |
+
+### ⚙️ Modul: System & Konfiguration
+
+| Feature | Beschreibung |
+|---------|-------------|
+| Stammdaten-CRUD | Kunden, Mitarbeiter, Projekte anlegen und bearbeiten |
+| CSV/Excel-Import | Für BWA, Stunden, Kunden, Mitarbeiter |
+| Datenexport | CSV, PDF, Excel für alle Module |
+| Datenübersicht | Alle Tabellen und Datenquellen auf einen Blick |
+| Integrations-Verwaltung | Verbundene Systeme, Sync-Status, API-Keys |
 
 ---
 
-## 5. Zielgruppe
+## 5. Datenquellen-Strategie (Detail)
+
+### 5.1 Bankkonten-Anbindung (NEU – Game Changer)
+
+**Warum das alles verändert:**
+Mit Zugriff auf echte Bankdaten wird aus einem Reporting-Tool ein **Echtzeit-Finanzcockpit:**
+
+| Feature | Ohne Bank | Mit Bank |
+|---------|-----------|----------|
+| Cashflow | Manuell aus BWA (Monat alt) | **Echtzeit aus Kontobewegungen** |
+| Liquidität | Geschätzt | **Auf den Cent genau** |
+| Forecast aktueller Monat | Nicht möglich | **Hochrechnung aus Ist-Daten + Trends** |
+| Zahlungseingänge | Manuell abgleichen | **Automatisch zuordnen zu Rechnungen** |
+| Frühwarnung | Keine | **"Liquidität reicht noch 3,2 Monate"** |
+
+**Technische Umsetzung:**
+- **Provider:** finAPI (deutsch, PSD2-zertifiziert) oder Tink (Visa-Tochter)
+- **Standard:** PSD2 / Open Banking API
+- **Sicherheit:** Bank-Grade-Verschlüsselung, keine Speicherung von Bankzugangsdaten
+- **Kategorisierung:** KI-basierte automatische Zuordnung von Transaktionen (Gehälter, Miete, Kundeneingänge, etc.)
+
+### 5.2 BWA-Import (Kernfeature)
+
+**Der pragmatischste Weg zu Finanzdaten:**
+- Steuerberater exportiert monatlich BWA als CSV/PDF aus DATEV
+- ServiceIQ importiert und parsed automatisch
+- **KI-Feature:** BWA hochladen → sofortige Zusammenfassung + Empfehlungen
+
+**Formate:** DATEV-Standard-CSV, lexoffice-Export, sevDesk-Export, freies CSV-Mapping
+
+### 5.3 Zeiterfassungs-Integrationen
+
+| System | API | Verbreitung DACH | Daten | Priorität |
+|--------|-----|-----------------|-------|-----------|
+| **Clockodo** | REST, gut dokumentiert | Sehr hoch | Stunden, Projekte, Abwesenheiten | 🔴 P1 |
+| **Harvest** | Exzellente REST-API | Hoch (international) | Stunden, Projekte, Ausgaben | 🔴 P1 |
+| **Toggl Track** | Gute REST-API | Hoch | Stunden, Projekte | 🟡 P2 |
+| **Mite** | Einfache REST-API | Mittel (Agenturen) | Stunden, Projekte | 🟡 P2 |
+| **Kimai** | Open-Source REST | Mittel (Self-Hosted) | Stunden, Projekte, Abwesenheiten | 🟢 P3 |
+| **ZEP** | SOAP/REST | Hoch (Ingenieurbüros) | Stunden, Projekte | 🟢 P3 |
+
+### 5.4 Buchhaltungs-/Rechnungssysteme
+
+| System | Daten | Integration | Priorität |
+|--------|-------|------------|-----------|
+| **lexoffice** | Rechnungen, Kontakte, Belege | REST-API (Partner-Programm) | 🔴 P1 |
+| **sevDesk** | Rechnungen, Kontakte, Zahlungen | REST-API | 🔴 P1 |
+| **DATEV** | BWA, Buchungssätze | CSV-Import (sofort) + DATEVconnect (später) | 🔴 P1 (CSV) |
+| **Billomat** | Rechnungen | REST-API | 🟢 P3 |
+| **FastBill** | Rechnungen | REST-API | 🟢 P3 |
+
+### 5.5 HR-Systeme
+
+| System | Daten | Priorität |
+|--------|-------|-----------|
+| **Personio** | Mitarbeiter, Abwesenheiten, Gehälter | 🟡 P2 |
+| **HRworks** | Mitarbeiter, Zeiterfassung, Abwesenheiten | 🟡 P2 |
+| **Sage HR** | Mitarbeiter, Org-Struktur | 🟢 P3 |
+
+### 5.6 Laufender-Monat-Forecast (Killer-Feature)
+
+So berechnet ServiceIQ den Forecast für den aktuellen Monat:
+
+```
+Forecast Umsatz (aktueller Monat) =
+    Bereits gebuchte Stunden × Stundensatz
+  + Verbleibende Arbeitstage × Ø-Auslastung × Ø-Stundensatz
+  - Geplante Abwesenheiten × Stundensatz
+  ± Trend-Korrektur (basierend auf letzten 3 Monaten)
+
+Forecast Cashflow (aktueller Monat) =
+    Aktueller Kontostand (aus Bankanbindung)
+  + Erwartete Zahlungseingänge (fällige Rechnungen)
+  - Geplante Ausgaben (Gehälter am 25., Miete am 1., etc.)
+  - Offene Verbindlichkeiten
+```
+
+**Warum das einzigartig ist:** Kein anderes Tool im Markt verknüpft Zeiterfassung + Bankdaten + HR-Daten für einen Echtzeit-Forecast.
+
+---
+
+## 6. Zielgruppe
 
 ### Primäre Zielgruppe
 
-**IT-Dienstleister im DACH-Raum mit 10–150 Mitarbeitern**, die ihr Geschäft überwiegend über den Verkauf von Berater-/Entwicklerzeit (Time & Material) betreiben.
+**IT-Dienstleister im DACH-Raum mit 10–150 Mitarbeitern**, deren Geschäftsmodell auf dem Verkauf von Berater-/Entwicklerzeit basiert.
 
 | Segment | Beschreibung | Typische Größe |
 |---------|-------------|----------------|
-| **IT-Beratungen** | Strategie-, Prozess- und Technologieberatung | 15–100 MA |
-| **Systemhäuser** | IT-Infrastruktur, Managed Services, Cloud | 20–150 MA |
-| **Softwareentwicklungshäuser** | Custom Development, Nearshoring-Koordination | 10–80 MA |
-| **IT-Personaldienstleister** | Arbeitnehmerüberlassung, Freelancer-Vermittlung | 10–50 MA |
-| **Managed Service Provider** | Laufende IT-Betreuung mit SLAs | 15–100 MA |
+| IT-Beratungen | Strategie, Prozess, Technologie | 15–100 MA |
+| Systemhäuser | IT-Infrastruktur, Managed Services, Cloud | 20–150 MA |
+| Softwareentwicklungshäuser | Custom Development, Nearshoring | 10–80 MA |
+| IT-Personaldienstleister | ANÜ, Freelancer-Vermittlung | 10–50 MA |
+| Managed Service Provider | IT-Betreuung mit SLAs | 15–100 MA |
 
-### Buyer Persona
-
-**"Der datengetriebene Geschäftsführer"**
-- Geschäftsführer/CEO oder kaufmännische Leitung eines IT-Unternehmens
-- 35–55 Jahre, technikaffin aber kein Entwickler
-- Nutzt aktuell Excel + 3–5 verschiedene Tools für sein Reporting
-- Verbringt monatlich 2–5 Tage mit dem Zusammenführen von Kennzahlen
-- Will datenbasiert entscheiden, hat aber nicht die Infrastruktur dafür
-- Budget: 500–2.000€/Monat für eine Lösung, die ihm 2–5 Tage/Monat spart
-
-### Sekundäre Zielgruppe
-- Controller / CFOs in größeren IT-Unternehmen (100–500 MA)
-- Teamleiter / Delivery Manager, die Auslastung ihrer Teams steuern
-- HR-Manager, die Personalkosten und -planung optimieren
+### Buyer Persona: "Der datengetriebene Geschäftsführer"
+- 35–55 Jahre, technikaffin, aber kein Entwickler
+- Nutzt aktuell Excel + 3–5 verschiedene Tools
+- Verbringt monatlich 2–5 Tage mit Reporting
+- Budget: 500–2.000€/Monat für eine Lösung, die 2–5 Tage spart
 
 ---
 
-## 6. Unique Selling Propositions (USP)
+## 7. USPs (Unique Selling Propositions)
 
-### USP 1: Branchenspezifisch statt generisch
-> "Gebaut für eine Branche, nicht für alle."
+### USP 1: Echtkosten-Deckungsbeitrag pro Kunde
+> Kein anderes Tool verbindet Stundensätze + Personalkosten + Auslastung in einer Zahl.
 
-Jedes Feature ist auf das Geschäftsmodell "Verkauf von Fachkräfte-Zeit" zugeschnitten. Begriffe wie Auslastungsquote, Stundensatz, Deckungsbeitrag pro Kunde und billable Hours sind nativ eingebaut – nicht als Custom Fields nachkonfiguriert.
+### USP 2: Bankanbindung + Forecast
+> Echtzeit-Liquidität statt monatlich veralteter BWA. Forecast des aktuellen Monats basierend auf echten Daten.
 
-### USP 2: Alle Bereiche in einem Tool
-> "Schluss mit dem Excel-Patchwork."
+### USP 3: KI-Agenten mit Vollzugriff
+> 4 spezialisierte Agenten, die nicht nur anzeigen, sondern aktiv beraten. KI-Wochenbericht per E-Mail.
 
-Finanzen, HR, Sales, Rechnungsstellung und KI-Analyse in einer Plattform. Keine Datensilos, keine manuellen Exporte, keine wöchentliche Zusammenführung.
+### USP 4: Branchenspezifisch statt generisch
+> Auslastungsquote, Bench-Management, Billable Hours – nativ eingebaut, nicht nachkonfiguriert.
 
-### USP 3: KI-gestützte Handlungsempfehlungen
-> "Nicht nur Dashboards – sondern Antworten."
-
-4 spezialisierte KI-Agenten, die nicht nur Daten anzeigen, sondern aktiv beraten: "Kunde X hat einen unterdurchschnittlichen Stundensatz – hier ist ein konkreter Plan zur Anpassung."
-
-### USP 4: Sofort einsatzbereit
-> "Kein 6-monatiges Implementierungsprojekt."
-
-Cloud-basiert, sofort startklar, Datenimport per CSV oder API. Keine Power BI-Lizenzen, keine Beraterstunden für die Einrichtung.
-
-### USP 5: Deutscher Markt, deutsche Sprache, deutsche Standards
-> "BWA statt P&L, DSGVO statt GDPR."
-
-Komplett deutschsprachige Oberfläche. BWA-Struktur, deutsches Datumsformat, Euro-Währung, DSGVO-konform. Keine Übersetzung eines US-Produkts.
+### USP 5: Modular – nur zahlen was du brauchst
+> Eigene Module ODER Integrationen. Zeiterfassung per User. Bankkonto optional. Kein All-or-Nothing.
 
 ---
 
-## 7. Wettbewerbsanalyse
+## 8. Preismodell
 
-### Direkte Wettbewerber
+### Kernplattform (Basis)
 
-| Lösung | Stärke | Schwäche gegenüber uns |
-|--------|--------|------------------------|
-| **Power BI + Custom Reports** | Mächtig, flexibel | Erfordert Expertise, teuer (50-100€/User/Monat + Berater), nicht branchenspezifisch |
-| **Tableau / Looker** | Enterprise-ready | Zu komplex für KMU, keine Branchenfokussierung, englischsprachig |
-| **DATEV Unternehmen Online** | Standard bei Steuerberatern | Nur Finanzen, kein HR/Sales/Auslastung |
-| **Personio** | Gutes HR-Tool | Nur HR, keine Finanz-/Sales-Integration |
+**Immer inkludiert:**
+- Executive Dashboard / Cockpit
+- Finanz-Dashboards (BWA, Cashflow, Deckungsbeitrag, Kosten)
+- HR-Übersicht & Sales-Dashboard
+- Rechnungsübersicht (nur Ansicht)
+- KI-Assistenten (Basis: 50 Anfragen/Monat)
+- Stammdaten-Verwaltung (Kunden, MA, Projekte)
+- CSV/Excel-Import für alle Datentypen
+- Datenexport (CSV, PDF)
+- 3 User-Accounts
+
+### Basis-Bundles
+
+| Bundle | Zielgruppe | Preis | Inkludiert |
+|--------|-----------|-------|------------|
+| **Starter** | Kleine Teams (5–20 MA) | **349€/Monat** | Kernplattform + 1 Integration + 5 User |
+| **Professional** | Mittelstand (20–75 MA) | **799€/Monat** | Kernplattform + Zeiterfassung (bis 30 User) + Rechnungsmodul + 3 Integrationen + 15 User + 200 KI-Anfragen |
+| **Enterprise** | Größere Unternehmen (75–200 MA) | **1.699€/Monat** | Alles uneingeschränkt + Custom Integrationen + dedizierter Support + unbegrenzt KI |
+
+### Add-On-Module (einzeln zubuchbar)
+
+| Modul | Preismodell | Preis |
+|-------|------------|-------|
+| **⏱ Zeiterfassung** | **Pro User / Monat** | **9€/User/Monat** (Min. 5 User) |
+| **🧾 Rechnungsstellung PRO** | Pro Unternehmen | 149€/Monat (Starter), 249€ (Pro), 399€ (Enterprise) |
+| **🏦 Bankanbindung** | Pro Bankkonto | **29€/Bankkonto/Monat** |
+| **📊 HR Analytics PRO** | Pro Unternehmen | 99€/Monat (Starter), 179€ (Pro), 299€ (Enterprise) |
+| **📁 Projekt-Controlling** | Pro Unternehmen | 99€/Monat (Starter), 179€ (Pro), 299€ (Enterprise) |
+| **📈 Sales Pipeline** | Pro Unternehmen | 99€/Monat (Starter), 179€ (Pro), 299€ (Enterprise) |
+| **🤖 KI PRO** | Pro Unternehmen | 149€/Monat (unbegrenzte Anfragen + Wochenbericht + Smart Alerts) |
+| **🔌 Integrationen** | Pro Anbindung | 49€/Integration/Monat |
+| **👤 Zusätzliche User** | Pro User | 15€/User/Monat |
+
+### Beispielrechnung: IT-Beratung mit 35 MA
+
+| Posten | Preis |
+|--------|-------|
+| Professional Bundle | 799€ |
+| + Zeiterfassung (35 User) | 315€ |
+| + Bankanbindung (2 Konten) | 58€ |
+| + KI PRO | 149€ |
+| + 20 zusätzliche User | 300€ |
+| **Gesamt** | **1.621€/Monat** |
+| **ROI:** Spart mind. 3 GF-Tage/Monat + Auslastungsoptimierung | **>10x** |
+
+### Setup-Gebühr
+
+| Paket | Preis | Umfang |
+|-------|-------|--------|
+| **Self-Service** | 0€ | CSV-Import, Online-Dokumentation |
+| **Assisted** | 1.500€ | Datenimport, 2h Setup-Call, Konfiguration |
+| **White-Glove** | 4.500€ | Vollständiges Onboarding, Datenmigration, 3 Schulungstermine |
+
+---
+
+## 9. Wettbewerbsanalyse
+
+| Lösung | Stärke | Schwäche gegenüber ServiceIQ |
+|--------|--------|-----------------------------|
+| **Power BI** | Mächtig, flexibel | Erfordert Expertise, teuer (50–100€/User/Monat + Berater), nicht branchenspezifisch |
+| **Tableau / Looker** | Enterprise-ready | Zu komplex für KMU, keine Branchenfokussierung |
+| **DATEV** | Standard bei Steuerberatern | Nur Finanzen, kein HR/Sales/Auslastung |
+| **Personio** | Gutes HR | Nur HR, keine Finanz-/Sales-Integration |
 | **Clockodo / Harvest** | Einfache Zeiterfassung | Nur Zeiterfassung, kein BI, keine KI |
+| **Productive.io / Kantata** | PSA-Tool | Meist englisch, nicht DACH-fokussiert |
+| **sevDesk / lexoffice** | Buchhaltung | Nur Rechnungen, kein BI |
 
-### Indirekte Wettbewerber
-
-| Lösung | Überschneidung | Unser Vorteil |
-|--------|---------------|---------------|
-| **Excel / Google Sheets** | Wird von 80% der Zielgruppe genutzt | Automatisierung statt manuelle Pflege |
-| **SAP Business One** | ERP mit Finanzen | Viel zu komplex und teuer für 10-150 MA |
-| **Productive.io / Kantata** | PSA-Tools (Professional Services Automation) | Meist englisch, nicht auf DACH-Markt zugeschnitten |
-| **sevDesk / lexoffice** | Buchhaltung | Nur Rechnungen/Buchhaltung, kein BI |
-
-### Positionierung im Markt
-
-```
-                    Branchenspezifisch
-                          ↑
-                          |
-         [Unser Produkt]  |
-                    ●     |
-                          |
-    Einfach ◄─────────────┼───────────────► Komplex
-                          |
-               sevDesk ●  |  ● Power BI
-                          |
-            Clockodo ●    |     ● SAP
-                          |
-                    Generisch
-```
+**ServiceIQ-Positionierung:** Branchenspezifisch + KI + All-in-One + Bankanbindung
 
 ---
 
-## 8. Business Case
+## 10. Sicherheit & Vertrauen
+
+| Bereich | Maßnahme |
+|---------|----------|
+| **Datenhoheit** | EU-Hosting (Frankfurt), DSGVO-konform |
+| **Verschlüsselung** | TLS 1.3 in Transit, AES-256 at Rest |
+| **Mandantentrennung** | Isolierte Datenbank pro Kunde |
+| **Rollenkonzept** | Admin, Controller, Manager, Viewer (nicht jeder sieht Gehälter) |
+| **2FA / SSO** | Zwei-Faktor + Google/Microsoft SSO |
+| **Bankdaten** | PSD2-konform, keine Speicherung von Zugangsdaten, nur Lesezugriff |
+| **Audit-Log** | Jede Änderung protokolliert |
+| **Backup** | Tägliche automatische Backups, 30 Tage |
+| **Datenexport** | Jederzeit alle Daten als CSV/JSON – kein Vendor Lock-in |
+| **AVV** | Auftragsverarbeitungsvertrag nach Art. 28 DSGVO |
+
+### Flexibilität für den Kunden
+
+- **Kein Vendor Lock-in:** Alle Daten jederzeit exportierbar
+- **Modular zubuchbar:** Nur zahlen was genutzt wird
+- **Eigene Integrationen wählbar:** Clockodo ODER Harvest ODER ServiceIQ-eigene Zeiterfassung
+- **Monatlich kündbar:** Optional: 20% Rabatt bei Jahresvertrag
+- **API-First:** Offene API für eigene Integrationen
+- **White-Label-Option:** Für IT-Berater, die das Tool für ihre Kunden nutzen
+
+---
+
+## 11. Business Case
 
 ### Marktgröße (DACH)
 
-| Kennzahl | Wert | Quelle/Annahme |
-|----------|------|----------------|
-| IT-Dienstleister in DACH (10-150 MA) | ~15.000 Unternehmen | Bitkom, Statista |
-| Davon mit "Time & Material"-Geschäftsmodell | ~10.000 | Konservative Schätzung (67%) |
-| Erreichbarer Markt (SAM) in 5 Jahren | ~2.000 Unternehmen | 20% Marktdurchdringung |
-| Durchschnittlicher Jahresumsatz pro Kunde | 12.000€ – 24.000€ | 1.000–2.000€/Monat |
-| **Gesamtmarktpotenzial (TAM)** | **~180 Mio. €/Jahr** | 15.000 × 12.000€ |
-| **Erreichbares Potenzial (SAM)** | **~36 Mio. €/Jahr** | 2.000 × 18.000€ |
-
-### Preismodell (Vorschlag)
-
-| Plan | Preis | Inkludiert |
-|------|-------|-----------|
-| **Starter** | 499€/Monat | Bis 20 Mitarbeiter, alle Module, 100 KI-Anfragen/Monat |
-| **Professional** | 999€/Monat | Bis 75 Mitarbeiter, alle Module, unbegrenzte KI, API-Zugang |
-| **Enterprise** | 1.999€/Monat | Bis 200 Mitarbeiter, Custom Integrationen, dedizierter Support |
-| **Setup-Gebühr** | 2.500€ einmalig | Datenimport, Konfiguration, 2h Schulung |
+| Kennzahl | Wert |
+|----------|------|
+| IT-Dienstleister in DACH (10–150 MA) | ~15.000 Unternehmen |
+| Davon "Time & Material"-Geschäftsmodell | ~10.000 (67%) |
+| Erreichbarer Markt (5 Jahre) | ~2.000 Unternehmen (20%) |
+| Ø Jahresumsatz pro Kunde | 15.000–25.000€ |
+| **TAM** | **~180 Mio. €/Jahr** |
+| **SAM** | **~40 Mio. €/Jahr** |
 
 ### ROI für den Kunden
 
-**Szenario: IT-Dienstleister mit 40 Beratern, Ø 130€/h, 80% Ziel-Auslastung**
+**Szenario: 40 Berater, Ø 130€/h, 80% Ziel-Auslastung**
 
 | Verbesserung | Effekt | Jährlicher Wert |
 |-------------|--------|-----------------|
-| Auslastung +3% durch bessere Planung | +500 billable Hours | **+65.000€** |
-| Stundensatz-Optimierung +5€ bei 2 Kunden | Höherer Ertrag | **+25.000€** |
-| Reporting-Aufwand -3 Tage/Monat (GF) | Zeitersparnis | **+18.000€** |
-| Krankenstand -1 Tag/MA durch Früherkennung | Weniger Ausfall | **+12.000€** |
-| Besseres Forderungsmanagement | Schnellere Zahlung | **+8.000€** |
+| Auslastung +3% | +500 billable Hours | **+65.000€** |
+| Stundensatz +5€ bei 2 Kunden | Höherer Ertrag | **+25.000€** |
+| Reporting -3 Tage/Monat | GF-Zeitersparnis | **+18.000€** |
+| Krankenstand -1 Tag/MA | Weniger Ausfall | **+12.000€** |
+| Schnellere Zahlung (DSO -10 Tage) | Bessere Liquidität | **+8.000€** |
 | **Gesamt-Wertbeitrag** | | **~128.000€/Jahr** |
-| **Software-Kosten** | Professional-Plan | **-12.000€/Jahr** |
-| **ROI** | | **>10x** |
+| **Software-Kosten** | | **~20.000€/Jahr** |
+| **ROI** | | **>6x** |
 
 ---
 
-## 9. Technologie & Architektur
+## 12. Roadmap (12 Monate)
 
-| Komponente | Technologie |
-|------------|-------------|
-| Frontend | Next.js 14, React 18, Tailwind CSS 3 |
-| Visualisierung | Recharts (React-native Charts) |
-| Backend | Next.js API Routes (Server-Side) |
-| Datenbank | PostgreSQL + Prisma ORM |
-| Authentifizierung | NextAuth.js v4 (Credentials, erweiterbar um SSO) |
-| KI-Engine | GPT-4.1 via API (4 spezialisierte Agenten) |
-| Hosting | Cloud-basiert (SaaS), DSGVO-konform |
-| Datenmodell | 17+ Tabellen, relationale Struktur |
-
-### Datenmodell (Kernentitäten)
-
-```
-Kunden ──┬── Projekte ──── Zeiteinträge ──── Mitarbeiter
-         │                                       │
-         ├── Rechnungen                    Abwesenheiten
-         │                                       │
-         └── Offene Posten              Personalkosten
-                                                 │
-Finanzbuchhaltung ── BWA-Konten          Monatsberichte
-         │
-    Cashflow ── Liquiditätsplanung
-         │
-    Planung ── IST/SOLL/Forecast
-```
+| Quartal | Feature | Typ |
+|---------|---------|-----|
+| **Q1** | Executive Dashboard / Cockpit | Kern |
+| **Q1** | Stammdaten-CRUD (Kunden, MA, Projekte) | Kern |
+| **Q1** | CSV-Import (BWA, Stunden, MA) | Kern |
+| **Q1** | Echtkosten-Deckungsbeitrag | Kern |
+| **Q1** | Fehlende KPIs (Rev/Employee, DSO, Bench-Quote) | Kern |
+| **Q2** | Zeiterfassungsmodul (Add-On) | Modul |
+| **Q2** | Clockodo + Harvest Integration | Integration |
+| **Q2** | lexoffice + sevDesk Integration | Integration |
+| **Q2** | Bankanbindung (finAPI) | Modul |
+| **Q3** | Rechnungserstellung aus Zeiten | Modul |
+| **Q3** | KI Stufe 2 (Forecast, Smart Alerts, Wochenbericht) | KI |
+| **Q3** | Laufender-Monat-Forecast | Kern |
+| **Q3** | Personio Integration | Integration |
+| **Q4** | Branchenvergleich (anonymisierte Benchmarks) | Kern |
+| **Q4** | KI Stufe 3 (auto Rechnungen, Mahnwesen) | KI |
+| **Q4** | Pipeline / Angebots-Tracking | Modul |
+| **Q4** | White-Label-Option | Business |
 
 ---
 
-## 10. Go-to-Market-Strategie
+## 13. Die 4 Killer-Features (die ServiceIQ einzigartig machen)
 
-### Phase 1: Proof of Concept (Monat 1–3)
-- Demo-Umgebung mit fiktiven Daten bereitstellen
-- 5–10 Pilotkunden aus dem Netzwerk gewinnen
-- Feedback sammeln und Produkt iterieren
+### 🥇 #1: Echtkosten-Deckungsbeitrag pro Kunde
+KEIN anderes Tool verbindet Stundensätze + Personalkosten + Auslastung für die Antwort auf: *"Welcher Kunde lohnt sich wirklich?"*
 
-### Phase 2: Early Adopters (Monat 4–8)
-- CSV-Import für BWA und Zeiterfassung implementieren
-- 20–30 zahlende Kunden gewinnen
-- Case Studies erstellen
+### 🥈 #2: Echtzeit-Cashflow + Laufender-Monat-Forecast
+Bankanbindung + gebuchte Stunden + Abwesenheiten = ein Forecast, der jeden Tag besser wird.
 
-### Phase 3: Skalierung (Monat 9–18)
-- API-Integrationen (DATEV, Clockodo, Personio)
-- Content Marketing (LinkedIn, Fachmedien)
-- Partner-Programm mit IT-Steuerberatern
+### 🥉 #3: KI-Wochenbericht per E-Mail
+Jeden Montag: *"Umsatz +8%, 2 Berater unter 60%, Rechnung bezahlt, Empfehlung: Stundensatz erhöhen."*
+Zero-Effort. Der GF muss die App nicht mal öffnen.
 
-### Vertriebskanäle
-1. **Direktvertrieb** – Netzwerk, LinkedIn, IT-Branchenveranstaltungen
-2. **Content Marketing** – Blog, Whitepaper zu KPIs für IT-Dienstleister
-3. **Partner** – Steuerberater, IT-Verbände, Systemhaus-Netzwerke
-4. **Empfehlungen** – Bestehende Kunden empfehlen innerhalb der Branche
+### 🏅 #4: Bench-Management
+*"In 3 Wochen endet Projekt X – 2 Berater werden frei."*
+1 Berater × 1 Monat auf der Bank = 15.000€ verlorener Umsatz.
 
 ---
 
-## 11. Roadmap (12 Monate)
-
-| Quartal | Feature | Priorität |
-|---------|---------|----------|
-| Q1 | CSV-Import (BWA, Zeiterfassung) | 🔴 Hoch |
-| Q1 | Multi-Tenant / Mandantenfähigkeit | 🔴 Hoch |
-| Q1 | PDF-Export für alle Dashboards | 🟡 Mittel |
-| Q2 | API-Integrationen (Clockodo, DATEV) | 🔴 Hoch |
-| Q2 | Rollensystem (Admin, Controller, Manager, Viewer) | 🟡 Mittel |
-| Q2 | Automatische Forecast-Berechnung | 🟡 Mittel |
-| Q3 | KI-Agenten mit Zugriff auf alle Daten | 🔴 Hoch |
-| Q3 | Alerting (Auslastung < 70%, Offene Posten > 60 Tage) | 🟡 Mittel |
-| Q3 | Mobile-optimierte Ansichten | 🟢 Niedrig |
-| Q4 | Benchmark-Datenbank (anonymisierter Branchenvergleich) | 🔴 Hoch |
-| Q4 | Personio / HR-Tool Integration | 🟡 Mittel |
-| Q4 | White-Label-Option für Berater | 🟢 Niedrig |
-
----
-
-## 12. Risiken & Mitigation
-
-| Risiko | Wahrscheinlichkeit | Impact | Mitigation |
-|--------|-------------------|--------|------------|
-| Zu wenig Pilotkunden | Mittel | Hoch | Netzwerk nutzen, kostenlose Pilotphase anbieten |
-| Datenintegration zu komplex | Hoch | Mittel | CSV-Import als pragmatische Brücke, APIs schrittweise |
-| Power BI / Tableau bringt Branchen-Templates | Niedrig | Hoch | Geschwindigkeit + KI-Fokus als Differenzierung |
-| Preissensitivität im KMU-Markt | Mittel | Mittel | ROI klar kommunizieren, Starter-Plan unter 500€ |
-| DSGVO-Anforderungen | Niedrig | Hoch | EU-Hosting, Auftragsverarbeitung, Datenschutzkonzept |
-
----
-
-## 13. Zusammenfassung
-
-**Das Produkt ist die erste Business-Intelligence-Plattform, die speziell für das Geschäftsmodell von IT-Dienstleistern gebaut wurde.**
-
-Es löst ein konkretes, messbares Problem (5+ Tage/Monat für Reporting, keine Gesamtsicht auf das Geschäft) mit einer klaren, quantifizierbaren Wertschöpfung (>10x ROI).
-
-Der Markt ist groß genug (15.000 Unternehmen im DACH-Raum), spezifisch genug für eine fokussierte Go-to-Market-Strategie und unterversorgt mit branchenspezifischen Lösungen.
-
-Die Kombination aus **Branchenfokus + KI-Beratung + All-in-One-Plattform** schafft einen schwer kopierbaren Wettbewerbsvorteil.
-
----
-
-*Erstellt: April 2026*
-*Version: 1.0*
+*ServiceIQ – Intelligence Quotient für dein IT-Service-Business*
+*Erstellt: April 2026 | Version 3.0*
+*Vertraulich – nur für die interne Produktentwicklung*

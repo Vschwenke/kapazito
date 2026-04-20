@@ -91,16 +91,16 @@ function randomBetween(min: number, max: number): number {
 async function main() {
   console.log('Seeding users...');
   const testPw = await bcrypt.hash('johndoe123', 12);
-  const adminPw = await bcrypt.hash('PulseBI2026!', 12);
+  const adminPw = await bcrypt.hash('ServiceIQ2026!', 12);
   await prisma.user.upsert({
     where: { email: 'john@doe.com' },
     update: {},
     create: { email: 'john@doe.com', password: testPw, name: 'Test Admin', role: 'admin' },
   });
   await prisma.user.upsert({
-    where: { email: 'admin@pulsebi.de' },
+    where: { email: 'admin@serviceiq.de' },
     update: {},
-    create: { email: 'admin@pulsebi.de', password: adminPw, name: 'Admin', role: 'admin' },
+    create: { email: 'admin@serviceiq.de', password: adminPw, name: 'Admin', role: 'admin' },
   });
 
   console.log('Seeding customers...');

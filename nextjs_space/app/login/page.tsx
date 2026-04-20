@@ -76,8 +76,8 @@ export default function LoginPage() {
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-700 via-blue-800 to-slate-900 p-12 flex-col justify-between">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center font-bold text-white text-xl">PB</div>
-            <span className="text-white font-bold text-2xl tracking-tight">PulseBI</span>
+            <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center font-bold text-white text-xl">SQ</div>
+            <span className="text-white font-bold text-2xl tracking-tight">ServiceIQ</span>
           </div>
           <p className="text-blue-200 text-lg mt-1">Business Intelligence f\u00fcr IT-Dienstleister</p>
         </div>
@@ -121,22 +121,22 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <p className="text-blue-300/60 text-xs">\u00a9 2026 PulseBI \u2013 Made for IT Service Companies</p>
+        <p className="text-blue-300/60 text-xs">\u00a9 2026 ServiceIQ \u2013 Made for IT Service Companies</p>
       </div>
 
       {/* Right side - login form */}
       <div className="flex-1 flex items-center justify-center p-8 bg-slate-50">
         <div className="w-full max-w-md">
           <div className="lg:hidden flex items-center gap-3 mb-8">
-            <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center font-bold text-white">PB</div>
-            <span className="font-bold text-xl tracking-tight">PulseBI</span>
+            <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center font-bold text-white">SQ</div>
+            <span className="font-bold text-xl tracking-tight">ServiceIQ</span>
           </div>
 
           <h1 className="text-2xl font-bold text-slate-900 mb-1">
             {isLogin ? 'Willkommen zur\u00fcck' : 'Account erstellen'}
           </h1>
           <p className="text-slate-500 mb-8">
-            {isLogin ? 'Melden Sie sich an, um auf Ihre Dashboards zuzugreifen' : 'Registrieren Sie sich f\u00fcr PulseBI'}
+            {isLogin ? 'Melden Sie sich an, um auf Ihre Dashboards zuzugreifen' : 'Registrieren Sie sich f\u00fcr ServiceIQ'}
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">

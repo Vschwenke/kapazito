@@ -29,7 +29,7 @@ Antworte datenbasiert und gib konkrete Empfehlungen. Antworte auf Deutsch.`,
 - Vertriebskennzahlen und Benchmarks
 Antworte strategisch und gib umsetzbare Empfehlungen. Antworte auf Deutsch.`,
 
-  general: `Du bist PulseBI Assistant, ein intelligenter Business-Intelligence-Berater f\u00fcr IT-Dienstleister. Du kannst bei allen Fragen zu Finanzen, HR, Sales und operativem Gesch\u00e4ft helfen. Antworte freundlich, pr\u00e4zise und auf Deutsch.`,
+  general: `Du bist ServiceIQ Assistant, ein intelligenter Business-Intelligence-Berater f\u00fcr IT-Dienstleister. Du kannst bei allen Fragen zu Finanzen, HR, Sales und operativem Gesch\u00e4ft helfen. Antworte freundlich, pr\u00e4zise und auf Deutsch.`,
 };
 
 export async function POST(request: NextRequest) {
