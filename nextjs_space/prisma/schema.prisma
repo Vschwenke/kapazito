@@ -1,0 +1,256 @@
+generator client {
+    provider = "prisma-client-js"
+    binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+    output = "/home/ubuntu/inlogy_reporting_app/nextjs_space/node_modules/.prisma/client"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Customer {
+  id            String   @id @default(cuid())
+  name          String
+  shortName     String?
+  industry      String?
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  projects      Project[]
+  invoices      Invoice[]
+  openItems     OpenItem[]
+  timeEntries   TimeEntry[]
+  employeeAssignments EmployeeAssignment[]
+
+  @@index([isActive])
+}
+
+model Employee {
+  id                String   @id @default(cuid())
+  firstName         String
+  lastName          String
+  email             String?
+  contractType      String?  // Remote, Hybrid, Office
+  experienceLevel   String?  // Junior, Mid, Senior, Lead
+  monthlyIncome     Float?
+  lastRaise         DateTime?
+  startDate         DateTime?
+  endDate           DateTime?
+  isActive          Boolean  @default(true)
+  homeOfficePercent Float?   @default(0)
+  weeklyHours       Float?   @default(40)
+  createdAt         DateTime @default(now())
+  timeEntries       TimeEntry[]
+  absences          Absence[]
+  personnelCosts    PersonnelCost[]
+  assignments       EmployeeAssignment[]
+  userReports       UserReport[]
+
+  @@index([isActive])
+}
+
+model Project {
+  id            String   @id @default(cuid())
+  name          String
+  customerId    String
+  customer      Customer @relation(fields: [customerId], references: [id])
+  purchaseOrder String?
+  hourlyRate    Float?
+  budgetHours   Float?
+  isActive      Boolean  @default(true)
+  startDate     DateTime?
+  endDate       DateTime?
+  createdAt     DateTime @default(now())
+  timeEntries   TimeEntry[]
+  invoiceItems  InvoiceItem[]
+
+  @@index([customerId])
+}
+
+model TimeEntry {
+  id            String   @id @default(cuid())
+  employeeId    String
+  employee      Employee @relation(fields: [employeeId], references: [id])
+  customerId    String?
+  customer      Customer? @relation(fields: [customerId], references: [id])
+  projectId     String?
+  project       Project?  @relation(fields: [projectId], references: [id])
+  date          DateTime
+  hours         Float
+  billableHours Float    @default(0)
+  description   String?
+  isBillable    Boolean  @default(true)
+  workLocation  String?  // HomeOffice, InOffice
+  createdAt     DateTime @default(now())
+
+  @@index([employeeId, date])
+  @@index([customerId, date])
+  @@index([date])
+}
+
+model Absence {
+  id          String   @id @default(cuid())
+  employeeId  String
+  employee    Employee @relation(fields: [employeeId], references: [id])
+  type        String   // Urlaub, Krank, Feiertag, Sonstiges
+  startDate   DateTime
+  endDate     DateTime
+  days        Float
+  approved    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  @@index([employeeId, startDate])
+  @@index([type])
+}
+
+model FinancialAccount {
+  id            String   @id @default(cuid())
+  accountNumber String
+  accountName   String
+  category      String   // Umsatzerlöse, Rohertrag, Gesamtkosten, etc.
+  year          Int
+  month         Int
+  amount        Float    @default(0)
+  previousYear  Float?   @default(0)
+  budget        Float?   @default(0)
+  createdAt     DateTime @default(now())
+
+  @@unique([accountNumber, year, month])
+  @@index([year, month])
+  @@index([category])
+}
+
+model PersonnelCost {
+  id          String   @id @default(cuid())
+  employeeId  String
+  employee    Employee @relation(fields: [employeeId], references: [id])
+  year        Int
+  month       Int
+  grossSalary Float    @default(0)
+  socialCosts Float    @default(0)
+  otherCosts  Float    @default(0)
+  totalCost   Float    @default(0)
+  createdAt   DateTime @default(now())
+
+  @@unique([employeeId, year, month])
+  @@index([year, month])
+}
+
+model Invoice {
+  id          String   @id @default(cuid())
+  customerId  String
+  customer    Customer @relation(fields: [customerId], references: [id])
+  invoiceNo   String   @unique
+  issueDate   DateTime
+  dueDate     DateTime
+  totalAmount Float
+  paidAmount  Float    @default(0)
+  status      String   @default("open") // open, partial, paid, overdue
+  createdAt   DateTime @default(now())
+  items       InvoiceItem[]
+
+  @@index([customerId])
+  @@index([status])
+}
+
+model InvoiceItem {
+  id          String   @id @default(cuid())
+  invoiceId   String
+  invoice     Invoice  @relation(fields: [invoiceId], references: [id])
+  projectId   String?
+  project     Project? @relation(fields: [projectId], references: [id])
+  description String?
+  hours       Float?
+  rate        Float?
+  amount      Float
+  createdAt   DateTime @default(now())
+
+  @@index([invoiceId])
+}
+
+model OpenItem {
+  id          String   @id @default(cuid())
+  customerId  String
+  customer    Customer @relation(fields: [customerId], references: [id])
+  type        String   // Forderung, Verbindlichkeit
+  amount      Float
+  dueDate     DateTime?
+  description String?
+  year        Int
+  month       Int
+  createdAt   DateTime @default(now())
+
+  @@index([customerId])
+  @@index([year, month])
+}
+
+model FinancialPlanning {
+  id          String   @id @default(cuid())
+  category    String
+  year        Int
+  month       Int
+  planned     Float    @default(0)
+  actual      Float    @default(0)
+  forecast    Float    @default(0)
+  createdAt   DateTime @default(now())
+
+  @@unique([category, year, month])
+  @@index([year, month])
+}
+
+model Holiday {
+  id          String   @id @default(cuid())
+  name        String
+  date        DateTime
+  region      String?  @default("DE")
+  createdAt   DateTime @default(now())
+
+  @@unique([name, date])
+}
+
+model EmployeeAssignment {
+  id          String   @id @default(cuid())
+  employeeId  String
+  employee    Employee @relation(fields: [employeeId], references: [id])
+  customerId  String
+  customer    Customer @relation(fields: [customerId], references: [id])
+  startDate   DateTime
+  endDate     DateTime?
+  hourlyRate  Float?
+  allocation  Float?   @default(100)
+  createdAt   DateTime @default(now())
+
+  @@index([employeeId])
+  @@index([customerId])
+}
+
+model UserReport {
+  id                String   @id @default(cuid())
+  employeeId        String
+  employee          Employee @relation(fields: [employeeId], references: [id])
+  year              Int
+  month             Int
+  targetHours       Float    @default(0)
+  actualHours       Float    @default(0)
+  billableHours     Float    @default(0)
+  sickDays          Float    @default(0)
+  vacationDays      Float    @default(0)
+  utilization       Float    @default(0)
+  createdAt         DateTime @default(now())
+
+  @@unique([employeeId, year, month])
+  @@index([year, month])
+}
+
+model CashflowEntry {
+  id          String   @id @default(cuid())
+  year        Int
+  month       Int
+  inflow      Float    @default(0)
+  outflow     Float    @default(0)
+  balance     Float    @default(0)
+  cumulative  Float    @default(0)
+  createdAt   DateTime @default(now())
+
+  @@unique([year, month])
+}
