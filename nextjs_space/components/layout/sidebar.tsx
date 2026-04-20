@@ -96,11 +96,11 @@ export function Sidebar() {
         <div className="flex items-center justify-between px-4 h-14 border-b border-slate-700/50">
           {!collapsed && (
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white text-sm">IN</div>
-              <span className="font-display font-bold text-sm tracking-tight">INLOGY Reporting</span>
+              <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white text-sm">PB</div>
+              <span className="font-display font-bold text-sm tracking-tight">PulseBI</span>
             </div>
           )}
-          {collapsed && <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white text-sm mx-auto">IN</div>}
+          {collapsed && <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white text-sm mx-auto">PB</div>}
           <button onClick={() => setMobileOpen(false)} className="lg:hidden p-1 hover:bg-slate-700 rounded">
             <X className="w-4 h-4" />
           </button>
@@ -147,7 +147,7 @@ export function Sidebar() {
 
         {/* Footer */}
         <div className="px-3 py-3 border-t border-slate-700/50">
-          {!collapsed && <p className="text-[10px] text-slate-500 text-center">\u00a9 2026 INLOGY GmbH</p>}
+          {!collapsed && <p className="text-[10px] text-slate-500 text-center">&copy; 2026 PulseBI</p>}
         </div>
       </aside>
     </>

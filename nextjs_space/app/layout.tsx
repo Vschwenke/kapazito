@@ -12,7 +12,7 @@ const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mon
 
 export const metadata = {
   metadataBase: new URL(process.env.NEXTAUTH_URL || 'http://localhost:3000'),
-  title: 'INLOGY Reporting',
+  title: 'PulseBI – Business Intelligence',
   description: 'Business Intelligence Reporting System - Finanzreport, HR, Sales & CRM',
   icons: { icon: '/favicon.svg', shortcut: '/favicon.svg' },
   openGraph: { images: ['/og-image.png'] },
