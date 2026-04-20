@@ -46,23 +46,55 @@ export async function POST(request: NextRequest) {
 
     const systemPrompt = SYSTEM_PROMPTS[agent] || SYSTEM_PROMPTS.general;
 
-    // Fetch context data based on agent type
+    // Fetch comprehensive real KPI data for all agents
     let contextData = '';
     try {
-      if (agent === 'finanz') {
-        const accounts = await prisma.financialAccount.findMany({ where: { year: 2026 }, orderBy: [{ month: 'asc' }] });
-        const cashflow = await prisma.cashflowEntry.findMany({ where: { year: 2026 } });
-        contextData = `\n\nAktuelle Finanzdaten (2026):\n- ${accounts.length} Buchungseintr\u00e4ge\n- Cashflow-Eintr\u00e4ge: ${cashflow.length} Monate\n- Letzer Cashflow-Stand: ${cashflow[cashflow.length - 1]?.cumulative?.toLocaleString('de-DE') ?? 'N/A'}\u20ac`;
-      } else if (agent === 'hr') {
-        const empCount = await prisma.employee.count({ where: { isActive: true } });
-        const reports = await prisma.userReport.findMany({ where: { year: 2026 } });
-        const avgUtil = reports.length > 0 ? (reports.reduce((s, r) => s + r.utilization, 0) / reports.length).toFixed(1) : 'N/A';
-        contextData = `\n\nAktuelle HR-Daten:\n- Aktive Mitarbeiter: ${empCount}\n- Durchschn. Auslastung 2026: ${avgUtil}%\n- Datens\u00e4tze: ${reports.length} Monatsberichte`;
-      } else if (agent === 'sales') {
-        const customers = await prisma.customer.findMany({ where: { isActive: true } });
-        const projects = await prisma.project.findMany({ where: { isActive: true } });
-        contextData = `\n\nAktuelle Sales-Daten:\n- Aktive Kunden: ${customers.length}\n- Aktive Projekte: ${projects.length}\n- Kundenliste: ${customers.map(c => c.name).join(', ')}`;
+      const year = 2026;
+      const [
+        employees, accounts, cashflow, personnelCosts,
+        timeEntries, invoices, openItems, absences, allCustomers, allProjects,
+      ] = await Promise.all([
+        prisma.employee.findMany({ where: { isActive: true }, include: { userReports: { where: { year } }, assignments: { where: { endDate: null }, include: { customer: true } } } }),
+        prisma.financialAccount.findMany({ where: { year } }),
+        prisma.cashflowEntry.findMany({ where: { year }, orderBy: { month: 'asc' } }),
+        prisma.personnelCost.findMany({ where: { year } }),
+        prisma.timeEntry.findMany({ where: { date: { gte: new Date(year, 0, 1), lt: new Date(year + 1, 0, 1) } }, include: { customer: true, employee: true } }),
+        prisma.invoice.findMany({ where: { issueDate: { gte: new Date(year, 0, 1) } } }),
+        prisma.openItem.findMany({ where: { year } }),
+        prisma.absence.findMany({ where: { startDate: { gte: new Date(year, 0, 1) } } }),
+        prisma.customer.findMany({ where: { isActive: true }, include: { projects: true } }),
+        prisma.project.findMany({ where: { isActive: true }, include: { customer: { select: { name: true } } } }),
+      ]);
+
+      const revenue = accounts.filter(a => a.accountNumber === '1020').reduce((s, a) => s + (a.amount ?? 0), 0);
+      const betriebsergebnis = accounts.filter(a => a.accountNumber === '1270').reduce((s, a) => s + (a.amount ?? 0), 0);
+      const gesamtkosten = accounts.filter(a => a.accountNumber === '1260').reduce((s, a) => s + (a.amount ?? 0), 0);
+      const totalPersonnel = personnelCosts.reduce((s, p) => s + (p.totalCost ?? 0), 0);
+      const totalBillableH = timeEntries.reduce((s, t) => s + (t.billableHours ?? 0), 0);
+      const totalH = timeEntries.reduce((s, t) => s + (t.hours ?? 0), 0);
+      const billableRatio = totalH > 0 ? (totalBillableH / totalH * 100).toFixed(1) : '0';
+      const avgRate = totalBillableH > 0 ? (revenue / totalBillableH).toFixed(0) : '0';
+      const personnelQuote = revenue > 0 ? (totalPersonnel / revenue * 100).toFixed(1) : '0';
+      const latestCF = cashflow.length > 0 ? cashflow[cashflow.length - 1] : null;
+      const sickDays = absences.filter(a => a.type === 'Krank').reduce((s, a) => s + (a.days ?? 0), 0);
+      const totalInvoiced = invoices.reduce((s, i) => s + (i.totalAmount ?? 0), 0);
+      const totalPaid = invoices.reduce((s, i) => s + (i.paidAmount ?? 0), 0);
+      const bench = employees.filter(e => !e.assignments || e.assignments.length === 0);
+      const avgUtil = employees.length > 0 ? (employees.reduce((s, e) => {
+        const reps = e.userReports ?? [];
+        const tgt = reps.reduce((ss: number, r: any) => ss + (r.targetHours ?? 0), 0);
+        const bill = reps.reduce((ss: number, r: any) => ss + (r.billableHours ?? 0), 0);
+        return s + (tgt > 0 ? bill / tgt : 0);
+      }, 0) / employees.length * 100).toFixed(1) : '0';
+
+      const revByCust: Record<string, number> = {};
+      for (const te of timeEntries) {
+        const cn = te.customer?.name ?? 'Intern';
+        revByCust[cn] = (revByCust[cn] ?? 0) + (te.billableHours ?? 0) * parseFloat(avgRate);
       }
+      const topCusts = Object.entries(revByCust).sort((a, b) => b[1] - a[1]).slice(0, 5);
+
+      contextData = `\n\n=== ECHTE GESCH\u00c4FTSDATEN ${year} ===\nFINANZEN:\n- Gesamtumsatz: ${revenue.toLocaleString('de-DE')}\u20ac\n- Betriebsergebnis: ${betriebsergebnis.toLocaleString('de-DE')}\u20ac\n- Gesamtkosten: ${gesamtkosten.toLocaleString('de-DE')}\u20ac\n- Personalkosten: ${totalPersonnel.toLocaleString('de-DE')}\u20ac (Quote: ${personnelQuote}%)\n- Revenue/MA: ${employees.length > 0 ? (revenue / employees.length).toLocaleString('de-DE') : 0}\u20ac\n- Liquidit\u00e4t: ${latestCF?.cumulative?.toLocaleString('de-DE') ?? 'N/A'}\u20ac\n\nHR & TEAM:\n- ${employees.length} aktive MA, \u00d8 Auslastung: ${avgUtil}%, Billable Ratio: ${billableRatio}%\n- Abrechenbare Std: ${totalBillableH.toLocaleString('de-DE')}, Gesamt: ${totalH.toLocaleString('de-DE')}\n- Bench: ${bench.length} MA (${bench.map(e => `${e.firstName} ${e.lastName}`).join(', ') || 'keine'})\n- Krankheitstage: ${sickDays} (\u00d8 ${employees.length > 0 ? (sickDays / employees.length).toFixed(1) : 0}/MA)\n- Team: ${employees.map(e => `${e.firstName} ${e.lastName} (${e.experienceLevel || '-'}, ${e.monthlyIncome ? e.monthlyIncome.toLocaleString('de-DE') + '\u20ac' : '-'})`).join('; ')}\n\nSALES:\n- ${allCustomers.length} Kunden: ${allCustomers.map(c => c.name).join(', ')}\n- ${allProjects.length} Projekte, \u00d8 Stundensatz: ${avgRate}\u20ac\n- Top 5: ${topCusts.map(([n, v]) => `${n}: ${v.toLocaleString('de-DE')}\u20ac`).join(', ')}\n\nRECHNUNGEN:\n- Fakturiert: ${totalInvoiced.toLocaleString('de-DE')}\u20ac, Bezahlt: ${totalPaid.toLocaleString('de-DE')}\u20ac, Offen: ${(totalInvoiced - totalPaid).toLocaleString('de-DE')}\u20ac\n- \u00dcberf\u00e4llig: ${invoices.filter(i => i.status === 'overdue').length}\n\nNutze diese echten Zahlen f\u00fcr Analysen und konkrete Handlungsempfehlungen.`;
     } catch (e) {
       console.error('Context fetch error:', e);
     }

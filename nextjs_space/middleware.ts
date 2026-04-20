@@ -16,6 +16,8 @@ export const config = {
     '/stammdaten/:path*',
     '/zeiterfassung/:path*',
     '/import/:path*',
+    '/projekte/:path*',
+    '/abwesenheiten/:path*',
     '/api/dashboard/:path*',
     '/api/finanzen/:path*',
     '/api/hr/:path*',
@@ -25,5 +27,8 @@ export const config = {
     '/api/agent/:path*',
     '/api/stammdaten/:path*',
     '/api/zeiterfassung/:path*',
+    '/api/projekte/:path*',
+    '/api/abwesenheiten/:path*',
+    '/api/import/:path*',
   ],
 };

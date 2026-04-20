@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 import {
   BarChart3, Users, TrendingUp, Receipt, Database, ChevronLeft, ChevronRight, Menu, X,
   LayoutDashboard, LineChart, PieChart, DollarSign, FileText, Briefcase, UserCheck, Settings,
-  Bot, LogOut, Clock, Building2, FolderKanban, Upload
+  Bot, LogOut, Clock, Building2, FolderKanban, Upload, Calendar, Target
 } from 'lucide-react';
 
 const navGroups = [
@@ -40,6 +40,7 @@ const navGroups = [
     items: [
       { label: 'Team-\u00dcbersicht', href: '/hr', icon: Users },
       { label: 'Mitarbeiter', href: '/hr/mitarbeiter', icon: UserCheck },
+      { label: 'Abwesenheiten', href: '/abwesenheiten', icon: Calendar },
     ],
   },
   {
@@ -49,6 +50,7 @@ const navGroups = [
     items: [
       { label: 'Dashboard', href: '/sales', icon: LayoutDashboard },
       { label: 'Ertr\u00e4ge', href: '/sales/ertraege', icon: TrendingUp },
+      { label: 'Projekt-Controlling', href: '/projekte', icon: Target },
     ],
   },
   {
