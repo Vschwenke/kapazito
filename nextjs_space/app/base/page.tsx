@@ -1,10 +1,10 @@
 import { DashboardShell } from '@/components/layout/dashboard-shell';
-import { BaseReportView } from './_components/base-report-view';
+import { SystemTabs } from './_components/system-tabs';
 
 export default function BasePage() {
   return (
-    <DashboardShell title="BASE REPORT" subtitle="Datenmodell-Übersicht und Statistiken">
-      <BaseReportView />
+    <DashboardShell title="SYSTEM & DATEN" subtitle="Datenmodell, Konfiguration und Systemübersicht">
+      <SystemTabs />
     </DashboardShell>
   );
 }

@@ -18,76 +18,38 @@ const navGroups = [
     color: 'text-teal-400',
     items: [
       { label: 'Executive Dashboard', href: '/dashboard', icon: LayoutDashboard },
-      { label: 'KI-Assistenten', href: '/agent', icon: Bot },
     ],
   },
   {
-    label: 'Finanzen',
+    label: 'Finanzen & Controlling',
     icon: BarChart3,
     color: 'text-violet-400',
     items: [
-      { label: 'Dashboard', href: '/finanzen', icon: LayoutDashboard },
+      { label: 'Finanzübersicht', href: '/finanzen', icon: BarChart3 },
+      { label: 'Profitabilität', href: '/finanzen/profitabilitaet', icon: PieChart },
       { label: 'Planung & Forecast', href: '/finanzen/planung', icon: LineChart },
-      { label: 'Deckungsbeitrag', href: '/finanzen/deckungsbeitrag', icon: PieChart },
-      { label: 'Erträge', href: '/finanzen/ertraege', icon: TrendingUp },
       { label: 'Betriebskosten', href: '/finanzen/betriebskosten', icon: DollarSign },
     ],
   },
   {
-    label: 'HR & Team',
+    label: 'Team & Leistung',
     icon: Users,
     color: 'text-emerald-400',
     items: [
       { label: 'Team-Übersicht', href: '/hr', icon: Users },
-      { label: 'Mitarbeiter', href: '/hr/mitarbeiter', icon: UserCheck },
       { label: 'Abwesenheiten', href: '/abwesenheiten', icon: Calendar },
+      { label: 'Zeiterfassung', href: '/zeiterfassung', icon: Clock },
+      { label: 'Sales & Faktura', href: '/sales', icon: Receipt },
     ],
   },
   {
-    label: 'Sales & CRM',
-    icon: TrendingUp,
-    color: 'text-amber-400',
-    items: [
-      { label: 'Dashboard', href: '/sales', icon: LayoutDashboard },
-      { label: 'Erträge', href: '/sales/ertraege', icon: TrendingUp },
-      { label: 'Projekt-Controlling', href: '/projekte', icon: Target },
-    ],
-  },
-  {
-    label: 'Rechnungen',
-    icon: Receipt,
-    color: 'text-rose-400',
-    items: [
-      { label: 'Kundenübersicht', href: '/rechnungen', icon: FileText },
-      { label: 'Details', href: '/rechnungen/details', icon: Briefcase },
-    ],
-  },
-  {
-    label: 'Stammdaten',
-    icon: Building2,
-    color: 'text-sky-400',
-    items: [
-      { label: 'Kunden', href: '/stammdaten/kunden', icon: Building2 },
-      { label: 'Mitarbeiter', href: '/stammdaten/mitarbeiter', icon: UserCheck },
-      { label: 'Projekte', href: '/stammdaten/projekte', icon: FolderKanban },
-    ],
-  },
-  {
-    label: 'Zeiterfassung',
-    icon: Clock,
-    color: 'text-teal-300',
-    items: [
-      { label: 'Wochenansicht', href: '/zeiterfassung', icon: Clock },
-    ],
-  },
-  {
-    label: 'System',
-    icon: Database,
+    label: 'Verwaltung',
+    icon: Settings,
     color: 'text-slate-400',
     items: [
-      { label: 'Datenübersicht', href: '/base', icon: Database },
-      { label: 'BWA-Import', href: '/import', icon: Upload },
-      { label: 'Konfiguration', href: '/base/config', icon: Settings },
+      { label: 'Stammdaten', href: '/stammdaten/kunden', icon: Building2 },
+      { label: 'Daten-Import', href: '/import', icon: Upload },
+      { label: 'System', href: '/base', icon: Database },
     ],
   },
 ];

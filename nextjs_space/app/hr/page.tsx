@@ -1,10 +1,10 @@
 import { DashboardShell } from '@/components/layout/dashboard-shell';
-import { HrTeamDashboard } from './_components/hr-team-dashboard';
+import { TeamLeistungTabs } from './_components/team-leistung-tabs';
 
 export default function HrPage() {
   return (
-    <DashboardShell title="HR & RECRUITING - TEAM" subtitle="Auslastungsquoten, Fluktuation, Krankheitsquoten">
-      <HrTeamDashboard />
+    <DashboardShell title="TEAM & LEISTUNG" subtitle="Auslastung, Mitarbeiter-Performance und Abwesenheiten">
+      <TeamLeistungTabs />
     </DashboardShell>
   );
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import { Sidebar } from './sidebar';
+import { FloatingAIWidget } from './floating-ai-widget';
 import { cn } from '@/lib/utils';
 
 export function DashboardShell({ children, title, subtitle }: { children: React.ReactNode; title?: string; subtitle?: string }) {
@@ -20,6 +21,7 @@ export function DashboardShell({ children, title, subtitle }: { children: React.
         )}
         <div className="p-4 sm:p-6">{children}</div>
       </main>
+      <FloatingAIWidget />
     </div>
   );
 }

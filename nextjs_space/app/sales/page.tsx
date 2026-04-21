@@ -1,10 +1,10 @@
 import { DashboardShell } from '@/components/layout/dashboard-shell';
-import { SalesDashboard } from './_components/sales-dashboard';
+import { SalesFakturaTabs } from './_components/sales-faktura-tabs';
 
 export default function SalesPage() {
   return (
-    <DashboardShell title="SALES & CRM" subtitle="Kundenspezifische Umsatzanalyse, Stundsätze, Projekte">
-      <SalesDashboard />
+    <DashboardShell title="SALES & FAKTURA" subtitle="Kundenanalyse, Rechnungsstellung und Billing-Übersicht">
+      <SalesFakturaTabs />
     </DashboardShell>
   );
 }
