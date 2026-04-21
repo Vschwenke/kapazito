@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 220 25% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 10%;
+    --primary: 172 66% 40%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 30% 95%;
+    --secondary-foreground: 220 25% 10%;
+    --muted: 210 25% 95%;
+    --muted-foreground: 215 14% 46%;
+    --accent: 262 60% 58%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 214 25% 90%;
+    --input: 214 25% 90%;
+    --ring: 172 66% 40%;
+    --radius: 0.75rem;
+    --radius-sm: calc(0.75rem - 4px);
+    --radius-lg: calc(0.75rem + 4px);
+    --radius-full: 9999px;
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+    --spacing-3xl: 64px;
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.04), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+    --shadow-md: 0 4px 8px -2px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+    --shadow-lg: 0 12px 24px -4px rgb(0 0 0 / 0.08), 0 4px 8px -4px rgb(0 0 0 / 0.04);
+    --chart-1: 172 66% 40%;
+    --chart-2: 262 60% 58%;
+    --chart-3: 35 92% 60%;
+    --chart-4: 340 65% 58%;
+    --chart-5: 200 80% 55%;
+  }
+  .dark {
+    --background: 220 20% 8%;
+    --foreground: 210 30% 96%;
+    --card: 220 18% 13%;
+    --card-foreground: 210 30% 96%;
+    --popover: 220 18% 13%;
+    --popover-foreground: 210 30% 96%;
+    --primary: 172 60% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 18% 16%;
+    --secondary-foreground: 210 30% 96%;
+    --muted: 220 16% 16%;
+    --muted-foreground: 215 16% 58%;
+    --accent: 262 55% 62%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 16% 22%;
+    --input: 220 16% 22%;
+    --ring: 172 60% 45%;
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.15), 0 1px 2px -1px rgb(0 0 0 / 0.2);
+    --shadow-md: 0 4px 8px -2px rgb(0 0 0 / 0.2), 0 2px 4px -2px rgb(0 0 0 / 0.15);
+    --shadow-lg: 0 12px 24px -4px rgb(0 0 0 / 0.3), 0 4px 8px -4px rgb(0 0 0 / 0.2);
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground; }
+  [data-hydration-error] { display: none !important; }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: hsl(var(--muted-foreground) / 0.2); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground) / 0.4); }
+
+/* Gauge animation */
+@keyframes gauge-fill { from { stroke-dashoffset: 283; } }
+.gauge-animate { animation: gauge-fill 1.5s ease-out forwards; }
+
+/* Glass effect utility */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.dark .glass-card {
+  background: rgba(20, 25, 35, 0.7);
+}
+
+/* Subtle gradient bg */
+.gradient-mesh {
+  background:
+    radial-gradient(at 20% 20%, hsl(172 66% 40% / 0.06) 0px, transparent 50%),
+    radial-gradient(at 80% 80%, hsl(262 60% 58% / 0.04) 0px, transparent 50%),
+    radial-gradient(at 50% 0%, hsl(35 92% 60% / 0.03) 0px, transparent 50%);
+}
+.dark .gradient-mesh {
+  background:
+    radial-gradient(at 20% 20%, hsl(172 60% 45% / 0.08) 0px, transparent 50%),
+    radial-gradient(at 80% 80%, hsl(262 55% 62% / 0.06) 0px, transparent 50%),
+    radial-gradient(at 50% 0%, hsl(35 80% 50% / 0.04) 0px, transparent 50%);
+}

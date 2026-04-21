@@ -1,0 +1,58 @@
+# Lokale Entwicklungsumgebung.
+# Start:  docker compose up -d
+# Logs:   docker compose logs -f app
+# Reset:  docker compose down -v
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: kapazito
+      POSTGRES_PASSWORD: kapazito_dev
+      POSTGRES_DB: kapazito
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./prisma/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kapazito -d kapazito"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: ["redis-server", "--appendonly", "yes"]
+
+  # App nur fuer Dev-Container-Tests; lokale Entwicklung laeuft via `npm run dev`
+  app:
+    profiles: ["container"]
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://kapazito:kapazito_dev@db:5432/kapazito?schema=public
+      NEXTAUTH_URL: http://localhost:3000
+      NEXTAUTH_SECRET: dev-secret-not-for-prod
+      LLM_PROVIDER: anthropic
+      KAPI_APPROVAL_REQUIRED: "true"
+      MULTI_TENANCY_ENFORCED: "true"
+    ports:
+      - "3000:3000"
+    volumes:
+      - file_storage:/app/storage
+
+volumes:
+  db_data:
+  redis_data:
+  file_storage:

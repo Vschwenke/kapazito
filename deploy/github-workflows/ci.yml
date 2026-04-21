@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Lint, Typecheck, Test, Build
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: kapazito
+          POSTGRES_PASSWORD: kapazito
+          POSTGRES_DB: kapazito_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports: [5432:5432]
+
+    env:
+      DATABASE_URL: postgresql://kapazito:kapazito@localhost:5432/kapazito_test
+      NEXTAUTH_SECRET: test-secret-nicht-fuer-produktion
+      NEXTAUTH_URL: http://localhost:3000
+      ANTHROPIC_API_KEY: sk-test
+      LLM_PROVIDER: anthropic
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Prisma Generate
+        run: npx prisma generate
+
+      - name: Prisma Migrate (test db)
+        run: npx prisma migrate deploy || npx prisma db push
+
+      - name: Lint
+        run: npm run lint --if-present
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Unit Tests
+        run: npm run test
+
+      - name: XRechnung-Pflichtfelder-Check
+        run: npm run validate:xrechnung
+        continue-on-error: true
+
+      - name: Build
+        run: npm run build

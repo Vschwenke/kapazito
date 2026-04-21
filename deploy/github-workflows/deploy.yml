@@ -1,0 +1,85 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE: ghcr.io/${{ github.repository_owner }}/kapazito
+
+jobs:
+  build-and-push:
+    name: Build Image & Push to GHCR
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.IMAGE }}
+          tags: |
+            type=raw,value=latest
+            type=sha,format=short
+            type=ref,event=branch
+
+      - name: Build & push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    name: Deploy to Strato
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: SSH into Server & Update
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.STRATO_HOST }}
+          username: ${{ secrets.STRATO_USER }}
+          key: ${{ secrets.STRATO_SSH_KEY }}
+          port: ${{ secrets.STRATO_SSH_PORT || 22 }}
+          script: |
+            set -euo pipefail
+            cd /srv/kapazito/src
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            docker compose -f docker-compose.prod.yml --env-file /srv/kapazito/.env.prod pull
+            docker compose -f docker-compose.prod.yml --env-file /srv/kapazito/.env.prod up -d
+            docker compose -f docker-compose.prod.yml --env-file /srv/kapazito/.env.prod exec -T app npx prisma migrate deploy
+            echo "Deploy abgeschlossen: $(date -Is)"
+
+      - name: Notify
+        if: always()
+        run: echo "Deploy status: ${{ job.status }}"

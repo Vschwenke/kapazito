@@ -1,0 +1,790 @@
+// Kapazito — Produktions-Datenmodell
+// Version 0.2.0 — Multi-Tenant, E-Invoicing-ready, Audit-fest
+//
+// Designprinzipien:
+//  - Jedes Business-Modell traegt tenantId (Mandantenisolation)
+//  - Unveraenderliche Audit-/Agent-Logs (append-only)
+//  - Alle monetaeren Werte als Decimal(14,2) (Float nur fuer Stunden/Prozente)
+//  - Enums statt Strings fuer Status/Typen
+//  - Cascades explizit gesetzt, niemals implizit
+//  - Indices auf tenantId + Sortierfeldern fuer schnelle Listenansichten
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// =================================================================
+// TENANT + AUTH + MEMBERSHIP
+// =================================================================
+
+model Tenant {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  name            String
+  legalName       String?
+  vatId           String?
+  taxId           String?
+  addressStreet   String?
+  addressZip      String?
+  addressCity     String?
+  addressCountry  String   @default("DE")
+  iban            String?
+  bic             String?
+  bankName        String?
+  defaultCurrency String   @default("EUR")
+  locale          String   @default("de-DE")
+  plan            Plan     @default(TRIAL)
+  trialEndsAt     DateTime?
+  datevClientNo   String?
+  logoUrl         String?
+  primaryColor    String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  memberships        Membership[]
+  invitations        Invitation[]
+  customers          Customer[]
+  employees          Employee[]
+  projects           Project[]
+  timeEntries        TimeEntry[]
+  absences           Absence[]
+  financialAccounts  FinancialAccount[]
+  personnelCosts     PersonnelCost[]
+  invoices           Invoice[]
+  openItems          OpenItem[]
+  financialPlanning  FinancialPlanning[]
+  holidays           Holiday[]
+  employeeAssignments EmployeeAssignment[]
+  userReports        UserReport[]
+  cashflowEntries    CashflowEntry[]
+  chatMessages       ChatMessage[]
+  invoiceNumberRanges InvoiceNumberRange[]
+  payments           Payment[]
+  reminders          Reminder[]
+  documents          Document[]
+  quotes             Quote[]
+  auditLogs          AuditLog[]
+  agentActions       AgentAction[]
+  apiKeys            ApiKey[]
+  webhookSubs        WebhookSubscription[]
+
+  @@index([slug])
+  @@index([plan])
+}
+
+enum Plan {
+  TRIAL
+  STARTER
+  PROFESSIONAL
+  ENTERPRISE
+}
+
+model User {
+  id            String       @id @default(cuid())
+  email         String       @unique
+  password      String?
+  name          String?
+  imageUrl      String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  emailVerified DateTime?
+  memberships   Membership[]
+  chatMessages  ChatMessage[]
+  auditLogs     AuditLog[]
+  agentActions  AgentAction[]
+
+  @@index([email])
+}
+
+model Membership {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  role      Role     @default(MEMBER)
+  scopes    String[] @default([])
+  createdAt DateTime @default(now())
+
+  @@unique([userId, tenantId])
+  @@index([tenantId])
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  FINANCE
+  MANAGER
+  MEMBER
+  GUEST
+}
+
+model Invitation {
+  id        String   @id @default(cuid())
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  email     String
+  role      Role     @default(MEMBER)
+  token     String   @unique
+  expiresAt DateTime
+  acceptedAt DateTime?
+  createdAt DateTime @default(now())
+
+  @@index([tenantId])
+  @@index([token])
+}
+
+// =================================================================
+// CHAT / KI
+// =================================================================
+
+model ChatMessage {
+  id        String   @id @default(cuid())
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sessionId String
+  role      String   // user | assistant | tool | system
+  content   String   @db.Text
+  agent     String?  // finanz | hr | sales | general | kapi
+  toolName  String?
+  toolInput Json?
+  toolOutput Json?
+  tokensIn  Int?
+  tokensOut Int?
+  costCents Int?
+  createdAt DateTime @default(now())
+
+  @@index([tenantId, sessionId, createdAt])
+  @@index([userId, createdAt])
+}
+
+model AgentAction {
+  id          String       @id @default(cuid())
+  tenantId    String
+  tenant      Tenant       @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User         @relation(fields: [userId], references: [id])
+  agent       String       // kapi | finance | staffing | controlling | sales
+  toolName    String
+  input       Json
+  output      Json?
+  status      ActionStatus @default(PENDING)
+  confirmedBy String?
+  confirmedAt DateTime?
+  executedAt  DateTime?
+  errorMessage String?
+  createdAt   DateTime     @default(now())
+
+  @@index([tenantId, createdAt])
+  @@index([status])
+}
+
+enum ActionStatus {
+  PENDING
+  APPROVED
+  EXECUTED
+  REJECTED
+  FAILED
+}
+
+// =================================================================
+// BUSINESS DATA (alle mit tenantId)
+// =================================================================
+
+model Customer {
+  id            String   @id @default(cuid())
+  tenantId      String
+  tenant        Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  name          String
+  shortName     String?
+  industry      String?
+  vatId         String?
+  addressStreet String?
+  addressZip    String?
+  addressCity   String?
+  addressCountry String  @default("DE")
+  contactName   String?
+  contactEmail  String?
+  contactPhone  String?
+  peppolId      String?
+  leitwegId     String?
+  paymentTerms  Int      @default(14) // Tage bis Faelligkeit
+  isActive      Boolean  @default(true)
+  notes         String?  @db.Text
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  projects            Project[]
+  invoices            Invoice[]
+  openItems           OpenItem[]
+  timeEntries         TimeEntry[]
+  employeeAssignments EmployeeAssignment[]
+  quotes              Quote[]
+
+  @@index([tenantId, isActive])
+  @@index([tenantId, name])
+}
+
+model Employee {
+  id                String    @id @default(cuid())
+  tenantId          String
+  tenant            Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  firstName         String
+  lastName          String
+  email             String?
+  jobTitle          String?
+  skills            String[]  @default([])
+  contractType      String?   // Remote | Hybrid | Office
+  experienceLevel   String?   // Junior | Mid | Senior | Lead
+  monthlyIncome     Decimal?  @db.Decimal(12, 2)
+  internalCostRate  Decimal?  @db.Decimal(8, 2) // Euro pro Stunde
+  lastRaise         DateTime?
+  startDate         DateTime?
+  endDate           DateTime?
+  isActive          Boolean   @default(true)
+  homeOfficePercent Float?    @default(0)
+  weeklyHours       Float?    @default(40)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  timeEntries     TimeEntry[]
+  absences        Absence[]
+  personnelCosts  PersonnelCost[]
+  assignments     EmployeeAssignment[]
+  userReports     UserReport[]
+
+  @@index([tenantId, isActive])
+  @@index([tenantId, lastName])
+}
+
+model Project {
+  id              String    @id @default(cuid())
+  tenantId        String
+  tenant          Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  customerId      String
+  customer        Customer  @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  name            String
+  code            String?
+  purchaseOrder   String?
+  contractNumber  String?
+  billingMode     BillingMode @default(TIME_AND_MATERIAL)
+  hourlyRate      Decimal?  @db.Decimal(8, 2)
+  fixedPrice      Decimal?  @db.Decimal(12, 2)
+  retainerMonthly Decimal?  @db.Decimal(12, 2)
+  budgetHours     Float?
+  currency        String    @default("EUR")
+  vatRate         Decimal   @default(19) @db.Decimal(5, 2)
+  isActive        Boolean   @default(true)
+  startDate       DateTime?
+  endDate         DateTime?
+  description     String?   @db.Text
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  timeEntries  TimeEntry[]
+  invoiceItems InvoiceItem[]
+  quoteItems   QuoteItem[]
+
+  @@index([tenantId, customerId])
+  @@index([tenantId, isActive])
+}
+
+enum BillingMode {
+  TIME_AND_MATERIAL
+  FIXED_PRICE
+  RETAINER
+  INTERNAL
+}
+
+model TimeEntry {
+  id             String      @id @default(cuid())
+  tenantId       String
+  tenant         Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  employeeId     String
+  employee       Employee    @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  customerId     String?
+  customer       Customer?   @relation(fields: [customerId], references: [id])
+  projectId      String?
+  project        Project?    @relation(fields: [projectId], references: [id])
+  date           DateTime    @db.Date
+  hours          Float
+  billableHours  Float       @default(0)
+  description    String?
+  isBillable     Boolean     @default(true)
+  workLocation   String?     // HomeOffice | InOffice
+  status         TimeEntryStatus @default(DRAFT)
+  invoiceItemId  String?
+  invoiceItem    InvoiceItem? @relation(fields: [invoiceItemId], references: [id])
+  approvedBy     String?
+  approvedAt     DateTime?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  @@index([tenantId, employeeId, date])
+  @@index([tenantId, customerId, date])
+  @@index([tenantId, projectId, status])
+  @@index([tenantId, date])
+  @@index([status])
+}
+
+enum TimeEntryStatus {
+  DRAFT
+  SUBMITTED
+  APPROVED
+  INVOICED
+  REJECTED
+}
+
+model Absence {
+  id          String      @id @default(cuid())
+  tenantId    String
+  tenant      Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  employeeId  String
+  employee    Employee    @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  type        AbsenceType
+  startDate   DateTime    @db.Date
+  endDate     DateTime    @db.Date
+  days        Float
+  approved    Boolean     @default(true)
+  note        String?
+  createdAt   DateTime    @default(now())
+
+  @@index([tenantId, employeeId, startDate])
+  @@index([tenantId, type])
+}
+
+enum AbsenceType {
+  VACATION
+  SICK
+  HOLIDAY
+  TRAINING
+  PARENTAL
+  OTHER
+}
+
+model FinancialAccount {
+  id            String   @id @default(cuid())
+  tenantId      String
+  tenant        Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  accountNumber String
+  accountName   String
+  category      String   // Umsatzerloese | Rohertrag | Gesamtkosten | ...
+  year          Int
+  month         Int
+  amount        Decimal  @default(0) @db.Decimal(14, 2)
+  previousYear  Decimal? @default(0) @db.Decimal(14, 2)
+  budget        Decimal? @default(0) @db.Decimal(14, 2)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([tenantId, accountNumber, year, month])
+  @@index([tenantId, year, month])
+  @@index([tenantId, category])
+}
+
+model PersonnelCost {
+  id          String   @id @default(cuid())
+  tenantId    String
+  tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  employeeId  String
+  employee    Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  year        Int
+  month       Int
+  grossSalary Decimal  @default(0) @db.Decimal(12, 2)
+  socialCosts Decimal  @default(0) @db.Decimal(12, 2)
+  otherCosts  Decimal  @default(0) @db.Decimal(12, 2)
+  totalCost   Decimal  @default(0) @db.Decimal(12, 2)
+  createdAt   DateTime @default(now())
+
+  @@unique([tenantId, employeeId, year, month])
+  @@index([tenantId, year, month])
+}
+
+// =================================================================
+// INVOICING — E-Invoicing-ready
+// =================================================================
+
+model InvoiceNumberRange {
+  id          String   @id @default(cuid())
+  tenantId    String
+  tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  prefix      String   @default("") // z.B. "2026-"
+  format      String   @default("{prefix}{seq:04d}") // Template
+  year        Int?
+  lastNumber  Int      @default(0)
+  isDefault   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([tenantId, prefix, year])
+  @@index([tenantId])
+}
+
+model Invoice {
+  id              String         @id @default(cuid())
+  tenantId        String
+  tenant          Tenant         @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  customerId      String
+  customer        Customer       @relation(fields: [customerId], references: [id], onDelete: Restrict)
+  invoiceNo       String
+  status          InvoiceStatus  @default(DRAFT)
+  issueDate       DateTime       @db.Date
+  dueDate         DateTime       @db.Date
+  servicePeriodFrom DateTime?    @db.Date
+  servicePeriodTo   DateTime?    @db.Date
+
+  netAmount       Decimal        @default(0) @db.Decimal(14, 2)
+  vatAmount       Decimal        @default(0) @db.Decimal(14, 2)
+  grossAmount     Decimal        @default(0) @db.Decimal(14, 2)
+  paidAmount      Decimal        @default(0) @db.Decimal(14, 2)
+  currency        String         @default("EUR")
+  paymentTerms    Int            @default(14)
+  discount        Decimal?       @default(0) @db.Decimal(6, 2)
+
+  // E-Invoicing
+  buyerReference  String?
+  leitwegId       String?
+  peppolId        String?
+  purchaseOrder   String?
+  bankIban        String?
+  bankBic         String?
+  bankName        String?
+
+  // Bezahlung & Status
+  sentAt          DateTime?
+  viewedAt        DateTime?
+  paidAt          DateTime?
+  cancelledAt     DateTime?
+
+  // Dokumente
+  pdfStorageKey   String?
+  xmlStorageKey   String?
+
+  // Notizen
+  headerText      String?        @db.Text
+  footerText      String?        @db.Text
+  internalNote    String?        @db.Text
+
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  items           InvoiceItem[]
+  payments        Payment[]
+  reminders       Reminder[]
+  documents       Document[]
+
+  @@unique([tenantId, invoiceNo])
+  @@index([tenantId, customerId])
+  @@index([tenantId, status])
+  @@index([tenantId, issueDate])
+  @@index([tenantId, dueDate])
+}
+
+enum InvoiceStatus {
+  DRAFT
+  OPEN
+  SENT
+  VIEWED
+  PARTIAL
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+model InvoiceItem {
+  id            String   @id @default(cuid())
+  tenantId      String
+  invoiceId     String
+  invoice       Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  projectId     String?
+  project       Project? @relation(fields: [projectId], references: [id])
+  position      Int      @default(1)
+  description   String   @db.Text
+  quantity      Decimal  @db.Decimal(10, 2)
+  unit          String   @default("Std") // Std | Tag | Pauschale | Stueck
+  unitPrice     Decimal  @db.Decimal(10, 2)
+  netAmount     Decimal  @db.Decimal(14, 2)
+  vatRate       Decimal  @default(19) @db.Decimal(5, 2)
+  vatAmount     Decimal  @db.Decimal(14, 2)
+  vatCategory   String   @default("S") // S | AE | Z | E (EN 16931)
+  discount      Decimal? @default(0) @db.Decimal(6, 2)
+  servicePeriodFrom DateTime? @db.Date
+  servicePeriodTo   DateTime? @db.Date
+  createdAt     DateTime @default(now())
+
+  timeEntries   TimeEntry[]
+
+  @@index([invoiceId])
+  @@index([tenantId])
+}
+
+model Payment {
+  id          String   @id @default(cuid())
+  tenantId    String
+  tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  invoiceId   String
+  invoice     Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  amount      Decimal  @db.Decimal(14, 2)
+  receivedAt  DateTime
+  method      String?  // SEPA | Bank | Kreditkarte | Bar
+  reference   String?
+  note        String?
+  createdAt   DateTime @default(now())
+
+  @@index([tenantId, invoiceId])
+  @@index([tenantId, receivedAt])
+}
+
+model Reminder {
+  id          String   @id @default(cuid())
+  tenantId    String
+  tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  invoiceId   String
+  invoice     Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  level       Int      // 1, 2, 3
+  sentAt      DateTime @default(now())
+  fee         Decimal  @default(0) @db.Decimal(8, 2)
+  interest    Decimal  @default(0) @db.Decimal(8, 2)
+  dueDate     DateTime?
+  template    String?
+  body        String?  @db.Text
+
+  @@index([tenantId, invoiceId])
+}
+
+// =================================================================
+// QUOTES (Angebote) — fuer spaetere Epics
+// =================================================================
+
+model Quote {
+  id            String       @id @default(cuid())
+  tenantId      String
+  tenant        Tenant       @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  customerId    String
+  customer      Customer     @relation(fields: [customerId], references: [id])
+  quoteNo       String
+  issueDate     DateTime     @db.Date
+  validUntil    DateTime     @db.Date
+  status        QuoteStatus  @default(DRAFT)
+  netAmount     Decimal      @default(0) @db.Decimal(14, 2)
+  vatAmount     Decimal      @default(0) @db.Decimal(14, 2)
+  grossAmount   Decimal      @default(0) @db.Decimal(14, 2)
+  currency      String       @default("EUR")
+  headerText    String?      @db.Text
+  footerText    String?      @db.Text
+  convertedInvoiceId String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  items QuoteItem[]
+
+  @@unique([tenantId, quoteNo])
+  @@index([tenantId, customerId])
+  @@index([tenantId, status])
+}
+
+enum QuoteStatus {
+  DRAFT
+  SENT
+  ACCEPTED
+  REJECTED
+  EXPIRED
+}
+
+model QuoteItem {
+  id          String   @id @default(cuid())
+  quoteId     String
+  quote       Quote    @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+  projectId   String?
+  project     Project? @relation(fields: [projectId], references: [id])
+  position    Int      @default(1)
+  description String   @db.Text
+  quantity    Decimal  @db.Decimal(10, 2)
+  unit        String   @default("Std")
+  unitPrice   Decimal  @db.Decimal(10, 2)
+  netAmount   Decimal  @db.Decimal(14, 2)
+  vatRate     Decimal  @default(19) @db.Decimal(5, 2)
+  vatAmount   Decimal  @db.Decimal(14, 2)
+
+  @@index([quoteId])
+}
+
+// =================================================================
+// OPEN ITEMS / PLANUNG / KALENDAR / REPORTS
+// =================================================================
+
+model OpenItem {
+  id          String   @id @default(cuid())
+  tenantId    String
+  tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  customerId  String
+  customer    Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  type        String   // Forderung | Verbindlichkeit
+  amount      Decimal  @db.Decimal(14, 2)
+  dueDate     DateTime?
+  description String?
+  year        Int
+  month       Int
+  createdAt   DateTime @default(now())
+
+  @@index([tenantId, customerId])
+  @@index([tenantId, year, month])
+}
+
+model FinancialPlanning {
+  id        String   @id @default(cuid())
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  category  String
+  year      Int
+  month     Int
+  planned   Decimal  @default(0) @db.Decimal(14, 2)
+  actual    Decimal  @default(0) @db.Decimal(14, 2)
+  forecast  Decimal  @default(0) @db.Decimal(14, 2)
+  createdAt DateTime @default(now())
+
+  @@unique([tenantId, category, year, month])
+  @@index([tenantId, year, month])
+}
+
+model Holiday {
+  id        String   @id @default(cuid())
+  tenantId  String?  // null = global Master-Feiertage
+  tenant    Tenant?  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  name      String
+  date      DateTime @db.Date
+  region    String?  @default("DE")
+  createdAt DateTime @default(now())
+
+  @@unique([tenantId, name, date])
+}
+
+model EmployeeAssignment {
+  id         String   @id @default(cuid())
+  tenantId   String
+  tenant     Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  employeeId String
+  employee   Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  customerId String
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  projectId  String?
+  startDate  DateTime @db.Date
+  endDate    DateTime? @db.Date
+  hourlyRate Decimal? @db.Decimal(8, 2)
+  allocation Float?   @default(100)
+  createdAt  DateTime @default(now())
+
+  @@index([tenantId, employeeId])
+  @@index([tenantId, customerId])
+}
+
+model UserReport {
+  id             String   @id @default(cuid())
+  tenantId       String
+  tenant         Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  employeeId     String
+  employee       Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  year           Int
+  month          Int
+  targetHours    Float    @default(0)
+  actualHours    Float    @default(0)
+  billableHours  Float    @default(0)
+  sickDays       Float    @default(0)
+  vacationDays   Float    @default(0)
+  utilization    Float    @default(0)
+  createdAt      DateTime @default(now())
+
+  @@unique([tenantId, employeeId, year, month])
+  @@index([tenantId, year, month])
+}
+
+model CashflowEntry {
+  id         String   @id @default(cuid())
+  tenantId   String
+  tenant     Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  year       Int
+  month      Int
+  inflow     Decimal  @default(0) @db.Decimal(14, 2)
+  outflow    Decimal  @default(0) @db.Decimal(14, 2)
+  balance    Decimal  @default(0) @db.Decimal(14, 2)
+  cumulative Decimal  @default(0) @db.Decimal(14, 2)
+  createdAt  DateTime @default(now())
+
+  @@unique([tenantId, year, month])
+}
+
+// =================================================================
+// AUDIT + DOCUMENTS + API + WEBHOOKS
+// =================================================================
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  tenantId   String
+  tenant     Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id])
+  action     String   // create | update | delete | read
+  entity     String   // Invoice | Customer | ...
+  entityId   String?
+  before     Json?
+  after      Json?
+  ip         String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+
+  @@index([tenantId, createdAt])
+  @@index([tenantId, entity, entityId])
+}
+
+model Document {
+  id          String   @id @default(cuid())
+  tenantId    String
+  tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  type        String   // invoice_pdf | invoice_xml | attachment | logo
+  storageKey  String
+  mimeType    String
+  size        Int
+  originalName String?
+  invoiceId   String?
+  invoice     Invoice? @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+
+  @@index([tenantId, type])
+}
+
+model ApiKey {
+  id         String   @id @default(cuid())
+  tenantId   String
+  tenant     Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  name       String
+  hashedKey  String   @unique
+  keyPrefix  String   // erste 8 Zeichen sichtbar
+  scopes     String[] @default([])
+  lastUsedAt DateTime?
+  expiresAt  DateTime?
+  revokedAt  DateTime?
+  createdAt  DateTime @default(now())
+
+  @@index([tenantId])
+}
+
+model WebhookSubscription {
+  id        String   @id @default(cuid())
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  url       String
+  events    String[] @default([])
+  secret    String
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@index([tenantId])
+}
