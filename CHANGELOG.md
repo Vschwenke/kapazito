@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.2 — 2026-04-21 · GitHub Codespaces Support
+
+- `.devcontainer/` mit vollstaendiger Dev-Umgebung: Node 20, Postgres-Sidecar, Prisma-/Tailwind-/ESLint-VSCode-Extensions.
+- `postCreateCommand` automatisiert npm install + Prisma generate + db push + Seed.
+- `ANTHROPIC_API_KEY` kommt automatisch aus GitHub-Codespace-Secrets in die `.env`.
+- Port 3000 wird automatisch als Preview geoeffnet, `NEXTAUTH_URL` wird dynamisch auf die Codespace-Domain gesetzt.
+- `.devcontainer/README.md` mit Setup- und Troubleshooting-Anleitung.
+- Haupt-README um Codespaces-Schnellstart-Abschnitt erweitert.
+
 ## 0.2.1 — 2026-04-21 · Auth & Onboarding (Epic 2)
 
 ### Added

@@ -1,0 +1,66 @@
+{
+  "name": "Kapazito Dev",
+  "dockerComposeFile": ["compose.yml"],
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "shutdownAction": "stopCompose",
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "20" },
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Prisma.prisma",
+        "bradlc.vscode-tailwindcss",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "streetsidesoftware.code-spell-checker",
+        "ms-azuretools.vscode-docker"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+
+  "forwardPorts": [3000, 5432],
+  "portsAttributes": {
+    "3000": {
+      "label": "Kapazito App",
+      "onAutoForward": "openPreview",
+      "visibility": "public"
+    },
+    "5432": {
+      "label": "Postgres",
+      "onAutoForward": "silent"
+    }
+  },
+
+  "containerEnv": {
+    "DATABASE_URL": "postgresql://kapazito:kapazito_dev@db:5432/kapazito?schema=public",
+    "NEXTAUTH_URL": "https://${localEnv:CODESPACE_NAME}-3000.${localEnv:GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}",
+    "LLM_PROVIDER": "anthropic",
+    "LLM_MODEL": "claude-3-5-sonnet-20241022",
+    "KAPI_APPROVAL_REQUIRED": "true",
+    "MULTI_TENANCY_ENFORCED": "true",
+    "MAIL_FROM": "Kapazito <dev@kapazito.de>",
+    "STORAGE_PROVIDER": "local",
+    "NODE_ENV": "development"
+  },
+
+  "remoteEnv": {
+    "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}",
+    "NEXTAUTH_SECRET": "${localEnv:NEXTAUTH_SECRET}",
+    "RESEND_API_KEY": "${localEnv:RESEND_API_KEY}"
+  },
+
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "postStartCommand": "bash .devcontainer/start-hint.sh",
+
+  "remoteUser": "node"
+}

@@ -25,6 +25,15 @@ Dieses Repo ist die Produkt-Version 0.2.0 — aus dem Abacus-Prototyp neu aufgeb
 
 ---
 
+## Schnellstart via GitHub Codespaces (3 Min, Browser)
+
+1. https://github.com/Vschwenke/kapazito → Branch `rebuild-v0.2`
+2. Gruener „Code"-Button → Codespaces-Tab → „Create codespace on rebuild-v0.2"
+3. Warten (~3 Min), dann im Terminal: `npm run dev`
+4. Port 3000 oeffnet automatisch als Preview
+
+Einmal-Setup fuer Kapi: `ANTHROPIC_API_KEY` als Codespace-Secret hinterlegen — Details in `.devcontainer/README.md`.
+
 ## Schnellstart (lokal)
 
 ```bash
