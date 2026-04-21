@@ -49,6 +49,7 @@ const navGroups = [
     items: [
       { label: 'Stammdaten', href: '/stammdaten/kunden', icon: Building2 },
       { label: 'Daten-Import', href: '/import', icon: Upload },
+      { label: 'Einstellungen', href: '/settings', icon: Settings },
       { label: 'System', href: '/base', icon: Database },
     ],
   },

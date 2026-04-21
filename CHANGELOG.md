@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.2.1 — 2026-04-21 · Auth & Onboarding (Epic 2)
+
+### Added
+
+- **Signup-Flow** (`/signup`, 2 Schritte): Account + Tenant-Anlage in einer Transaktion, Trial 14 Tage, Passwort-Policy enforced, Slug aus Firmenname.
+- **Login verbessert**: optionaler Tenant-Slug fuer Nutzer mit Multi-Membership, bessere Fehlermeldungen, Redirect auf Callback-URL.
+- **Invite-Flow**: `/api/settings/team/invitations` (erstellen), Token-basierter Accept-Link per E-Mail, `/invite/accept` Public-Page — bestehende User werden direkt verknuepft, neue User legen Passwort an.
+- **Settings-Bereich**:
+  - `/settings/organization`: Firmendaten, Adresse, USt-ID, Bankverbindung, DATEV-Mandantennummer.
+  - `/settings/team`: Mitglieder mit Rollen-Matrix (inline-editierbar), offene Invites, Entfernen, Last-Owner-Protection.
+- **Onboarding-Wizard** (`/onboarding`, 5 Schritte): Welcome → Firmendaten → Mitarbeiter → Kunde → Projekt. Skippbar, localStorage-persistent, nach Signup automatisch.
+- **Service**: `lib/services/signup.service.ts` mit Slug-Generator (DE-Umlaute, Kollisions-Suffix), Welcome-Mail, ValidationError-Klasse.
+- **APIs**: 6 neue Routen unter `/api/settings/*` und `/api/invite/accept`, alle mit Zod + RBAC + Audit.
+- **Sidebar**: Einstellungen-Link in Verwaltungs-Bereich.
+
+### Changed
+
+- `/api/signup` komplett neu — nutzt Signup-Service, Rate-Limit 5/h, Zod-Validation.
+- Login-UI: neue Struktur mit Multi-Tenant-Support und verbesserter UX.
+
 ## 0.2.0 — 2026-04-21 · Foundation + Invoicing + Agentic AI
 
 **Vom Prototyp zum Produkt.** Diese Version setzt die kritischen Epics 1, 5 und 7 aus dem Produkt-Blueprint um.
