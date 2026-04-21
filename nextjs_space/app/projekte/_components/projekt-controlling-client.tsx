@@ -58,7 +58,7 @@ export function ProjektControllingClient() {
         <KpiCard title="Gesamtumsatz" value={summary.totalRevenue ?? 0} format="currency" icon={DollarSign} iconColor="bg-emerald-50 text-emerald-600" />
         <KpiCard title="Personalkosten" value={summary.totalCosts ?? 0} format="currency" icon={DollarSign} iconColor="bg-red-50 text-red-600" />
         <KpiCard title="Profit" value={summary.totalProfit ?? 0} format="currency" icon={TrendingUp} iconColor="bg-emerald-50 text-emerald-600" />
-        <KpiCard title="\u00d8 Marge" value={`${(summary.avgMargin ?? 0).toFixed(1)}%`} icon={TrendingUp} iconColor="bg-purple-50 text-purple-600" />
+        <KpiCard title="Ø Marge" value={`${(summary.avgMargin ?? 0).toFixed(1)}%`} icon={TrendingUp} iconColor="bg-purple-50 text-purple-600" />
         <KpiCard title="Budget-Warnung" value={summary.overBudgetCount ?? 0} icon={AlertTriangle} iconColor="bg-orange-50 text-orange-600" />
       </div>
 
@@ -88,7 +88,7 @@ export function ProjektControllingClient() {
                   </div>
                   <div className="min-w-0">
                     <h3 className="font-semibold text-sm truncate">{p.name}</h3>
-                    <p className="text-xs text-muted-foreground">{p.customer} \u2022 {p.rate > 0 ? `${p.rate}\u20ac/Std` : 'Kein Satz'}</p>
+                    <p className="text-xs text-muted-foreground">{p.customer} • {p.rate > 0 ? `${p.rate}€/Std` : 'Kein Satz'}</p>
                   </div>
                 </div>
 
@@ -182,7 +182,7 @@ export function ProjektControllingClient() {
                           <span className="text-xs font-mono">{t.hours.toFixed(1)} Std</span>
                         </div>
                       ))}
-                      {(p.team ?? []).length === 0 && <p className="text-xs text-muted-foreground">Keine Zeiteintr\u00e4ge</p>}
+                      {(p.team ?? []).length === 0 && <p className="text-xs text-muted-foreground">Keine Zeiteinträge</p>}
                     </div>
                   </div>
                 </div>

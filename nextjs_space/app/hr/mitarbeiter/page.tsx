@@ -3,7 +3,7 @@ import { MitarbeiterView } from './_components/mitarbeiter-view';
 
 export default function MitarbeiterPage() {
   return (
-    <DashboardShell title="HR - MITARBEITER" subtitle="Individuelle Mitarbeiter-\u00dcbersicht">
+    <DashboardShell title="HR - MITARBEITER" subtitle="Individuelle Mitarbeiter-Übersicht">
       <MitarbeiterView />
     </DashboardShell>
   );

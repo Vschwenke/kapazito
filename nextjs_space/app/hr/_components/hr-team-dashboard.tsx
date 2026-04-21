@@ -52,7 +52,7 @@ export function HrTeamDashboard() {
           <GaugeChart value={data?.totalBillableHours > 0 ? ((data?.totalBillableHours / Math.max((data?.totalBillableHours + (data?.totalSickDays ?? 0) * 8), 1)) * 100) : 0} label="Abrechenbare Std. %" color="#1a9a8a" />
         </div>
         <div className="bg-card rounded-xl p-4 border border-border/50 shadow-sm text-center">
-          <p className="text-xs text-muted-foreground uppercase font-semibold">\u00d8 Monatseinkommen</p>
+          <p className="text-xs text-muted-foreground uppercase font-semibold">Ø Monatseinkommen</p>
           <p className="text-2xl font-bold font-mono mt-3">{formatCurrency(data?.avgMonthlyIncome ?? 0)}</p>
           <DollarSign className="w-5 h-5 mx-auto mt-2 text-emerald-500" />
         </div>

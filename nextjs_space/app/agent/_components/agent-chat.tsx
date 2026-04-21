@@ -8,10 +8,10 @@ type Message = { role: 'user' | 'assistant'; content: string };
 type AgentType = 'general' | 'finanz' | 'hr' | 'sales';
 
 const AGENTS: { id: AgentType; label: string; desc: string; icon: any; color: string }[] = [
-  { id: 'general', label: 'Kapazito Assistent', desc: 'Allgemeine Gesch\u00e4ftsberatung', icon: Bot, color: 'bg-teal-100 text-teal-700 border-teal-200' },
+  { id: 'general', label: 'Kapazito Assistent', desc: 'Allgemeine Geschäftsberatung', icon: Bot, color: 'bg-teal-100 text-teal-700 border-teal-200' },
   { id: 'finanz', label: 'Finanz-Analyst', desc: 'BWA, Cashflow, Deckungsbeitrag', icon: BarChart3, color: 'bg-emerald-100 text-emerald-700 border-emerald-200' },
   { id: 'hr', label: 'HR-Berater', desc: 'Auslastung, Team, Gehalt', icon: Users, color: 'bg-purple-100 text-purple-700 border-purple-200' },
-  { id: 'sales', label: 'Sales-Stratege', desc: 'Kunden, Stundens\u00e4tze, Pipeline', icon: TrendingUp, color: 'bg-orange-100 text-orange-700 border-orange-200' },
+  { id: 'sales', label: 'Sales-Stratege', desc: 'Kunden, Stundensätze, Pipeline', icon: TrendingUp, color: 'bg-orange-100 text-orange-700 border-orange-200' },
 ];
 
 export function AgentChat() {
@@ -139,7 +139,7 @@ export function AgentChat() {
               {agent === 'finanz' && [
                 'Wie ist unsere aktuelle Umsatzrendite?',
                 'Analysiere unseren Cashflow und gib Empfehlungen',
-                'Welche Kosten k\u00f6nnen wir optimieren?',
+                'Welche Kosten können wir optimieren?',
                 'Erstelle eine Deckungsbeitrags-Bewertung',
               ].map(q => (
                 <button key={q} onClick={() => sendSuggestion(q)} className="text-left p-3 rounded-lg bg-muted/50 hover:bg-muted text-sm text-muted-foreground transition-colors">{q}</button>
@@ -147,23 +147,23 @@ export function AgentChat() {
               {agent === 'hr' && [
                 'Wie ist die aktuelle Auslastung des Teams?',
                 'Analysiere unsere Fluktuationsrate',
-                'Welche Mitarbeiter sind unterbesch\u00e4ftigt?',
+                'Welche Mitarbeiter sind unterbeschäftigt?',
                 'Gib Empfehlungen zur Gehaltsstruktur',
               ].map(q => (
                 <button key={q} onClick={() => sendSuggestion(q)} className="text-left p-3 rounded-lg bg-muted/50 hover:bg-muted text-sm text-muted-foreground transition-colors">{q}</button>
               ))}
               {agent === 'sales' && [
                 'Welche Kunden bringen am meisten Umsatz?',
-                'Wie k\u00f6nnen wir unsere Stundens\u00e4tze optimieren?',
+                'Wie können wir unsere Stundensätze optimieren?',
                 'Analysiere das Wachstumspotenzial',
-                'Welche Cross-Selling-M\u00f6glichkeiten gibt es?',
+                'Welche Cross-Selling-Möglichkeiten gibt es?',
               ].map(q => (
                 <button key={q} onClick={() => sendSuggestion(q)} className="text-left p-3 rounded-lg bg-muted/50 hover:bg-muted text-sm text-muted-foreground transition-colors">{q}</button>
               ))}
               {agent === 'general' && [
-                'Gib mir einen \u00dcberblick \u00fcber die Gesch\u00e4ftslage',
-                'Was sind die wichtigsten KPIs f\u00fcr IT-Dienstleister?',
-                'Wie verbessere ich die Profitabilit\u00e4t?',
+                'Gib mir einen Überblick über die Geschäftslage',
+                'Was sind die wichtigsten KPIs für IT-Dienstleister?',
+                'Wie verbessere ich die Profitabilität?',
                 'Welche Benchmarks sollte ich anstreben?',
               ].map(q => (
                 <button key={q} onClick={() => sendSuggestion(q)} className="text-left p-3 rounded-lg bg-muted/50 hover:bg-muted text-sm text-muted-foreground transition-colors">{q}</button>

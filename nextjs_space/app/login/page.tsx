@@ -58,7 +58,7 @@ export default function LoginPage() {
       });
 
       if (result?.error) {
-        setError('Ung\u00fcltige Anmeldedaten');
+        setError('Ungültige Anmeldedaten');
         setLoading(false);
         return;
       }
@@ -88,19 +88,19 @@ export default function LoginPage() {
             </div>
             <div>
               <span className="text-white font-bold text-2xl tracking-tight block">Kapazito</span>
-              <span className="text-teal-200/80 text-xs font-medium tracking-wide">KAPAZIT\u00c4TS-COCKPIT</span>
+              <span className="text-teal-200/80 text-xs font-medium tracking-wide">KAPAZITÄTS-COCKPIT</span>
             </div>
           </div>
           <p className="text-teal-100 text-lg mt-4 max-w-md leading-relaxed">
-            Dein intelligentes Cockpit f\u00fcr Auslastung, Finanzen und Team-Performance.
+            Dein intelligentes Cockpit für Auslastung, Finanzen und Team-Performance.
           </p>
         </div>
 
         <div className="relative space-y-6">
           {[
-            { icon: Sparkles, title: 'Echtzeit-Dashboards', desc: 'Finanzen, HR, Sales und Rechnungen \u2013 alles auf einen Blick' },
+            { icon: Sparkles, title: 'Echtzeit-Dashboards', desc: 'Finanzen, HR, Sales und Rechnungen – alles auf einen Blick' },
             { icon: Brain, title: 'KI-Assistenten', desc: 'Intelligente Analyse und Handlungsempfehlungen per Chat' },
-            { icon: Shield, title: 'Eigene Datenhoheit', desc: 'Ihre Daten geh\u00f6ren Ihnen \u2013 keine Abh\u00e4ngigkeiten' },
+            { icon: Shield, title: 'Eigene Datenhoheit', desc: 'Ihre Daten gehören Ihnen – keine Abhängigkeiten' },
             { icon: Zap, title: 'Sofort einsatzbereit', desc: 'CSV-Upload, Zeiterfassung und Rechnungen inklusive' },
           ].map((item, i) => (
             <div key={i} className="flex items-start gap-4 group">
@@ -115,7 +115,7 @@ export default function LoginPage() {
           ))}
         </div>
 
-        <p className="relative text-teal-300/40 text-xs">\u00a9 2026 Kapazito \u2013 Kapazit\u00e4ten klar im Blick</p>
+        <p className="relative text-teal-300/40 text-xs">© 2026 Kapazito – Kapazitäten klar im Blick</p>
       </div>
 
       {/* Right side - login form */}
@@ -129,10 +129,10 @@ export default function LoginPage() {
           </div>
 
           <h1 className="text-2xl font-bold text-slate-900 mb-1">
-            {isLogin ? 'Willkommen zur\u00fcck' : 'Account erstellen'}
+            {isLogin ? 'Willkommen zurück' : 'Account erstellen'}
           </h1>
           <p className="text-slate-500 mb-8">
-            {isLogin ? 'Melden Sie sich an, um auf Ihre Dashboards zuzugreifen' : 'Registrieren Sie sich f\u00fcr Kapazito'}
+            {isLogin ? 'Melden Sie sich an, um auf Ihre Dashboards zuzugreifen' : 'Registrieren Sie sich für Kapazito'}
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -167,7 +167,7 @@ export default function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 outline-none transition-all bg-white text-slate-900 shadow-sm"
-                placeholder="\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"
+                placeholder="••••••••"
               />
             </div>
 

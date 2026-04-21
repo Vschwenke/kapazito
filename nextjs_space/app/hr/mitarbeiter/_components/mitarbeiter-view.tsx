@@ -47,7 +47,7 @@ export function MitarbeiterView() {
         <div className="flex-1 space-y-4">
           <div className="bg-card rounded-xl p-4 border border-border/50 shadow-sm">
             <h2 className="text-lg font-bold font-display">{selected?.name ?? ''}</h2>
-            <p className="text-sm text-muted-foreground">{selected?.customer ?? ''} \u2022 {selected?.experienceLevel ?? ''} \u2022 {selected?.contractType ?? ''}</p>
+            <p className="text-sm text-muted-foreground">{selected?.customer ?? ''} • {selected?.experienceLevel ?? ''} • {selected?.contractType ?? ''}</p>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">

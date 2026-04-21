@@ -65,7 +65,7 @@ export function BwaImportClient() {
           <div className="flex gap-3">
             <Info className="w-5 h-5 text-teal-500 shrink-0 mt-0.5" />
             <div className="text-sm space-y-1">
-              <p className="font-semibold">CSV-Format f\u00fcr BWA-Import</p>
+              <p className="font-semibold">CSV-Format für BWA-Import</p>
               <p className="text-muted-foreground">Pflichtfelder: <code className="bg-muted px-1 rounded">Kontonummer</code>, <code className="bg-muted px-1 rounded">Kontoname</code>, <code className="bg-muted px-1 rounded">Jahr</code>, <code className="bg-muted px-1 rounded">Monat</code>, <code className="bg-muted px-1 rounded">Betrag</code></p>
               <p className="text-muted-foreground">Optionale Felder: <code className="bg-muted px-1 rounded">Kategorie</code>, <code className="bg-muted px-1 rounded">Vorjahr</code>, <code className="bg-muted px-1 rounded">Budget</code></p>
               <p className="text-muted-foreground">Trennzeichen: Semikolon (;) oder Komma (,). Dezimaltrennzeichen: Komma oder Punkt.</p>
@@ -102,7 +102,7 @@ export function BwaImportClient() {
                 <span className="text-xs text-muted-foreground">({(file.size / 1024).toFixed(1)} KB)</span>
               </div>
             ) : (
-              <p className="text-sm text-muted-foreground">CSV-Datei hier ablegen oder klicken zum Ausw\u00e4hlen</p>
+              <p className="text-sm text-muted-foreground">CSV-Datei hier ablegen oder klicken zum Auswählen</p>
             )}
           </div>
         </CardContent>
@@ -148,8 +148,8 @@ export function BwaImportClient() {
               <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
               <div className="text-sm space-y-1">
                 <p className="font-semibold text-emerald-500">Import erfolgreich!</p>
-                <p>{result.imported} von {result.total} Datens\u00e4tzen importiert.</p>
-                {result.skipped > 0 && <p className="text-orange-500">{result.skipped} Datens\u00e4tze \u00fcbersprungen.</p>}
+                <p>{result.imported} von {result.total} Datensätzen importiert.</p>
+                {result.skipped > 0 && <p className="text-orange-500">{result.skipped} Datensätze übersprungen.</p>}
                 {result.errors?.length > 0 && (
                   <div className="mt-2 text-xs text-muted-foreground">
                     {result.errors.map((e: string, i: number) => <p key={i}>{e}</p>)}

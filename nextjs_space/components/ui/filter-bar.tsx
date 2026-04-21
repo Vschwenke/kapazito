@@ -14,7 +14,7 @@ interface FilterBarProps {
 
 const quarters = [0, 1, 2, 3, 4];
 const months = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-const monthLabels = ['Alle', 'Jan', 'Feb', 'M\u00e4r', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
+const monthLabels = ['Alle', 'Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
 const quarterLabels = ['Alle', 'Q1', 'Q2', 'Q3', 'Q4'];
 
 export function FilterBar({ years = [2024, 2025, 2026], selectedYear, selectedQuarter, selectedMonth, onYearChange, onQuarterChange, onMonthChange }: FilterBarProps) {

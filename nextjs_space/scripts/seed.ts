@@ -295,8 +295,8 @@ async function main() {
   // ---- FINANCIAL ACCOUNTS (BWA) with sub-categories ----
   console.log('Seeding financial accounts (BWA)...');
   const bwaAccounts = [
-    { num: '1020', name: 'Umsatzerl\u00f6se', cat: 'Umsatzerl\u00f6se' },
-    { num: '1032', name: 'Refinancing', cat: 'Umsatzerl\u00f6se' },
+    { num: '1020', name: 'Umsatzerlöse', cat: 'Umsatzerlöse' },
+    { num: '1032', name: 'Refinancing', cat: 'Umsatzerlöse' },
     { num: '1092', name: 'Betriebl. Rohertrag', cat: 'Rohertrag' },
     { num: '1100', name: 'Personalkosten', cat: 'Personalkosten' },
     { num: '1150', name: 'Sachkosten', cat: 'Sachkosten' },
@@ -307,7 +307,7 @@ async function main() {
     { num: '1290', name: 'Neutraler Ertrag', cat: 'Neutral' },
     { num: '1300', name: 'Ergebnis vor Steuern', cat: 'Ergebnis' },
     { num: '1310', name: 'Steuern Flink.u.Ertg', cat: 'Steuern' },
-    { num: '1320', name: 'Vorl\u00e4ufiges Ergebnis', cat: 'Ergebnis' },
+    { num: '1320', name: 'Vorläufiges Ergebnis', cat: 'Ergebnis' },
   ];
 
   const years = [2024, 2025, 2026];

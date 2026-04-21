@@ -100,10 +100,10 @@ export function PlanungDashboard() {
                 <tr key={p?.month} className="border-b border-border/50 hover:bg-muted/50">
                   <td className="py-1.5 px-2 font-medium">{getMonthShort(p?.month ?? 0)}</td>
                   <td className="text-right py-1.5 px-2 font-mono">{fmt(p?.planned)}</td>
-                  <td className="text-right py-1.5 px-2 font-mono">{(p?.actual ?? 0) > 0 ? fmt(p?.actual) : '\u2014'}</td>
+                  <td className="text-right py-1.5 px-2 font-mono">{(p?.actual ?? 0) > 0 ? fmt(p?.actual) : '—'}</td>
                   <td className="text-right py-1.5 px-2 font-mono text-muted-foreground">{fmt(p?.forecast)}</td>
                   <td className={`text-right py-1.5 px-2 font-mono ${diff !== null ? (diff >= 0 ? 'text-emerald-600' : 'text-red-500') : ''}`}>
-                    {diff !== null ? `${diff >= 0 ? '+' : ''}${diff.toFixed(1)}%` : '\u2014'}
+                    {diff !== null ? `${diff >= 0 ? '+' : ''}${diff.toFixed(1)}%` : '—'}
                   </td>
                 </tr>
               );

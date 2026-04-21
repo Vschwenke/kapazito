@@ -3,7 +3,7 @@ import { SalesErtraegeView } from './_components/sales-ertraege-view';
 
 export default function SalesErtraegePage() {
   return (
-    <DashboardShell title="SALES - ERTR\u00c4GE" subtitle="Kundenspezifische Ertragsanalyse">
+    <DashboardShell title="SALES - ERTRÄGE" subtitle="Kundenspezifische Ertragsanalyse">
       <SalesErtraegeView />
     </DashboardShell>
   );

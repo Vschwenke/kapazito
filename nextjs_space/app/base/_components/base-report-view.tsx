@@ -38,7 +38,7 @@ export function BaseReportView() {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <KpiCard title="Eintr\u00e4ge DB" value={formatNumber(data?.totalEntries ?? 0)} icon={Database} iconColor="bg-teal-50 text-teal-600" />
+        <KpiCard title="Einträge DB" value={formatNumber(data?.totalEntries ?? 0)} icon={Database} iconColor="bg-teal-50 text-teal-600" />
         <KpiCard title="Tabellen" value={tables?.length ?? 0} icon={Table2} iconColor="bg-emerald-50 text-emerald-600" />
         <KpiCard title="Datenquellen" value={Object.keys(bySource ?? {}).length} icon={Layers} iconColor="bg-purple-50 text-purple-600" />
         <KpiCard title="Entwickler" value={(data?.devByExperience ?? []).reduce((s: number, d: any) => s + (d?.count ?? 0), 0)} icon={Users} iconColor="bg-orange-50 text-orange-600" />
@@ -46,7 +46,7 @@ export function BaseReportView() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="bg-card rounded-xl p-4 border border-border/50 shadow-sm">
-          <h3 className="text-sm font-semibold mb-3">Eintr\u00e4ge nach Quelle</h3>
+          <h3 className="text-sm font-semibold mb-3">Einträge nach Quelle</h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -77,13 +77,13 @@ export function BaseReportView() {
 
       {/* Table list */}
       <div className="bg-card rounded-xl p-4 border border-border/50 shadow-sm overflow-x-auto">
-        <h3 className="text-sm font-semibold mb-3">Datenmodell - Tabellen\u00fcbersicht</h3>
+        <h3 className="text-sm font-semibold mb-3">Datenmodell - Tabellenübersicht</h3>
         <table className="w-full text-xs">
           <thead><tr className="border-b border-border">
             <th className="text-left py-1.5 px-2">Tabelle</th>
             <th className="text-left py-1.5 px-2">Typ</th>
             <th className="text-left py-1.5 px-2">Quelle</th>
-            <th className="text-right py-1.5 px-2">Eintr\u00e4ge</th>
+            <th className="text-right py-1.5 px-2">Einträge</th>
           </tr></thead>
           <tbody>
             {(tables ?? []).map((t: any, i: number) => (
@@ -112,11 +112,11 @@ export function BaseReportView() {
       <div className="bg-card rounded-xl p-4 border border-border/50 shadow-sm">
         <h3 className="text-sm font-semibold mb-3">Datenarchitektur</h3>
         <div className="grid grid-cols-1 sm:grid-cols-5 gap-3">
-          {[{ name: 'Zeiterfassung', desc: 'Stunden & Abwesenheiten', icon: '\u23f0', color: 'bg-blue-50 border-blue-200' },
-            { name: 'Buchhaltung', desc: 'BWA & Finanzen', icon: '\ud83d\udcca', color: 'bg-orange-50 border-orange-200' },
-            { name: 'Stammdaten', desc: 'Kunden & Mitarbeiter', icon: '\ud83d\uddc4\ufe0f', color: 'bg-emerald-50 border-emerald-200' },
-            { name: 'Projektverwaltung', desc: 'Projekte & Vertr\u00e4ge', icon: '\ud83d\udcc1', color: 'bg-purple-50 border-purple-200' },
-            { name: 'Rechnungsmodul', desc: 'Billing & Faktura', icon: '\ud83d\udd17', color: 'bg-pink-50 border-pink-200' },
+          {[{ name: 'Zeiterfassung', desc: 'Stunden & Abwesenheiten', icon: '⏰', color: 'bg-blue-50 border-blue-200' },
+            { name: 'Buchhaltung', desc: 'BWA & Finanzen', icon: '📊', color: 'bg-orange-50 border-orange-200' },
+            { name: 'Stammdaten', desc: 'Kunden & Mitarbeiter', icon: '🗄️', color: 'bg-emerald-50 border-emerald-200' },
+            { name: 'Projektverwaltung', desc: 'Projekte & Verträge', icon: '📁', color: 'bg-purple-50 border-purple-200' },
+            { name: 'Rechnungsmodul', desc: 'Billing & Faktura', icon: '🔗', color: 'bg-pink-50 border-pink-200' },
           ].map((s: any) => (
             <div key={s?.name} className={`rounded-lg p-3 border ${s?.color} text-center`}>
               <span className="text-2xl">{s?.icon}</span>
@@ -126,15 +126,15 @@ export function BaseReportView() {
           ))}
         </div>
         <div className="text-center my-3">
-          <span className="text-lg">\u2193</span>
+          <span className="text-lg">↓</span>
         </div>
         <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-3 text-center border border-slate-200 dark:border-slate-700">
           <Database className="w-6 h-6 mx-auto text-primary" />
           <p className="text-sm font-bold mt-1">Kapazito – Zentrales Datenmodell</p>
-          <p className="text-[10px] text-muted-foreground">PostgreSQL \u2022 {(data?.totalEntries ?? 0).toLocaleString('de-DE')} Eintr\u00e4ge \u2022 {tables?.length ?? 0} Tabellen</p>
+          <p className="text-[10px] text-muted-foreground">PostgreSQL • {(data?.totalEntries ?? 0).toLocaleString('de-DE')} Einträge • {tables?.length ?? 0} Tabellen</p>
         </div>
         <div className="text-center my-3">
-          <span className="text-lg">\u2193</span>
+          <span className="text-lg">↓</span>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
           {['Finanzreport', 'HR & Recruiting', 'Sales & CRM', 'Rechnungsstellung', 'Base Report'].map((r: string) => (

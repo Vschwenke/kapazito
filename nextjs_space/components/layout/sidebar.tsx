@@ -29,7 +29,7 @@ const navGroups = [
       { label: 'Dashboard', href: '/finanzen', icon: LayoutDashboard },
       { label: 'Planung & Forecast', href: '/finanzen/planung', icon: LineChart },
       { label: 'Deckungsbeitrag', href: '/finanzen/deckungsbeitrag', icon: PieChart },
-      { label: 'Ertr\u00e4ge', href: '/finanzen/ertraege', icon: TrendingUp },
+      { label: 'Erträge', href: '/finanzen/ertraege', icon: TrendingUp },
       { label: 'Betriebskosten', href: '/finanzen/betriebskosten', icon: DollarSign },
     ],
   },
@@ -38,7 +38,7 @@ const navGroups = [
     icon: Users,
     color: 'text-emerald-400',
     items: [
-      { label: 'Team-\u00dcbersicht', href: '/hr', icon: Users },
+      { label: 'Team-Übersicht', href: '/hr', icon: Users },
       { label: 'Mitarbeiter', href: '/hr/mitarbeiter', icon: UserCheck },
       { label: 'Abwesenheiten', href: '/abwesenheiten', icon: Calendar },
     ],
@@ -49,7 +49,7 @@ const navGroups = [
     color: 'text-amber-400',
     items: [
       { label: 'Dashboard', href: '/sales', icon: LayoutDashboard },
-      { label: 'Ertr\u00e4ge', href: '/sales/ertraege', icon: TrendingUp },
+      { label: 'Erträge', href: '/sales/ertraege', icon: TrendingUp },
       { label: 'Projekt-Controlling', href: '/projekte', icon: Target },
     ],
   },
@@ -58,7 +58,7 @@ const navGroups = [
     icon: Receipt,
     color: 'text-rose-400',
     items: [
-      { label: 'Kunden\u00fcbersicht', href: '/rechnungen', icon: FileText },
+      { label: 'Kundenübersicht', href: '/rechnungen', icon: FileText },
       { label: 'Details', href: '/rechnungen/details', icon: Briefcase },
     ],
   },
@@ -85,7 +85,7 @@ const navGroups = [
     icon: Database,
     color: 'text-slate-400',
     items: [
-      { label: 'Daten\u00fcbersicht', href: '/base', icon: Database },
+      { label: 'Datenübersicht', href: '/base', icon: Database },
       { label: 'BWA-Import', href: '/import', icon: Upload },
       { label: 'Konfiguration', href: '/base/config', icon: Settings },
     ],

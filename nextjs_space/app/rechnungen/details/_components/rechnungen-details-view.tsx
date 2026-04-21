@@ -6,7 +6,7 @@ import { formatCurrency } from '@/lib/format';
 import { Loader2, Receipt, Users, Clock, Calendar } from 'lucide-react';
 
 const STATUS_COLORS: Record<string, string> = { paid: '#34d399', partial: '#f59e42', open: '#38bdf8', overdue: '#e8577a' };
-const STATUS_LABELS: Record<string, string> = { paid: 'Bezahlt', partial: 'Teilweise', open: 'Offen', overdue: '\u00dcberf\u00e4llig' };
+const STATUS_LABELS: Record<string, string> = { paid: 'Bezahlt', partial: 'Teilweise', open: 'Offen', overdue: 'Überfällig' };
 
 export function RechnungenDetailsView() {
   const [data, setData] = useState<any>(null);
@@ -27,7 +27,7 @@ export function RechnungenDetailsView() {
 
   if (loading) return <div className="flex items-center justify-center h-64"><Loader2 className="w-8 h-8 animate-spin text-primary" /></div>;
 
-  const monthNames = ['Alle', 'Januar', 'Februar', 'M\u00e4rz', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
+  const monthNames = ['Alle', 'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
   
   const filteredBilling = selectedMonth > 0
     ? (data?.employeeBilling ?? []).filter((eb: any) => (eb?.byMonth?.[selectedMonth] ?? 0) > 0)
@@ -73,7 +73,7 @@ export function RechnungenDetailsView() {
             <th className="text-right py-1.5 px-2">Quote %</th>
             <th className="text-right py-1.5 px-2">Jan</th>
             <th className="text-right py-1.5 px-2">Feb</th>
-            <th className="text-right py-1.5 px-2">M\u00e4r</th>
+            <th className="text-right py-1.5 px-2">Mär</th>
           </tr></thead>
           <tbody>
             {(filteredBilling ?? []).map((eb: any, i: number) => (
@@ -83,7 +83,7 @@ export function RechnungenDetailsView() {
                 <td className="text-right py-1.5 px-2 font-mono">{Math.round(eb?.totalHours ?? 0)}</td>
                 <td className="text-right py-1.5 px-2 font-mono">{Math.round(eb?.billableHours ?? 0)}</td>
                 <td className="text-right py-1.5 px-2 font-mono text-emerald-600">
-                  {(eb?.totalHours ?? 0) > 0 ? `${((eb?.billableHours / eb?.totalHours) * 100).toFixed(1)}%` : '\u2014'}
+                  {(eb?.totalHours ?? 0) > 0 ? `${((eb?.billableHours / eb?.totalHours) * 100).toFixed(1)}%` : '—'}
                 </td>
                 <td className="text-right py-1.5 px-2 font-mono">{Math.round(eb?.byMonth?.[1] ?? 0)}</td>
                 <td className="text-right py-1.5 px-2 font-mono">{Math.round(eb?.byMonth?.[2] ?? 0)}</td>

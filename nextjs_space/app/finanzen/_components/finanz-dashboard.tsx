@@ -39,7 +39,7 @@ export function FinanzDashboard() {
     return <div className="flex items-center justify-center h-64"><Loader2 className="w-8 h-8 animate-spin text-primary" /></div>;
   }
   if (!data) {
-    return <div className="flex items-center justify-center h-64 text-muted-foreground"><AlertCircle className="w-5 h-5 mr-2" /> Keine Daten verf\u00fcgbar</div>;
+    return <div className="flex items-center justify-center h-64 text-muted-foreground"><AlertCircle className="w-5 h-5 mr-2" /> Keine Daten verfügbar</div>;
   }
 
   const revenueDelta = data?.bwa?.find((b: any) => b?.accountNumber === '1020')?.delta ?? 0;
@@ -92,10 +92,10 @@ export function FinanzDashboard() {
 
       {/* KPI Cards Row */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        <KpiCard title="Umsatzerl\u00f6se" value={data?.revenue ?? 0} format="currency" delta={revenueDelta} deltaLabel="\u0394/VJ" icon={DollarSign} iconColor="bg-teal-50 text-teal-600" />
-        <KpiCard title="Rohertrag" value={data?.rohertrag ?? 0} format="currency" delta={rohertragDelta} deltaLabel="\u0394/VJ" icon={TrendingUp} iconColor="bg-emerald-50 text-emerald-600" />
-        <KpiCard title="Gesamtkosten" value={data?.gesamtkosten ?? 0} format="currency" delta={kostenDelta} deltaLabel="\u0394/VJ" icon={TrendingDown} iconColor="bg-red-50 text-red-600" />
-        <KpiCard title="Betriebsergebnis" value={data?.betriebsergebnis ?? 0} format="currency" delta={ergebnisDelta} deltaLabel="\u0394/VJ" icon={BarChart3} iconColor="bg-purple-50 text-purple-600" />
+        <KpiCard title="Umsatzerlöse" value={data?.revenue ?? 0} format="currency" delta={revenueDelta} deltaLabel="Δ/VJ" icon={DollarSign} iconColor="bg-teal-50 text-teal-600" />
+        <KpiCard title="Rohertrag" value={data?.rohertrag ?? 0} format="currency" delta={rohertragDelta} deltaLabel="Δ/VJ" icon={TrendingUp} iconColor="bg-emerald-50 text-emerald-600" />
+        <KpiCard title="Gesamtkosten" value={data?.gesamtkosten ?? 0} format="currency" delta={kostenDelta} deltaLabel="Δ/VJ" icon={TrendingDown} iconColor="bg-red-50 text-red-600" />
+        <KpiCard title="Betriebsergebnis" value={data?.betriebsergebnis ?? 0} format="currency" delta={ergebnisDelta} deltaLabel="Δ/VJ" icon={BarChart3} iconColor="bg-purple-50 text-purple-600" />
         <KpiCard title="Kunden" value={data?.customers ?? 0} icon={Users} iconColor="bg-orange-50 text-orange-600" />
         <KpiCard title="Entwickler" value={data?.developers ?? 0} icon={UserPlus} iconColor="bg-cyan-50 text-cyan-600" />
       </div>
@@ -137,7 +137,7 @@ export function FinanzDashboard() {
                   <Line dataKey="Ergebnis" stroke="#10b981" strokeWidth={2} dot={{ r: 4 }} />
                 </ComposedChart>
               </ResponsiveContainer>
-            ) : <p className="text-center text-muted-foreground text-sm pt-20">Keine Daten f\u00fcr diesen Zeitraum</p>}
+            ) : <p className="text-center text-muted-foreground text-sm pt-20">Keine Daten für diesen Zeitraum</p>}
           </div>
         </div>
 
@@ -156,7 +156,7 @@ export function FinanzDashboard() {
                   <Line dataKey="Kumulativ" stroke="#7c5cfc" strokeWidth={2} dot={{ r: 4 }} />
                 </ComposedChart>
               </ResponsiveContainer>
-            ) : <p className="text-center text-muted-foreground text-sm pt-20">Keine Daten f\u00fcr diesen Zeitraum</p>}
+            ) : <p className="text-center text-muted-foreground text-sm pt-20">Keine Daten für diesen Zeitraum</p>}
           </div>
         </div>
       </div>
@@ -182,14 +182,14 @@ export function FinanzDashboard() {
 
         {/* BWA Table */}
         <div className="bg-card rounded-xl p-4 border border-border/50 shadow-sm overflow-x-auto">
-          <h3 className="text-sm font-semibold mb-3">BWA-\u00dcbersicht</h3>
+          <h3 className="text-sm font-semibold mb-3">BWA-Übersicht</h3>
           <table className="w-full text-xs">
             <thead>
               <tr className="border-b border-border">
                 <th className="text-left py-1.5 px-2 font-semibold">Position</th>
                 <th className="text-right py-1.5 px-2 font-semibold">Gesamt</th>
                 <th className="text-right py-1.5 px-2 font-semibold">Vorjahr</th>
-                <th className="text-right py-1.5 px-2 font-semibold">\u0394 %</th>
+                <th className="text-right py-1.5 px-2 font-semibold">Δ %</th>
               </tr>
             </thead>
             <tbody>

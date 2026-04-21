@@ -5,23 +5,23 @@ import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/db';
 
 const SYSTEM_PROMPTS: Record<string, string> = {
-  finanz: `Du bist ein erfahrener Finanz-Analyst f\u00fcr IT-Dienstleister. Du hilfst bei:
+  finanz: `Du bist ein erfahrener Finanz-Analyst für IT-Dienstleister. Du hilfst bei:
 - BWA-Analyse und Interpretation von Finanzkennzahlen
-- Cashflow-Optimierung und Liquidit\u00e4tsplanung
-- Deckungsbeitragsanalyse und Rentabilit\u00e4tsbewertung
+- Cashflow-Optimierung und Liquiditätsplanung
+- Deckungsbeitragsanalyse und Rentabilitätsbewertung
 - Kostenstruktur-Optimierung
 - IST-SOLL-Vergleiche und Forecast-Erstellung
-Antworte pr\u00e4zise, nutze Zahlen und Benchmarks. Gib konkrete Handlungsempfehlungen. Antworte auf Deutsch.`,
+Antworte präzise, nutze Zahlen und Benchmarks. Gib konkrete Handlungsempfehlungen. Antworte auf Deutsch.`,
 
-  hr: `Du bist ein HR-Analyst und Berater f\u00fcr IT-Dienstleister. Du hilfst bei:
-- Auslastungsoptimierung und Kapazit\u00e4tsplanung
+  hr: `Du bist ein HR-Analyst und Berater für IT-Dienstleister. Du hilfst bei:
+- Auslastungsoptimierung und Kapazitätsplanung
 - Fluktuationsanalyse und Mitarbeiterbindung
 - Gehaltsstrukturen und Benchmarking
 - Krankenquoten und Abwesenheitsmanagement
 - Team-Zusammensetzung und Skill-Management
 Antworte datenbasiert und gib konkrete Empfehlungen. Antworte auf Deutsch.`,
 
-  sales: `Du bist ein Sales-Analyst und CRM-Berater f\u00fcr IT-Dienstleister. Du hilfst bei:
+  sales: `Du bist ein Sales-Analyst und CRM-Berater für IT-Dienstleister. Du hilfst bei:
 - Kundenanalyse und Umsatzoptimierung
 - Stundensatz-Strategie und Preisgestaltung
 - Pipeline-Management und Forecast
@@ -29,7 +29,7 @@ Antworte datenbasiert und gib konkrete Empfehlungen. Antworte auf Deutsch.`,
 - Vertriebskennzahlen und Benchmarks
 Antworte strategisch und gib umsetzbare Empfehlungen. Antworte auf Deutsch.`,
 
-  general: `Du bist der Kapazito-Assistent, ein intelligenter Business-Intelligence-Berater f\u00fcr Professional-Services-Unternehmen. Du kannst bei allen Fragen zu Finanzen, HR, Sales, Auslastung und operativem Gesch\u00e4ft helfen. Antworte freundlich, pr\u00e4zise und auf Deutsch.`,
+  general: `Du bist der Kapazito-Assistent, ein intelligenter Business-Intelligence-Berater für Professional-Services-Unternehmen. Du kannst bei allen Fragen zu Finanzen, HR, Sales, Auslastung und operativem Geschäft helfen. Antworte freundlich, präzise und auf Deutsch.`,
 };
 
 export async function POST(request: NextRequest) {
@@ -94,7 +94,7 @@ export async function POST(request: NextRequest) {
       }
       const topCusts = Object.entries(revByCust).sort((a, b) => b[1] - a[1]).slice(0, 5);
 
-      contextData = `\n\n=== ECHTE GESCH\u00c4FTSDATEN ${year} ===\nFINANZEN:\n- Gesamtumsatz: ${revenue.toLocaleString('de-DE')}\u20ac\n- Betriebsergebnis: ${betriebsergebnis.toLocaleString('de-DE')}\u20ac\n- Gesamtkosten: ${gesamtkosten.toLocaleString('de-DE')}\u20ac\n- Personalkosten: ${totalPersonnel.toLocaleString('de-DE')}\u20ac (Quote: ${personnelQuote}%)\n- Revenue/MA: ${employees.length > 0 ? (revenue / employees.length).toLocaleString('de-DE') : 0}\u20ac\n- Liquidit\u00e4t: ${latestCF?.cumulative?.toLocaleString('de-DE') ?? 'N/A'}\u20ac\n\nHR & TEAM:\n- ${employees.length} aktive MA, \u00d8 Auslastung: ${avgUtil}%, Billable Ratio: ${billableRatio}%\n- Abrechenbare Std: ${totalBillableH.toLocaleString('de-DE')}, Gesamt: ${totalH.toLocaleString('de-DE')}\n- Bench: ${bench.length} MA (${bench.map(e => `${e.firstName} ${e.lastName}`).join(', ') || 'keine'})\n- Krankheitstage: ${sickDays} (\u00d8 ${employees.length > 0 ? (sickDays / employees.length).toFixed(1) : 0}/MA)\n- Team: ${employees.map(e => `${e.firstName} ${e.lastName} (${e.experienceLevel || '-'}, ${e.monthlyIncome ? e.monthlyIncome.toLocaleString('de-DE') + '\u20ac' : '-'})`).join('; ')}\n\nSALES:\n- ${allCustomers.length} Kunden: ${allCustomers.map(c => c.name).join(', ')}\n- ${allProjects.length} Projekte, \u00d8 Stundensatz: ${avgRate}\u20ac\n- Top 5: ${topCusts.map(([n, v]) => `${n}: ${v.toLocaleString('de-DE')}\u20ac`).join(', ')}\n\nRECHNUNGEN:\n- Fakturiert: ${totalInvoiced.toLocaleString('de-DE')}\u20ac, Bezahlt: ${totalPaid.toLocaleString('de-DE')}\u20ac, Offen: ${(totalInvoiced - totalPaid).toLocaleString('de-DE')}\u20ac\n- \u00dcberf\u00e4llig: ${invoices.filter(i => i.status === 'overdue').length}\n\nNutze diese echten Zahlen f\u00fcr Analysen und konkrete Handlungsempfehlungen.`;
+      contextData = `\n\n=== ECHTE GESCHÄFTSDATEN ${year} ===\nFINANZEN:\n- Gesamtumsatz: ${revenue.toLocaleString('de-DE')}€\n- Betriebsergebnis: ${betriebsergebnis.toLocaleString('de-DE')}€\n- Gesamtkosten: ${gesamtkosten.toLocaleString('de-DE')}€\n- Personalkosten: ${totalPersonnel.toLocaleString('de-DE')}€ (Quote: ${personnelQuote}%)\n- Revenue/MA: ${employees.length > 0 ? (revenue / employees.length).toLocaleString('de-DE') : 0}€\n- Liquidität: ${latestCF?.cumulative?.toLocaleString('de-DE') ?? 'N/A'}€\n\nHR & TEAM:\n- ${employees.length} aktive MA, Ø Auslastung: ${avgUtil}%, Billable Ratio: ${billableRatio}%\n- Abrechenbare Std: ${totalBillableH.toLocaleString('de-DE')}, Gesamt: ${totalH.toLocaleString('de-DE')}\n- Bench: ${bench.length} MA (${bench.map(e => `${e.firstName} ${e.lastName}`).join(', ') || 'keine'})\n- Krankheitstage: ${sickDays} (Ø ${employees.length > 0 ? (sickDays / employees.length).toFixed(1) : 0}/MA)\n- Team: ${employees.map(e => `${e.firstName} ${e.lastName} (${e.experienceLevel || '-'}, ${e.monthlyIncome ? e.monthlyIncome.toLocaleString('de-DE') + '€' : '-'})`).join('; ')}\n\nSALES:\n- ${allCustomers.length} Kunden: ${allCustomers.map(c => c.name).join(', ')}\n- ${allProjects.length} Projekte, Ø Stundensatz: ${avgRate}€\n- Top 5: ${topCusts.map(([n, v]) => `${n}: ${v.toLocaleString('de-DE')}€`).join(', ')}\n\nRECHNUNGEN:\n- Fakturiert: ${totalInvoiced.toLocaleString('de-DE')}€, Bezahlt: ${totalPaid.toLocaleString('de-DE')}€, Offen: ${(totalInvoiced - totalPaid).toLocaleString('de-DE')}€\n- Überfällig: ${invoices.filter(i => i.status === 'overdue').length}\n\nNutze diese echten Zahlen für Analysen und konkrete Handlungsempfehlungen.`;
     } catch (e) {
       console.error('Context fetch error:', e);
     }

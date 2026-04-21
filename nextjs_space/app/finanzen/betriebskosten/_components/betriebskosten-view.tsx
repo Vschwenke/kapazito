@@ -14,10 +14,10 @@ const COLORS = ['#1a9a8a', '#7c5cfc', '#f59e42', '#e8577a', '#38bdf8', '#34d399'
 // Map BWA account numbers to categories
 const COST_CATEGORIES: Record<string, string> = {
   '1100': 'Personalkosten',
-  '1110': 'Geh\u00e4lter',
+  '1110': 'Gehälter',
   '1120': 'Sozialabgaben',
   '1200': 'Sachkosten',
-  '1210': 'Miete & B\u00fcro',
+  '1210': 'Miete & Büro',
   '1220': 'IT & Software',
   '1230': 'Marketing',
   '1240': 'Reisekosten',
@@ -112,19 +112,19 @@ export function BetriebskostenView() {
 
       {!hasRealData && (
         <div className="flex items-center gap-2 p-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-xs text-amber-600">
-          <span>\u26a0\ufe0f Keine detaillierten Unterkategorien in BWA-Daten. Verteilung wird gesch\u00e4tzt. Importieren Sie detaillierte BWA-Daten f\u00fcr exakte Aufschl\u00fcsselung.</span>
+          <span>⚠️ Keine detaillierten Unterkategorien in BWA-Daten. Verteilung wird geschätzt. Importieren Sie detaillierte BWA-Daten für exakte Aufschlüsselung.</span>
         </div>
       )}
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <KpiCard title="Gesamtkosten" value={total} format="currency" delta={kostenAcc?.delta} deltaLabel="\u0394/VJ" icon={DollarSign} iconColor="bg-red-50 text-red-600" />
+        <KpiCard title="Gesamtkosten" value={total} format="currency" delta={kostenAcc?.delta} deltaLabel="Δ/VJ" icon={DollarSign} iconColor="bg-red-50 text-red-600" />
         <KpiCard title="Personalkosten" value={costBreakdown.find(c => c.name === 'Personalkosten')?.value ?? 0} format="currency" icon={Users} iconColor="bg-teal-50 text-teal-600" />
         <KpiCard title="Sachkosten" value={costBreakdown.find(c => c.name === 'Sachkosten')?.value ?? 0} format="currency" icon={Building} iconColor="bg-orange-50 text-orange-600" />
         <KpiCard title="Sonstige" value={(costBreakdown.find(c => c.name === 'Abschreibungen')?.value ?? 0) + (costBreakdown.find(c => c.name === 'Sonstige')?.value ?? 0)} format="currency" icon={DollarSign} iconColor="bg-purple-50 text-purple-600" />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="bg-card rounded-xl p-4 border border-border/50 shadow-sm">
-          <h3 className="text-sm font-semibold mb-3">Kostenaufschl\u00fcsselung</h3>
+          <h3 className="text-sm font-semibold mb-3">Kostenaufschlüsselung</h3>
           <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>

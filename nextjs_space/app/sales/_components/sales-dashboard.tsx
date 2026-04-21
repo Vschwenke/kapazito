@@ -62,7 +62,7 @@ export function SalesDashboard() {
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
         <KpiCard title="Abrechenbare Std." value={Math.round(data?.totalBillableHours ?? 0).toLocaleString('de-DE')} icon={Clock} iconColor="bg-teal-50 text-teal-600" />
         <KpiCard title="Umsatz Kunden" value={data?.totalRevenue ?? 0} format="currency" icon={DollarSign} iconColor="bg-emerald-50 text-emerald-600" />
-        <KpiCard title="\u00d8 Stundensatz" value={`${(data?.avgHourlyRate ?? 0).toFixed(0)}\u20ac`} icon={TrendingUp} iconColor="bg-purple-50 text-purple-600" />
+        <KpiCard title="Ø Stundensatz" value={`${(data?.avgHourlyRate ?? 0).toFixed(0)}€`} icon={TrendingUp} iconColor="bg-purple-50 text-purple-600" />
         <KpiCard title="Offene Posten" value={data?.totalOpenItems ?? 0} format="currency" icon={Wallet} iconColor="bg-orange-50 text-orange-600" />
         <KpiCard title="Aktive MA" value={data?.activeEmployees ?? 0} icon={Users} iconColor="bg-cyan-50 text-cyan-600" />
         <KpiCard title="Kunden" value={data?.customerCount ?? 0} icon={BarChart3} iconColor="bg-pink-50 text-pink-600" />
@@ -121,7 +121,7 @@ export function SalesDashboard() {
               <tr key={i} className="border-b border-border/50 hover:bg-muted/50">
                 <td className="py-1.5 px-2 font-medium">{p?.name}</td>
                 <td className="py-1.5 px-2">{p?.customer}</td>
-                <td className="text-right py-1.5 px-2 font-mono">{(p?.hourlyRate ?? 0).toFixed(0)}\u20ac</td>
+                <td className="text-right py-1.5 px-2 font-mono">{(p?.hourlyRate ?? 0).toFixed(0)}€</td>
                 <td className="text-right py-1.5 px-2 font-mono">{(p?.budgetHours ?? 0).toLocaleString('de-DE')}</td>
               </tr>
             ))}

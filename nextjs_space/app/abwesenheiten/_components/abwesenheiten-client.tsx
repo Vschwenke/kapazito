@@ -76,7 +76,7 @@ export function AbwesenheitenClient() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Eintrag wirklich l\u00f6schen?')) return;
+    if (!confirm('Eintrag wirklich löschen?')) return;
     await fetch(`/api/abwesenheiten/${id}`, { method: 'DELETE' });
     fetchData();
   };
@@ -136,7 +136,7 @@ export function AbwesenheitenClient() {
                 <Label>Mitarbeiter *</Label>
                 <select value={form.employeeId} onChange={e => setForm({ ...form, employeeId: e.target.value })}
                   className="w-full h-10 rounded-md border border-input bg-background px-3 text-sm">
-                  <option value="">Bitte w\u00e4hlen...</option>
+                  <option value="">Bitte wählen...</option>
                   {employees.filter((e: any) => e.isActive).map((e: any) => (
                     <option key={e.id} value={e.id}>{e.firstName} {e.lastName}</option>
                   ))}
@@ -183,7 +183,7 @@ export function AbwesenheitenClient() {
       {/* Employee Overview */}
       {(data?.employeeSummary ?? []).length > 0 && (
         <Card>
-          <CardHeader><CardTitle className="text-base">\u00dcbersicht nach Mitarbeiter</CardTitle></CardHeader>
+          <CardHeader><CardTitle className="text-base">Übersicht nach Mitarbeiter</CardTitle></CardHeader>
           <CardContent className="p-0">
             <div className="overflow-x-auto">
               <table className="w-full text-xs">
@@ -202,7 +202,7 @@ export function AbwesenheitenClient() {
                       <td className="p-3 font-medium">{e.name}</td>
                       <td className="p-3 text-center"><Badge variant="outline" className={TYPE_COLORS.Urlaub}>{e.urlaub} Tage</Badge></td>
                       <td className="p-3 text-center"><Badge variant="outline" className={TYPE_COLORS.Krank}>{e.krank} Tage</Badge></td>
-                      <td className="p-3 text-center">{e.sonstige > 0 ? `${e.sonstige} Tage` : '\u2013'}</td>
+                      <td className="p-3 text-center">{e.sonstige > 0 ? `${e.sonstige} Tage` : '–'}</td>
                       <td className="p-3 text-center font-semibold">{e.total} Tage</td>
                     </tr>
                   ))}
@@ -246,7 +246,7 @@ export function AbwesenheitenClient() {
                           </Badge>
                         </td>
                         <td className="p-3 text-muted-foreground">
-                          {a.startDate?.split('T')[0]} \u2013 {a.endDate?.split('T')[0]}
+                          {a.startDate?.split('T')[0]} – {a.endDate?.split('T')[0]}
                         </td>
                         <td className="p-3 text-center font-mono">{a.days}</td>
                         <td className="p-3 text-center">

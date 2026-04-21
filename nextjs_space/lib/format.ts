@@ -1,8 +1,8 @@
 export function formatCurrency(value: number | null | undefined, decimals: number = 0): string {
   const v = value ?? 0;
-  if (Math.abs(v) >= 1000000) return `${(v / 1000000).toFixed(2)}M\u20ac`;
-  if (Math.abs(v) >= 1000) return `${(v / 1000).toFixed(decimals > 0 ? decimals : 1)}K\u20ac`;
-  return `${v.toFixed(decimals)}\u20ac`;
+  if (Math.abs(v) >= 1000000) return `${(v / 1000000).toFixed(2)}M€`;
+  if (Math.abs(v) >= 1000) return `${(v / 1000).toFixed(decimals > 0 ? decimals : 1)}K€`;
+  return `${v.toFixed(decimals)}€`;
 }
 
 export function formatPercent(value: number | null | undefined, decimals: number = 2): string {
@@ -14,12 +14,12 @@ export function formatNumber(value: number | null | undefined, decimals: number 
 }
 
 export function getMonthName(month: number): string {
-  const months = ['Januar', 'Februar', 'M\u00e4rz', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
+  const months = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
   return months?.[month - 1] ?? '';
 }
 
 export function getMonthShort(month: number): string {
-  const months = ['Jan', 'Feb', 'M\u00e4r', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
+  const months = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
   return months?.[month - 1] ?? '';
 }
 
@@ -32,7 +32,7 @@ export function getDeltaColor(delta: number | null | undefined): string {
 
 export function getDeltaIcon(delta: number | null | undefined): string {
   const d = delta ?? 0;
-  if (d > 0) return '\u25b2';
-  if (d < 0) return '\u25bc';
-  return '\u2014';
+  if (d > 0) return '▲';
+  if (d < 0) return '▼';
+  return '—';
 }

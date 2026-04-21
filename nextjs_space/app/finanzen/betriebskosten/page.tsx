@@ -3,7 +3,7 @@ import { BetriebskostenView } from './_components/betriebskosten-view';
 
 export default function BetriebskostenPage() {
   return (
-    <DashboardShell title="BETRIEBSKOSTEN" subtitle="Kostenaufschl\u00fcsselung nach Kategorien">
+    <DashboardShell title="BETRIEBSKOSTEN" subtitle="Kostenaufschlüsselung nach Kategorien">
       <BetriebskostenView />
     </DashboardShell>
   );

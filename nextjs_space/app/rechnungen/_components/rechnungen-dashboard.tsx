@@ -8,7 +8,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, PieC
 
 const COLORS = ['#1a9a8a', '#7c5cfc', '#f59e42', '#34d399', '#e8577a'];
 const STATUS_COLORS: Record<string, string> = { paid: '#34d399', partial: '#f59e42', open: '#38bdf8', overdue: '#e8577a' };
-const STATUS_LABELS: Record<string, string> = { paid: 'Bezahlt', partial: 'Teilweise', open: 'Offen', overdue: '\u00dcberf\u00e4llig' };
+const STATUS_LABELS: Record<string, string> = { paid: 'Bezahlt', partial: 'Teilweise', open: 'Offen', overdue: 'Überfällig' };
 
 export function RechnungenDashboard() {
   const [data, setData] = useState<any>(null);
@@ -81,7 +81,7 @@ export function RechnungenDashboard() {
         </div>
 
         <div className="bg-card rounded-xl p-4 border border-border/50 shadow-sm">
-          <h3 className="text-sm font-semibold mb-3">Status-\u00dcbersicht</h3>
+          <h3 className="text-sm font-semibold mb-3">Status-Übersicht</h3>
           <div className="h-72">
             {statusData.length > 0 ? (
               <ResponsiveContainer width="100%" height="100%">
@@ -141,7 +141,7 @@ export function RechnungenDashboard() {
             <th className="text-right py-1.5 px-2">Abrechenbar</th>
             <th className="text-right py-1.5 px-2">Jan</th>
             <th className="text-right py-1.5 px-2">Feb</th>
-            <th className="text-right py-1.5 px-2">M\u00e4r</th>
+            <th className="text-right py-1.5 px-2">Mär</th>
           </tr></thead>
           <tbody>
             {(data?.employeeBilling ?? []).map((eb: any, i: number) => (

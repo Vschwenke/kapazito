@@ -30,7 +30,7 @@ export function SalesErtraegeView() {
   return (
     <div className="space-y-4">
       <div className="bg-card rounded-xl p-4 border border-border/50 shadow-sm">
-        <h3 className="text-sm font-semibold mb-3">Ertr\u00e4ge nach Kunden</h3>
+        <h3 className="text-sm font-semibold mb-3">Erträge nach Kunden</h3>
         <div className="h-80">
           {customerData.length > 0 ? (
             <ResponsiveContainer width="100%" height="100%">
@@ -47,13 +47,13 @@ export function SalesErtraegeView() {
       </div>
 
       <div className="bg-card rounded-xl p-4 border border-border/50 shadow-sm overflow-x-auto">
-        <h3 className="text-sm font-semibold mb-3">Ertr\u00e4ge Detail</h3>
+        <h3 className="text-sm font-semibold mb-3">Erträge Detail</h3>
         <table className="w-full text-xs">
           <thead><tr className="border-b border-border">
             <th className="text-left py-1.5 px-2">Kunde</th>
             <th className="text-right py-1.5 px-2">Umsatz</th>
             <th className="text-right py-1.5 px-2">Stunden</th>
-            <th className="text-right py-1.5 px-2">\u00d8 Stundensatz</th>
+            <th className="text-right py-1.5 px-2">Ø Stundensatz</th>
             <th className="text-right py-1.5 px-2">Anteil</th>
           </tr></thead>
           <tbody>
@@ -64,8 +64,8 @@ export function SalesErtraegeView() {
                   <td className="py-1.5 px-2 font-medium">{c?.name}</td>
                   <td className="text-right py-1.5 px-2 font-mono">{formatCurrency(c?.Umsatz)}</td>
                   <td className="text-right py-1.5 px-2 font-mono">{(c?.Stunden ?? 0).toLocaleString('de-DE')}</td>
-                  <td className="text-right py-1.5 px-2 font-mono">{c?.Stunden > 0 ? `${(c?.Umsatz / c?.Stunden).toFixed(0)}\u20ac` : '\u2014'}</td>
-                  <td className="text-right py-1.5 px-2 font-mono">{total > 0 ? `${((c?.Umsatz / total) * 100).toFixed(1)}%` : '\u2014'}</td>
+                  <td className="text-right py-1.5 px-2 font-mono">{c?.Stunden > 0 ? `${(c?.Umsatz / c?.Stunden).toFixed(0)}€` : '—'}</td>
+                  <td className="text-right py-1.5 px-2 font-mono">{total > 0 ? `${((c?.Umsatz / total) * 100).toFixed(1)}%` : '—'}</td>
                 </tr>
               );
             })}

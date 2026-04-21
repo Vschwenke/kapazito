@@ -42,13 +42,13 @@ export function ErtraegeView() {
     <div className="space-y-4">
       <FilterBar selectedYear={year} selectedQuarter={quarter} selectedMonth={month} onYearChange={setYear} onQuarterChange={setQuarter} onMonthChange={setMonth} />
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-        <KpiCard title="Umsatzerl\u00f6se" value={revenueAcc?.total ?? 0} format="currency" delta={revenueAcc?.delta} deltaLabel="\u0394/VJ" icon={DollarSign} iconColor="bg-teal-50 text-teal-600" />
+        <KpiCard title="Umsatzerlöse" value={revenueAcc?.total ?? 0} format="currency" delta={revenueAcc?.delta} deltaLabel="Δ/VJ" icon={DollarSign} iconColor="bg-teal-50 text-teal-600" />
         <KpiCard title="Refinancing" value={refinancingAcc?.total ?? 0} format="currency" icon={TrendingUp} iconColor="bg-purple-50 text-purple-600" />
-        <KpiCard title="Rohertrag" value={rohertragAcc?.total ?? 0} format="currency" delta={rohertragAcc?.delta} deltaLabel="\u0394/VJ" icon={TrendingUp} iconColor="bg-emerald-50 text-emerald-600" />
+        <KpiCard title="Rohertrag" value={rohertragAcc?.total ?? 0} format="currency" delta={rohertragAcc?.delta} deltaLabel="Δ/VJ" icon={TrendingUp} iconColor="bg-emerald-50 text-emerald-600" />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="bg-card rounded-xl p-4 border border-border/50 shadow-sm">
-          <h3 className="text-sm font-semibold mb-3">Ertr\u00e4ge nach Monat</h3>
+          <h3 className="text-sm font-semibold mb-3">Erträge nach Monat</h3>
           <div className="h-72">
             {monthlyData.length > 0 ? (
               <ResponsiveContainer width="100%" height="100%">

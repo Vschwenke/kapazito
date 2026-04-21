@@ -20,7 +20,7 @@ export function KpiCard({ title, value, format = 'text', delta, deltaLabel, icon
     ? format === 'currency' ? formatCurrency(value)
       : format === 'percent' ? formatPercent(value)
       : (value ?? 0).toLocaleString('de-DE')
-    : value ?? '\u2014';
+    : value ?? '—';
 
   return (
     <div className={cn(

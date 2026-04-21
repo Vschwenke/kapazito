@@ -105,7 +105,7 @@ export function ZeiterfassungClient() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Eintrag wirklich l\u00f6schen?')) return;
+    if (!confirm('Eintrag wirklich löschen?')) return;
     await fetch(`/api/zeiterfassung/${id}`, { method: 'DELETE' });
     fetchEntries();
   };
@@ -236,7 +236,7 @@ export function ZeiterfassungClient() {
                 <select value={form.workLocation} onChange={e => setForm({ ...form, workLocation: e.target.value })}
                   className="w-full h-10 rounded-md border border-input bg-background px-3 text-sm">
                   <option value="HomeOffice">Home Office</option>
-                  <option value="InOffice">B\u00fcro</option>
+                  <option value="InOffice">Büro</option>
                 </select>
               </div>
             </div>
@@ -291,7 +291,7 @@ export function ZeiterfassungClient() {
                   </div>
                 ))}
                 <button onClick={() => openNew(d)} className="w-full text-center py-1 text-xs text-muted-foreground hover:text-foreground hover:bg-muted/40 rounded transition-colors">
-                  <Plus className="w-3 h-3 inline mr-1" />Hinzuf\u00fcgen
+                  <Plus className="w-3 h-3 inline mr-1" />Hinzufügen
                 </button>
               </CardContent>
             </Card>

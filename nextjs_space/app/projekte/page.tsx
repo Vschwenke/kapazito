@@ -3,7 +3,7 @@ import { ProjektControllingClient } from './_components/projekt-controlling-clie
 
 export default function ProjektControllingPage() {
   return (
-    <DashboardShell title="PROJEKT-CONTROLLING" subtitle="Budget, Profitabilit\u00e4t und Fortschritt pro Projekt">
+    <DashboardShell title="PROJEKT-CONTROLLING" subtitle="Budget, Profitabilität und Fortschritt pro Projekt">
       <ProjektControllingClient />
     </DashboardShell>
   );
